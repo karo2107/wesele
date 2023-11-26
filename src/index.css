@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Lato";
-  /* 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Monofett', Handwriting;
+   /* 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
   -webkit-font-smoothing: antialiased;
@@ -15,7 +15,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Lato","Tangerine" monospace;
+  font-family:"Monofett", source-code-pro, Monaco, Consolas, handwriting, monospace,;
 }
 
 .player-wrapper {
@@ -87,4 +87,8 @@ code {
   box-shadow: 55px 55px 1px;
 color: #022911;
 margin-bottom: 55px;
+}
+
+.navbarbg{
+  background-color: rgba(39, 55, 70, 0.009);
 }

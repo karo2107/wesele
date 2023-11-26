@@ -1,6 +1,10 @@
 .App {
   text-align: center;
   overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Monofett"
+   'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
 .App-logo {

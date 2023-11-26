@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import Autocomplete from "@mui/material/Autocomplete";
 import { SettingsInputAntenna } from "@mui/icons-material";
 import Alert from "@mui/material/Alert";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Nav from "./nav";
 const options = [
   "Bez dodtakowych wymagań",
@@ -20,7 +21,36 @@ const options = [
   "Uczulenie na laktozę",
   "Uczulenie na gluten",
 ];
-
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#825b07",
+      main: "#825b07",
+      dark: "#825b07",
+      contrastText: "#000",
+    },
+    secondary: {
+      light: "#022911",
+      main: "#022911",
+      dark: "#022911",
+      contrastText: "#fff",
+    },
+    third: {
+      light: "#000000",
+      main: "#000000",
+      dark: "#000000",
+      contrastText: "#000000",
+    },
+  },
+  shadows: ["none"],
+  typography: {
+    fontFamily: ['Italianno'].join(","),
+    textTransform: "none",
+    button: {
+      textTransform: "none",
+    },
+  },
+});
 export default function Obecnosc() {
   const [wyslanoWiadomosc, setwyslanoWiadomosc] = React.useState(false);
   const [validated, setValidated] = React.useState(false);

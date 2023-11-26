@@ -20,8 +20,8 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import InfoIcon from "@mui/icons-material/Info";
 import BeenhereIcon from "@mui/icons-material/Beenhere";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
-
-
+import ReactDOM from "react-dom";
+import Snowfall from "react-snowfall";
 
 import { Helmet } from "react-helmet";
 
@@ -54,7 +54,8 @@ const theme = createTheme({
   },
   shadows: ["none"],
   typography: {
-    fontFamily: ["Tangerine"].join(","),
+    fontFamily: ["Italianno"].join(","),
+    textTransform: "none",
     button: {
       textTransform: "none",
     },
@@ -92,7 +93,8 @@ export default function Album() {
   }, [shuffle]);
   const pathname = window.location.pathname;
   const splitString = pathname.split("/");
-  const a = splitString[1];
+
+  const a = "Karolina i Kuba";
 
   return (
     <ThemeProvider theme={theme}>
@@ -102,12 +104,13 @@ export default function Album() {
         <Box
           sx={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80')",
+              "url('https://images.unsplash.com/photo-1543721241-adfe6a33fd2e?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             height: "100vh",
           }}
         >
+          <Snowfall />
           <Container
             data-aos="zoom-in"
             data-aos-anchor-placement="top-bottom"
@@ -116,31 +119,85 @@ export default function Album() {
               height: "100vh",
             }}
           >
+            <Box sx={{ display: { xs: "block", sm: "none" } }}>
+              <br /> <br /> <br /> <br />
+            </Box>
             <Stack
               direction="column"
               justifyContent="space-between"
-              alignItems="center"
+              alignItems=""
               spacing={{ xs: 1, sm: 2, md: 8, lg: 14 }}
-            ><Typography/>
-              <Typography/>
+            >
+              <Typography />
+              <Typography />
+
               <Typography
-                component="h2"
-                variant="h2"
-                align="center"
-                color=""
+                sx={{ fontStyle: "oblique", color: "black" }}
+                component="h3"
+                variant="h3"
+              >
+                <a>
+                  Z przyjemnością zapraszamy na nasze wesele
+                  <br />
+                  dnia 31 grudnia 2024 roku
+                </a>
+              </Typography>
+              <Typography
+                component="h4"
+                variant="h4"
+                align="right"
+                color="red"
                 gutterBottom
+                sx={{ fontStyle: "italic" }}
               >
                 {a}
               </Typography>
-              <Typography component="h3" variant="h3">
-                Z przyjemnością zapraszają
-                
-              </Typography>
-              <Typography component="h2" variant="h2">
-                Do Gospody<br />dnia 31 grudnia 2024 roku
-              </Typography>
             </Stack>{" "}
           </Container>
+        </Box>
+        <Box>
+          <Container maxWidth="md">
+            <Typography
+              sx={{ fontStyle: "italic", color: "" }}
+              component="h4"
+              variant="h5"
+            >
+              <br />
+              <br />
+              <b>Szanowni Rodzice, Krewni, Bliscy i Przyjaciele!</b>
+              <br />
+              <br />
+            </Typography>
+            <Typography
+              align="justify"
+              sx={{ fontStyle: "italic", color: "" }}
+              component="h6"
+              variant="h6"
+            >
+              Z ogromną radością pragniemy Was zaprosić na nasz ślub i wesele.
+              To wyjątkowe wydarzenie odbędzie się w ostatnią noc roku, 31
+              grudnia 2024 roku, w malowniczym zakątku, Gospodzie nad Rabą i
+              (mamy nadzieję) na Zamku w Wiśniczu. Prosimy o zarezerwowanie tego
+              wyjątkowego dnia w Waszym kalendarzu i dołączenie do zabawy.
+              Będziemy razem witać Nowy Rok w świetnym towarzystwie! Szczegóły
+              dotyczące karty dań, planu wesela oraz ceremonii ślubnej będziemy
+              stopniowo udostępniać, a wszystkie informacje zostaną podane do
+              wiadomości przed wakacjami. Bądźcie pewni, że pracujemy nad
+              stworzeniem niezapomnianego wydarzenia, a na koniec wieczoru
+              planujemy wybuchową zabawę, która dostarczy Wam mnóstwo radości i
+              niezapomnianych chwil. Liczymy, że razem z nami stworzycie
+              magiczną atmosferę tego wyjątkowego dnia. Z niecierpliwością
+              czekamy na wspólną zabawę!
+              <br />
+              <br />
+              Z serdecznymi pozdrowieniami,
+              <br />
+              <br />
+              Karolina i Kuba
+              <br />
+              <br />
+            </Typography>
+          </Container>{" "}
         </Box>
       </main>{" "}
       <Helmet>

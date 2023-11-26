@@ -1,4 +1,8 @@
-import * as React from "react";
+import db from "../firebase.config";
+import React, { useState, useEffect, useLocation } from "react";
+import "firebase/compat/firestore";
+import "firebase/storage";
+import "firebase/database";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,44 +23,111 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import Nav from "./nav";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = splitString[1];
-const defaultTheme = createTheme();
 
-export default function SignIn() {
-  const [age, setAge] = React.useState("");
+const Post = () => {
+  const [info, setInfo] = useState([]);
 
+  const [obecnosc, setObecnosc] = React.useState("");
+  const [obecnosctowarzysza, setObecnosctowarzysza] = React.useState("");
+  const [guest, setGuest] = React.useState("");
+  const [food, setFood] = React.useState("");
+  const [foodguest, setFoodguest] = React.useState("");
+  const href = window.location.pathname;
+  const output = href.replace("/Zaproszenie/", "");
+
+  // const href = window.location.pathname;
+  // const output = href.replace("/Zaproszenie/", "");
+  // const BGIMG ="https://images.unsplash.com/photo-1515339760107-1952b7a08454?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  const BGIMG =
+    "https://images.unsplash.com/photo-1543157145-f78c636d023d?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  // const BGIMG ="https://images.unsplash.com/photo-1518627249530-af3cb4a171ae?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setFood(event.target.value);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const handleChangeObecnosc = (event) => {
+    setObecnosc(event.target.value);
+  };
+  const handleChangeObecnosctowarzysza = (event) => {
+    setObecnosctowarzysza(event.target.value);
+  };
+  const handleChangeFood = (event) => {
+    setFood(event.target.value);
+  };
+  const handleChangeFoodguest = (event) => {
+    setFoodguest(event.target.value);
   };
 
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Nav />
-      <Grid container>
-        <Grid item xs={12} sm={12} md={6} lg={5} elevation={1}>
+  useEffect(() => {
+    const Fetchdata = async () => {
+      await db
+        .collection("goscie")
+        .where("ID", "==", a)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((element) => {
+            var data = element.data();
+            setInfo((arr) => [...arr, data]);
+          });
+        });
+    };
+    Fetchdata();
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#825b07",
+        main: "#825b07",
+        dark: "#825b07",
+        contrastText: "#000",
+      },
+      secondary: {
+        light: "#022911",
+        main: "#022911",
+        dark: "#022911",
+        contrastText: "#fff",
+      },
+      third: {
+        light: "#000000",
+        main: "#000000",
+        dark: "#000000",
+        contrastText: "#000000",
+      },
+    },
+    shadows: ["none"],
+    typography: {
+      fontFamily: ["Italianno"].join(","),
+      textTransform: "none",
+      button: {
+        textTransform: "none",
+      },
+    },
+  });
+  const items = info.map((data) => {
+    return (
+      <Grid container maxWidth="md" sx={{ mt: 10 }}>
+        <Grid item xs={12} sm={12} md={12} lg={12} elevation={1}>
           <CssBaseline />
           <Box
             sx={{
               boxShadow: 3,
+              borderRadius: 10,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              backgroundImage: `url(${bg})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
+              backgroundColor: "#ffffffcc",
+
               minHeight: "100vh",
-              maxWidth: "md",
-              backgroundColor: "red",
+              maxWidth: "100vw",
             }}
           >
             <Container
@@ -81,36 +152,50 @@ export default function SignIn() {
                 alignItems="center"
                 // spacing={{ xs: 1, sm: 2, md: 8, lg: 14 }}
               >
-                <Typography component="h1" variant="h5" />
-                <Typography component="h1" variant="h5" />
-                <Typography component="h1" variant="h5" />
-                <Typography component="h1" variant="h4">
-                  Zaproszenie dla
-                </Typography>
-                <Typography component="h1" variant="h2">
-                  Filip Filpowski
-                </Typography>
-                <Typography component="h6" variant="h6" >
-                  Uroczyście informujemy, że dnia 18 października 2023 r. w
-                  Kościele św. Piotra w Puszczykowie Kamila Proszkowska i Wacław
-                  Wiaderko powiedzą sobie sakramentalne "TAK" i będą przysięgać
-                  sobie miłość, wierność i uczciwość małżeńską. Na uroczystość
-                  zaślubin Narzeczeni zapraszają wraz z Rodzicami
-                </Typography>
-
+                <br />
+                <br />
+                <br />
                 <Typography
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-
-                    alignItems: "right",
-                  }}
+                  sx={{ fontStyle: "italic" }}
                   component="h1"
-                  variant="h5"
+                  variant="h2"
                 >
-                  Zapraszamy,
+                  {data.NAME} <br /> {data.GUEST}
+                </Typography>
+                <br />
+                <br />
+                <br />
+                <Typography
+                  sx={{ fontStyle: "italic" }}
+                  align="justify"
+                  component="h6"
+                  variant="h6"
+                >
+                  Z ogromną radością pragniemy Was zaprosić na nasz ślub i
+                  wesele. To wyjątkowe wydarzenie odbędzie się w ostatnią noc
+                  roku, 31 grudnia 2024 roku, w malowniczym zakątku, Gospodzie
+                  nad Rabą. Prosimy o zarezerwowanie tego wyjątkowego dnia w
+                  Waszym kalendarzu i dołączenie do zabawy. Będziemy razem witać
+                  nowy rok w świetnym towarzystwie! Szczegóły dotyczące karty
+                  dań, planu wesela oraz ceremonii ślubnej będziemy stopniowo
+                  udostępniać, a wszystkie informacje zostaną podane do
+                  wiadomości przed wakacjami. Bądźcie pewni, że pracujemy nad
+                  stworzeniem niezapomnianego wydarzenia, a na koniec wieczoru
+                  planujemy wybuchową zabawę, która dostarczy Wam mnóstwo
+                  radości i niezapomnianych chwil. 
+                  <br/>
+                  Chcąc umozliwić wszystkich gościom relkaks i dobrą zabawę, postanowiliśmy
+                  zorganizować ten wyjątkowy dzień wyłącznie dla dorosłych. 
+                  <br/>
+                  Dziękujemy za zrozumienie i z niecierpliwością czekamy na wspólną zabawę!
                   <br />
-                  {a}
+                  <br />
+                  Z serdecznymi pozdrowieniami,
+                  <br />
+                  <br />
+                  Karolina i Kuba
+                  <br />
+                  <br />
                 </Typography>
 
                 <Typography component="h1" variant="h5" />
@@ -119,109 +204,171 @@ export default function SignIn() {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={6} lg={4} elevation={6}>
+        <Grid item xs={12} sm={12} md={12} lg={12} elevation={6}>
           <Typography component="h1" variant="h5">
             <br />
             <br /> Twoja odpowiedz
-            <br /><br />
+            <br />
+            <br />
           </Typography>
           <Box component="form" sx={{ mt: 2 }}>
             {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}> */}
 
             <Grid container sx={{ px: 2 }}>
-              <Grid item xs={12} sm={12} md={6} sx={{ px: 2 }}>
+              <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
                 <InputLabel id="demo-simple-select-label">
-                  Czy możemy liczyć na Twoją obecność?
+                  {data.NAME}, czy możemy liczyć na Twoją obecność?
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="obecnosc"
-                  value={age}
+                  value={obecnosc}
                   label="Czy możemy liczyć na Twoją obecność?"
-                  onChange={handleChange} variant="standard"
+                  onChange={handleChangeObecnosc}
+                  variant="standard"
                 >
-                  <MenuItem value={10}>Tak</MenuItem>
-                  <MenuItem value={20}>Nie</MenuItem>
-                  <MenuItem value={30}>Jeszcze nie wiem</MenuItem>
+                  <MenuItem value={"tak"}>Tak</MenuItem>
+                  <MenuItem value={"nie"}>Nie</MenuItem>
+                  <MenuItem value={"moze"}>Jeszcze nie wiem</MenuItem>
                 </Select>
               </Grid>
-              <Grid item xs={12} sm={12} md={6} sx={{ px: 2 }}>
+              <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
                 <InputLabel id="demo-simple-select-label">
-                  Czy pojawisz się z osobą towarzyszącą?
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="obecnosc-goscia"
-                  value={age}
-                  label="Age"
-                  onChange={handleChange} variant="standard"
-                >
-                  <MenuItem value={10}>Tak</MenuItem>
-                  <MenuItem value={20}>Nie</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Grid>
-              <Grid item xs={12} sm={12} md={6} sx={{ px: 2 }}>
-                <InputLabel id="demo-simple-select-label">
-                Twoje preferencje żywieniowe
+                  Jakie są Twoje preferencje żywieniowe
                 </InputLabel>
                 <Select
                   labelId="jedzenie"
                   id="demo-simple-select"
-                  value={age}
-                  label="Czy możemy liczyć na Twoją obecność?"
-                  onChange={handleChange}
+                  value={food}
+                  label="Twoje preferencje deietetyczne?"
+                  onChange={handleChangeFood}
                   variant="standard"
                 >
-                  <MenuItem value={10}>Tak</MenuItem>
-                  <MenuItem value={20}>Nie</MenuItem>
-                  <MenuItem value={30}>Jeszcze nie wiem</MenuItem>
+                  <MenuItem value={"Brak"}>brak</MenuItem>
+                  <MenuItem value={"Wege"}>wegetarianin</MenuItem>
+                  <MenuItem value={"uczulenie na lactose"}>
+                    uczulenie na laktose
+                  </MenuItem>
                 </Select>
               </Grid>
-              <Grid item xs={12} sm={12} md={6} sx={{ px: 2 }}>
+              <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
                 <InputLabel id="demo-simple-select-label">
-                Preferencje żywieniowe osoby towarzyszącej
+                  {data.GUEST}, czy możemy liczyć na Twoją obecność?
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="obecnosc-goscia"
+                  value={obecnosctowarzysza}
+                  label="Age"
+                  onChange={handleChangeObecnosctowarzysza}
+                  variant="standard"
+                >
+                  <MenuItem value={"tak"}>Tak</MenuItem>
+                  <MenuItem value={"nie"}>Nie</MenuItem>
+                  <MenuItem value={"moze"}>Jeszcze nie wiem</MenuItem>
+                </Select>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
+                <InputLabel id="demo-simple-select-label">
+                  Jakie są Twoje preferencje żywieniowe
                 </InputLabel>
                 <Select
                   labelId="jedzenie-goscia"
                   id="demo-simple-select"
-                  value={age}
-                  label="Age"
+                  value={foodguest}
+                  label="Preferencje deietetyczne osoby towarzyszącej"
                   variant="standard"
-                  onChange={handleChange}
+                  onChange={handleChangeFoodguest}
                 >
-                  <MenuItem value={10}>Tak</MenuItem>
-                  <MenuItem value={20}>Nie</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value={"Brak"}>brak</MenuItem>
+                  <MenuItem value={"Wege"}>wegetarianin</MenuItem>
+                  <MenuItem value={"uczulenie na lactose"}>
+                    uczulenie na laktose
+                  </MenuItem>
                 </Select>
               </Grid>
             </Grid>
             <TextField
-            sx={{ px: 2 }}
+              sx={{ px: 2 }}
               margin="normal"
               required
               fullWidth
+              id="email"
+              label="E-mail"
+              name="email"
+              autoComplete=""
+              variant="standard"
+            />
+            <TextField
+              sx={{ px: 2 }}
+              margin="normal"
+              required
+              fullWidth
+              id="phone"
+              label="Telefon"
+              name="phone"
+              autoComplete=""
+              variant="standard"
+            />
+            <TextField
+              sx={{ px: 2 }}
+              margin="normal"
+              fullWidth
               id="text"
-              label="Dodatkowe informacje"
+              label="Czy masz jakieś pytania?"
               name="text"
               autoComplete=""
-              autoFocus
               variant="standard"
               multiline
-          rows={4}
+              rows={4}
             />
 
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, px:2 }}
+              sx={{ mt: 3, mb: 2, px: 2 }}
             >
-              Wyślij
+              <Typography sx={{ color: "white" }}>Wyślij odpowiedz</Typography>
             </Button>
           </Box>
         </Grid>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </Grid>
-    </ThemeProvider>
+    );
+  });
+
+  return (
+    <div>
+      <ThemeProvider theme={theme}>
+        <Nav />
+
+        <Container sx={{ minHeight: "100vh", minWidth: "100vw" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              // backgroundImage: `url(${bg})`,
+              backgroundImage: `url(${BGIMG})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              minHeight: "100vh",
+              // maxWidth: "100vw",
+              backgroundColor: "",
+            }}
+          >
+            {items}
+          </Box>
+        </Container>
+      </ThemeProvider>{" "}
+    </div>
   );
-}
+};
+
+export default Post;

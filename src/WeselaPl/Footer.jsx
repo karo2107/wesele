@@ -37,7 +37,7 @@ function Copyright() {
       </Link>{" "}
       <hr />
       {
-        "Copyright © Kozubek Matusiak Truszkiewicz Adwokaci i Radcowie Prawni s.c."
+        "Copyright © Choluj Design s.c."
       }{" "}
       {new Date().getFullYear()}
       <br />
@@ -126,7 +126,7 @@ export default function App() {
       <CssBaseline />
       <main>
         {/* Footer */}
-        <Box sx={{ bgcolor: "primary.light", mt: 0, p: 0 }} component="footer">
+        <Box sx={{ bgcolor: "", mt: 0, p: 0 }} component="footer">
           <Grid container spacing={0}>
             <Grid
               item
@@ -299,12 +299,12 @@ export default function App() {
                       key="2f4"
                       xs={12}
                       sm={12}
-                      md={12}
+                      md={6}
                       data-aos="fade-up"
                     >
                       <TextField
                         margin="normal"
-                        required
+                        
                         fullWidth
                         id="email"
                         label="E-mail"
@@ -323,30 +323,14 @@ export default function App() {
                       <TextField
                         margin="normal"
                         fullWidth
+                        required
                         id="name"
                         label="Imię i nazwisko "
                         name="from_name"
                         autoComplete="name"
                       />
                     </Grid>{" "}
-                    <Grid
-                      item
-                      key="2f4"
-                      xs={12}
-                      sm={12}
-                      md={6}
-                      data-aos="fade-up"
-                    >
-                      <TextField
-                        multiline
-                        margin="normal"
-                        fullWidth
-                        name="from_number"
-                        label="Numer telefonu"
-                        type="number"
-                        id="number"
-                      />
-                    </Grid>
+                   
                     <Grid
                       item
                       key="2ff4"
@@ -394,7 +378,7 @@ export default function App() {
           </Grid>
           <br />
         </Box>
-        <Box sx={{ backgroundColor: "secondary.main" }}>
+        <Box sx={{ backgroundColor: "black" }}>
           <br />
           <br />
           <Copyright />

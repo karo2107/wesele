@@ -1,110 +1,145 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-export default function MenuAppBar() {
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#825b07",
+      main: "#825b07",
+      dark: "#825b07",
+      contrastText: "#000",
+    },
+    secondary: {
+      light: "#022911",
+      main: "#022911",
+      dark: "#022911",
+      contrastText: "#fff",
+    },
+    third: {
+      light: "#000000",
+      main: "#000000",
+      dark: "#000000",
+      contrastText: "#000000",
+    },
+  },
+  shadows: ["none"],
+  typography: {
+    fontFamily: ['Italianno'].join(","),
+    textTransform: "none",
+    button: {
+      textTransform: "none",
+    },
+  },
+});
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
+const drawerWidth = 240;
+const navItems = ['Home', 'Harmonogram', 'Informacje', 'Karta'];
+
+function DrawerAppBar(props) {
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
   };
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const pathname = window.location.pathname;
-  const splitString = pathname.split("/");
-  // const a = splitString[1];
-  const a = "Karolina i Kuba";
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      
-      <AppBar position="static"
-      sx={{color:"white"}}
-      >
-        <Toolbar>
-          <Typography
-          sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}
-          variant="h4" component="div" >
-            {a}
-          </Typography>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}
-           
-          >
-            <MenuIcon />
-          </IconButton> 
-          
-         
-             <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? 'Zaloguj' : 'Wyloguj'}
-        />
-      </FormGroup>
-      {auth && (
-            <div>
-              
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          )}
-
-          <Typography sx={{px:2, display: { xs: 'none', sm: 'none', md: 'block' } }}>
-            Harmonogram
-          </Typography>
-          <Typography sx={{px:2, display: { xs: 'none', sm: 'none', md: 'block' } }}>
-            Lokalziacja
-          </Typography>
-          <Typography sx={{px:2, display: { xs: 'none', sm: 'none', md: 'block' } }}>
-            Harmonogram
-          </Typography>
-
-       
-        </Toolbar>
-        
-      </AppBar>
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        Wesele
+      </Typography>
+      <Divider />
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton href={item} sx={{ textAlign: 'center' }}>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
     </Box>
   );
+
+  const container = window !== undefined ? () => window().document.body : undefined;
+
+  return (
+    <ThemeProvider theme={theme}>
+    <Box className='navbarbg' sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar style={{ background: 'transparent', boxShadow: 'none'}} component="nav">
+        <Toolbar className='navbarbg'>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+           
+          <Typography
+         
+            href="/home"
+            variant="h4"
+            component="div"
+            sx={{color:'black', flexGrow: 1, display: { xs: 'none', sm: 'flex',fontStyle:'italic' } }}
+          >
+           Wesele K&K
+          </Typography>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            {navItems.map((item) => (
+              <Button href={item} key={item} sx={{ color: 'black', fontSize:"larger" }}>
+                {item}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <nav>
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </nav>
+     
+    </Box>
+  </ThemeProvider>);
 }
+
+DrawerAppBar.propTypes = {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
+export default DrawerAppBar;

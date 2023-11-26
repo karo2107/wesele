@@ -41,7 +41,7 @@ const theme = createTheme({
   },
   shadows: ["none"],
   typography: {
-    fontFamily: ["Tangerine"].join(","),
+    fontFamily: ["Monofett"].join(","),
     button: {
       textTransform: "none",
     },

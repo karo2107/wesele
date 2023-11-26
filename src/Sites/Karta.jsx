@@ -1,9 +1,4 @@
-import db from "../firebase.config";
 import React, { useState, useEffect } from "react";
-import "firebase/compat/firestore";
-import "firebase/storage";
-import "firebase/database";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import Box from "@mui/material/Box";
@@ -24,10 +19,45 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = "Karolina i Kuba";
+
+const info = [
+  {
+    TITLE: "Przystawki i powitalny drink na zamku",
+    TIME: "14:30",
+    DETAILS: "przystawki, prossecco, Więcej informacji wkrótce",
+  },
+  {
+    TITLE: "Pierwszy ciepły posiłek w gospodzie",
+    TIME: "17:00",
+    DETAILS: "Więcej informacji wkrótce",
+  },
+  {
+    TITLE: "Tort",
+    TIME: "19:00",
+    DETAILS: "Więcej informacji wkrótce",
+  },
+  {
+    TITLE: "Drugi ciepły posiłek",
+    TIME: "21:30",
+    DETAILS: "Więcej informacji wkrótce",
+  },
+  {
+    TITLE: "Trzeci ciepły posiłek",
+    TIME: "23:00",
+    DETAILS: "Więcej informacji wkrótce",
+  },
+  
+  {
+    TITLE: "Śniadanie",
+    TIME: "10:00",
+    DETAILS: "Więcej informacji wkrótce",
+  },
+];
 const theme = createTheme({
   palette: {
     primary: {
@@ -58,48 +88,6 @@ const theme = createTheme({
     },
   },
 });
-const info = [
-  {
-    TITLE: "Recepcja przed ślubem",
-    DATE: "14:30, 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-    LOCATION: "Zamek w Wiśniczu",
-  },
-  {
-    TITLE: "Ceremonia ślubu",
-    DATE: "15:30, 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-
-    LOCATION: "Zamek w Wiśniczu",
-  },
-  {
-    TITLE: "Przyjazd do Gospody nad Rabą",
-    DATE: "16:30, 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-
-    LOCATION: "Gospoda nad Rabą",
-  },
-  {
-    TITLE: "Wesele",
-    DATE: "17:00, 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-
-    LOCATION: "Gospoda nad Rabą",
-  },
-  {
-    TITLE: "Fajerwerki",
-    DATE: "24:00, 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-    LOCATION: "Gospoda nad Rabą",
-  },
-  {
-    TITLE: "Śniadanie noworoczne",
-    DATE: "10:00, 01/01/2025",
-    DETAILS:"Więcej szegółów wrótce",
-    LOCATION: "Gospoda nad Rabą",
-  },
-];
-
 const Write = () => {
   // const [info, setInfo] = useState([]);
   // const [title, setTitle] = useState();
@@ -115,7 +103,7 @@ const Write = () => {
     //     .collection({ a })
     //     .document("HARMONOGRAM")
     //     .collection("HARMONOGRAM")
-    //     .orderBy("DATE", "desc")
+    //     .orderBy("TIME", "desc")
     //     .get()
     //     .then((querySnapshot) => {
     //       querySnapshot.forEach((element) => {
@@ -142,26 +130,32 @@ const Write = () => {
             <CardContent>
               {" "}
               <Typography
-                // align="justify"
+                align="justify"
                 id={data.TITLE}
-                variant="h4"
-                component="h4"
+                variant="h5"
+                component="h5"
               >
                 {data.TITLE}
               </Typography>
-              <Typography gutterBottom variant="h5" component="h5">
-                {data.DATE}
-                {",   "}
-                {data.LOCATION}
+              <Typography
+                align="justify"
+                id={data.TIME}
+                variant="h5"
+                component="h5"
+              >
+                {data.TIME}
               </Typography>
               <Typography
-                // align="justify"
-                id={data.DETAILS}
-                variant="p"
-                component="p"
+                align="justify"
+                gutterBottom
+                variant="h6"
+                component="h6"
               >
                 {data.DETAILS}
               </Typography>
+             
+              
+              
             </CardContent>
             <hr />
           </Card>
@@ -179,7 +173,8 @@ const Write = () => {
     );
   });
 
-  return (<ThemeProvider theme={theme}>
+  return (
+    <ThemeProvider theme={theme}>
     <div sx={{ minHeight: "100vh" }}>
       <Nav />
       <Typography
@@ -189,7 +184,7 @@ const Write = () => {
         component="h2"
       >
         <br />
-        Harmonogram <br />
+        Karta dań <br />
         <br />
       </Typography>
       {items}

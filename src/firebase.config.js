@@ -10,16 +10,13 @@ import "firebase/compat/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyB2TgDR7gqeqk0lQBq02KWSHhKCagnP4CY",
-  authDomain: "wesela-1e2da.firebaseapp.com",
-  projectId: "wesela-1e2da",
-  storageBucket: "wesela-1e2da.appspot.com",
-  messagingSenderId: "723698951038",
-  appId: "1:723698951038:web:61046f8d1be3b9382ec92f",
-  measurementId: "G-9XFJHJSFRR"
-
-
-
+  apiKey: "AIzaSyCN1HFhDFNERWclXCEllCqiOVcVfEWEsS0",
+  authDomain: "zlocien-cc13c.firebaseapp.com",
+  projectId: "zlocien-cc13c",
+  storageBucket: "zlocien-cc13c.appspot.com",
+  messagingSenderId: "794238978419",
+  appId: "1:794238978419:web:fb1550ee3e7d7999195d06",
+  measurementId: "G-2SB0GG6M2D"
   // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   // authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   // projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,

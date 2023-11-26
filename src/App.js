@@ -16,8 +16,9 @@ import LandingPage from "./WeselaPl/LandingPage.jsx";
 import emailjs from "@emailjs/browser";
 import Footer from "./WeselaPl/Footer";
 import DocumentMeta from "react-document-meta";
-import MoreInfo from "./WeselaPl/MoreInfo.jsx"
-
+import MoreInfo from "./WeselaPl/MoreInfo.jsx";
+import Karta from "./Sites/Karta";
+import Admin from "./Sites/Admin";
 
 function Copyright() {
   return (
@@ -74,7 +75,14 @@ const theme = createTheme({
   },
   shadows: ["none"],
   typography: {
-    fontFamily: ["Tangerine"].join(","),
+    fontFamily: [
+      '"Italianno"',
+      'Charm',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'handwriting'
+    ].join(','),
     textTransform: "none",
     button: {
       textTransform: "none",
@@ -128,12 +136,14 @@ export default function App() {
 
                 {/* WeselaPl */}
                 {/* Sites */}
-                <Route path={`${a}/home`} element={<Home />} />
-                <Route path={`${a}/Kontakt`} element={<Contact />} />
-                <Route path={`${a}/Harmonogram`} element={<Harmonogram />} />
-                <Route path={`${a}/Obecnosc`} element={<Obecnosc />} />
-                <Route path={`${a}/Informacje`} element={<Informacje />} />
-                <Route path={`${a}/Zaproszenie`} element={<Zaproszenie />} />
+                <Route path={`/home`} element={<Home />} />
+                <Route path={`/Kontakt`} element={<Contact />} />
+                <Route path={`/Harmonogram`} element={<Harmonogram />} />
+                <Route path={`/Obecnosc`} element={<Obecnosc />} />
+                <Route path={`/Informacje`} element={<Informacje />} />
+                <Route path={`/Karta`} element={<Karta />} />
+                <Route path="/:Zaproszenie" element={<Zaproszenie/>} />
+                <Route path={`/wprowadzzmiany`} element={<Admin />} />
                 {/* <Route path={`${a}/:any `} element={<LandingPage />} /> */}
                 <Route path={`${a}`} element={<Home />} />
                 <Route path={`/:any `} element={<Home />} />

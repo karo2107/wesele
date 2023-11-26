@@ -1,9 +1,5 @@
-import db from "../firebase.config";
 import React, { useState, useEffect } from "react";
-import "firebase/compat/firestore";
-import "firebase/storage";
-import "firebase/database";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -13,58 +9,116 @@ import Modal from "@mui/material/Modal";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
+import Nav from "./nav";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {Helmet} from "react-helmet";
-import Nav from "./nav";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import { Helmet } from "react-helmet";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+const pathname = window.location.pathname;
+const splitString = pathname.split("/");
+const a = "Karolina i Kuba";
+
+const info = [
+  {
+    TITLE: "Ślub na Zamku w Wiśniczu",
+    GMAP: "https://maps.app.goo.gl/JY8oEdJcqwiZi6A88",
+    DETAILS:
+    <div><b>Ślub zostnie potwierdzony pózniej</b> </div>,
+    DETAILS2: <div><p><b>O obiekcie:</b> Więcej informacji wkrótce</p></div>,
+    DETAILS3:
+    <div><p><b>Planowane wydarzenia:</b> Więcej informacji wkrótce</p></div>,
+  DETAILS4:
+  <div><p><b>Ubiór:</b> Proponujemy ubrać się ciepło, buty na wysokim obcasie nie są wskazane</p></div>,
+  },
+  {
+    TITLE: "Wesele w Gospodzie nad Rabą",
+    GMAP: "https://maps.app.goo.gl/5nZGqpYyXNdWHNck8",
+    DETAILS:
+      "Więcej informacji wkrótce",
+    DETAILS2: "Więcej informacji wkrótce",
+    DETAILS3:
+      "Więcej informacji wkrótce",
+    DETAILS4:
+      "Więcej informacji wkrótce",
+  },
+  {
+    TITLE: "Śniadanie w Gospodzie nad Rabą",
+    GMAP: "https://maps.app.goo.gl/5nZGqpYyXNdWHNck8",
+    DETAILS:
+    <div><p><b>Dojazd:</b> Więcej informacji wkrótce</p></div>,
+    DETAILS2: <div><p><b>O obiekcie:</b> Więcej informacji wkrótce</p></div>,
+    DETAILS3:
+    <div><p><b>Planowane wydarzenia:</b> Więcej informacji wkrótce</p></div>,
+  DETAILS4:"Więcej informacji wkrótce"
+  },
+  {
+    TITLE: "Wasze zdjęcia",
+    GMAP: "https://drive.google.com/drive/folders/1kuC6IveYLcKHbMZt1-vQ-KaAwTOhRvw8?usp=sharing",
+    DETAILS:"Prosimy o uploadowanie Waszych zdjęć z uroczystości i przyjęcia pod powyszym linkiem",
+  },
+];
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#825b07",
+      main: "#825b07",
+      dark: "#825b07",
+      contrastText: "#000",
+    },
+    secondary: {
+      light: "#022911",
+      main: "#022911",
+      dark: "#022911",
+      contrastText: "#fff",
+    },
+    third: {
+      light: "#000000",
+      main: "#000000",
+      dark: "#000000",
+      contrastText: "#000000",
+    },
+  },
+  shadows: ["none"],
+  typography: {
+    fontFamily: ['Italianno'].join(","),
+    textTransform: "none",
+    button: {
+      textTransform: "none",
+    },
+  },
+});
 const Write = () => {
-  const [info, setInfo] = useState([]);
-  const [date, setDate] = useState();
-  const [p1, setP1] = useState();
-  const [p2, setP2] = useState();
-  const [p3, setP3] = useState();
-  const [p4, setP4] = useState();
-  const [p5, setP5] = useState();
-  const [summary, setSummary] = useState();
-  const [author, setAuthor] = useState();
-  const [title, setTitle] = useState();
-  const [picture, setPicture] = useState();
-  const [specjalizacja, setSpecjalizacja] = useState();
+  // const [info, setInfo] = useState([]);
+  // const [title, setTitle] = useState();
   // const [loggedin, setLoggedin] = useState();
-  const [pass, setPass] = useState();
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setTitle(-1);
-  const [pageloaded, setPageloaded] = useState(false);
-
-
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setTitle(-1);
+  // const [pageloaded, setPageloaded] = useState(false);
 
   useEffect(() => {
-    const Fetchdata = async () => {
-      await db
-        .collection("wesela")
-        .orderBy("DATE", "desc")
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((element) => {
-            var data = element.data();
-            setInfo((arr) => [...arr, data]);
-          });
-        });
-    };
-    Fetchdata();
+    // const Fetchdata = async () => {
+    //   await db
+    //     .collection({ a })
+    //     .document("HARMONOGRAM")
+    //     .collection("HARMONOGRAM")
+    //     .orderBy("GMAP", "desc")
+    //     .get()
+    //     .then((querySnapshot) => {
+    //       querySnapshot.forEach((element) => {
+    //         var data = element.data();
+    //         setInfo((arr) => [...arr, data]);
+    //       });
+    //     });
+    // };
+    // Fetchdata();
     AOS.init({
       duration: 2000,
     });
@@ -73,103 +127,95 @@ const Write = () => {
   const items = info.map((data) => {
     return (
       <div>
-        <Grid
-         data-aos="fade-down"
-        sx={{
-          my:5,
-          display: {
-            xs: "block",
-            sm: "block",
-            md: "flex",
-            lg: "flex",
-            xl: "flex",
-          },
-        }}
-        container
-        spacing={5}
-        alignItems=""
-      >
-        <Grid item  xs={0} md={0} lg={2}/>
-        <Grid item key={data.PICTURE} xs={12} md={3} lg={3}>
-          <a href={`/Aktualnosci/${data.URL}`}>
-
-          
-          <img
-            width="100%"
-            src={data.PICTURE}
-            // src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-            alt="KMT"
-          /></a>
-        </Grid>
-        <Grid sx={{p:1}} item key={data.TITLE} xs={12} md={9} lg={5}>
-          <Typography
-            align="justify"
-            id={data.TITLE}
-            variant="h4"
-            component="h1"
-          >
-            {data.TITLE}
-          </Typography>
-
-          <Typography
-            align="justify"
-            id={data.AUTHOR}
-            variant="p"
-            component="h4"
-          >
-            Autor:<a href={data.AUTHOR}> {data.AUTHOR}</a>
-            
-            
-            <br/> Dzień publikacji:  {data.DATE}<br/> Dotyczy specjalizacji:{" "}
-            <a href="/Specjalizacje"> {data.SPECJALIZACJA}</a>
-             <hr />
-          </Typography>
-          <Typography
-            align="justify"
-            id={data.SUMMARY}
-            variant="p"
-            component="p"
-          >
-            {data.SUMMARY}
-          </Typography>
-          <br/>
-          {/* <Link to={`/Aktualnosci/${data.TITLE}`}>przeczytaj</Link> */}
-          <Button
-            value={data.TITLE}
-            variant="outlined"
-            node="a"
-            href={`/Aktualnosci/${data.URL}`}
-            // onClick={(e) => setTitle(e.target.value)}
-            sx={{p:1}}
-          >
-            Przeczytaj
-          </Button>
-
-        </Grid>
-        <Grid item  xs={0} md={0} lg={2}/>
-        </Grid>
-        
+        <Container
+          data-aos="fade-down"
+          maxWidth="md"
+          sx={{ justifyContent: "flex-end", alignItems: "center" }}
+        >
+          <Card sx={{}}>
+            <CardContent>
+              {" "}
+              <Typography
+                // align="justify"
+                id={data.TITLE}
+                variant="h4"
+                component="h4"
+              >
+                {data.TITLE}
+              </Typography>
+              <Button variant="outlined" href={data.GMAP} id={data.GMAP}>
+                Link
+              </Button>
+              <Typography
+                align="justify"
+                gutterBottom
+                variant="h5"
+                component="h5"
+              >
+                {data.DETAILS}
+              </Typography>
+              <Typography
+                align="justify"
+                gutterBottom
+                variant="h5"
+                component="h5"
+              >
+                {data.DETAILS2}
+              </Typography>
+              <Typography
+                align="justify"
+                gutterBottom
+                variant="h5"
+                component="h5"
+              >
+                {data.DETAILS3}
+              </Typography>
+              <Typography
+                align="justify"
+                gutterBottom
+                variant="h5"
+                component="h5"
+              >
+                {data.DETAILS4}
+              </Typography>
+            </CardContent>
+            <hr />
+          </Card>
+        </Container>
         <Helmet>
-          <title>
-         KMT Aktualnosci
-          </title>
-          <meta name="description" content="KMT wesela, KMT aktualnosci"
-          />
-              <meta name="keywords" content="KMT, Kozubek Matusiak Truszkiewicz Adwokaci i Radcowie Prawni spółka cywilna, KMT Kozubek Matusiak Truszkiewicz, KMT Legal, KMT Kozubek Matusiak Truszkiewicz
-    Jan Matusiak, KMT, Aktualnosci prawne, wesela"/>
-          <link rel="canonical" href={`https://kmtlegal.pl/Aktualnosci/${data.URL}`}/>
+          <title>{a}</title>
+          <meta name="description" content="wesele" />
+          <meta name="keywords" content="wesela" />
+          {/* <link
+            rel="canonical"
+            href={`https://kmtlegal.pl/Aktualnosci/${data.URL}`}
+          /> */}
         </Helmet>
       </div>
     );
   });
 
   return (
-    <div sx={{minHeight:"100vh"}}>
-  <Nav />
-      
-        {items}
-     
-    </div>
+    <ThemeProvider theme={theme}>
+    <div sx={{ minHeight: "100vh" }}>
+      <Nav />
+      <Typography
+        // align="justify"
+        id={1}
+        variant="h2"
+        component="h2"
+      >
+        <br />
+        Wazne informacje <br />
+        <br />
+      </Typography>
+      {items}
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </div></ThemeProvider>
   );
 };
 
