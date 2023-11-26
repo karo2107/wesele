@@ -106,6 +106,7 @@ export default function Album() {
             backgroundImage:
               "url('https://images.unsplash.com/photo-1543721241-adfe6a33fd2e?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
             backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
             backgroundSize: "cover",
             height: "100vh",
           }}
@@ -127,6 +128,7 @@ export default function Album() {
               justifyContent="space-between"
               alignItems=""
               spacing={{ xs: 1, sm: 2, md: 8, lg: 14 }}
+              sx={{display: { xs: 'none', sm: 'flex',fontStyle:'italic' }}}
             >
               <Typography />
               <Typography />
@@ -146,13 +148,46 @@ export default function Album() {
                 component="h4"
                 variant="h4"
                 align="right"
-                color="red"
+                color="black"
                 gutterBottom
                 sx={{ fontStyle: "italic" }}
               >
                 {a}
               </Typography>
             </Stack>{" "}
+            <Stack
+              direction="column"
+              justifyContent="space-between"
+              alignItems=""
+              spacing={{ xs: 3, sm: 2, md: 8, lg: 14 }}
+              sx={{display: { xs: 'flex', sm: 'none',fontStyle:'italic' }}}
+            >
+              <Typography />
+              <Typography />
+
+              <Typography
+                sx={{ fontStyle: "oblique", color: "black" }}
+                component="h5"
+                variant="h5"
+              >
+                <a>
+                  Z przyjemnością zapraszamy na nasze wesele
+                  <br />
+                  dnia 31 grudnia 2024 roku
+                </a>
+              </Typography>
+              <Typography
+                component="h6"
+                variant="h6"
+                align="right"
+                color="black"
+                gutterBottom
+                sx={{ fontStyle: "italic" }}
+              >
+                {a}
+              </Typography>
+            </Stack>{" "}
+         
           </Container>
         </Box>
         <Box>

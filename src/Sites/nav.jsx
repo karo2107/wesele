@@ -99,7 +99,7 @@ function DrawerAppBar(props) {
             href="/home"
             variant="h4"
             component="div"
-            sx={{color:'black', flexGrow: 1, display: { xs: 'none', sm: 'flex',fontStyle:'italic' } }}
+            sx={{color:'black', fontStyle:'italic', flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}
           >
            Wesele K&K
           </Typography>
