@@ -28,33 +28,33 @@ const a = "Karolina i Kuba";
 const info = [
   {
     TITLE: "Przystawki i powitalny drink na zamku",
-    TIME: "14:30",
+    TIME: "⏲ 14:30",
     DETAILS: "przystawki, prossecco, Więcej informacji wkrótce",
   },
   {
     TITLE: "Pierwszy ciepły posiłek w gospodzie",
-    TIME: "17:00",
+    TIME: "⏲ 17:00",
     DETAILS: "Więcej informacji wkrótce",
   },
   {
     TITLE: "Tort",
-    TIME: "19:00",
+    TIME: "⏲ 19:00",
     DETAILS: "Więcej informacji wkrótce",
   },
   {
     TITLE: "Drugi ciepły posiłek",
-    TIME: "21:30",
+    TIME: "⏲ 21:30",
     DETAILS: "Więcej informacji wkrótce",
   },
   {
     TITLE: "Trzeci ciepły posiłek",
-    TIME: "23:00",
+    TIME: "⏲ 23:00",
     DETAILS: "Więcej informacji wkrótce",
   },
   
   {
     TITLE: "Śniadanie",
-    TIME: "10:00",
+    TIME: "⏲ 10:00",
     DETAILS: "Więcej informacji wkrótce",
   },
 ];

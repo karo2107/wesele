@@ -131,18 +131,18 @@ export default function Album() {
               sx={{display: { xs: 'none', sm: 'flex',fontStyle:'italic' }}}
             >
               <Typography />
-              <Typography />
+              
+              
 
               <Typography
                 sx={{ fontStyle: "oblique", color: "black" }}
                 component="h3"
                 variant="h3"
               >
-                <a>
-                  Z przyjemnością zapraszamy na nasze wesele
-                  <br />
-                  dnia 31 grudnia 2024 roku
-                </a>
+                
+                 Drodzy Goście!<br/> Zapraszamy Was na nasze wesele.
+                
+                
               </Typography>
               <Typography
                 component="h4"
@@ -170,11 +170,7 @@ export default function Album() {
                 component="h5"
                 variant="h5"
               >
-                <a>
-                  Z przyjemnością zapraszamy na nasze wesele
-                  <br />
-                  dnia 31 grudnia 2024 roku
-                </a>
+                Drodzy Goście!<br/> Zapraszamy Was na nasze wesele.
               </Typography>
               <Typography
                 component="h6"

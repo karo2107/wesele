@@ -60,41 +60,41 @@ const theme = createTheme({
 });
 const info = [
   {
-    TITLE: "Recepcja przed ślubem",
-    DATE: "14:30, 31/12/2024",
+    TITLE: "❶ Recepcja przed ślubem",
+    DATE: "⏲ 14:30 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
-    LOCATION: "Zamek w Wiśniczu",
+    LOCATION: "⛫ Zamek w Wiśniczu",
   },
   {
-    TITLE: "Ceremonia ślubu",
-    DATE: "15:30, 31/12/2024",
+    TITLE: "❷ Ceremonia ślubu",
+    DATE: "⏲ 15:30 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
 
-    LOCATION: "Zamek w Wiśniczu",
+    LOCATION: "⛫ Zamek w Wiśniczu",
   },
   {
-    TITLE: "Przyjazd do Gospody nad Rabą",
-    DATE: "16:30, 31/12/2024",
+    TITLE: "❸ Przyjazd do Gospody nad Rabą",
+    DATE: "⏲ 16:30 🗓 31/12/2024",
+    DETAILS:"Więcej szegółów wrótce",
+
+    LOCATION: "⚐ Gospoda nad Rabą",
+  },
+  {
+    TITLE: "❹ Wesele",
+    DATE: "⏲ 17:00 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
 
     LOCATION: "Gospoda nad Rabą",
   },
   {
-    TITLE: "Wesele",
-    DATE: "17:00, 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-
-    LOCATION: "Gospoda nad Rabą",
-  },
-  {
-    TITLE: "Fajerwerki",
-    DATE: "24:00, 31/12/2024",
+    TITLE: "❺ Fajerwerki",
+    DATE: "⏲ 24:00 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
     LOCATION: "Gospoda nad Rabą",
   },
   {
-    TITLE: "Śniadanie noworoczne",
-    DATE: "10:00, 01/01/2025",
+    TITLE: "❻ Śniadanie noworoczne",
+    DATE: "⏲ 10:00 🗓 01/01/2025",
     DETAILS:"Więcej szegółów wrótce",
     LOCATION: "Gospoda nad Rabą",
   },
@@ -151,7 +151,7 @@ const Write = () => {
               </Typography>
               <Typography gutterBottom variant="h5" component="h5">
                 {data.DATE}
-                {",   "}
+                <br/>
                 {data.LOCATION}
               </Typography>
               <Typography
