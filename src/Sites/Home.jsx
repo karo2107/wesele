@@ -22,9 +22,8 @@ import BeenhereIcon from "@mui/icons-material/Beenhere";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import ReactDOM from "react-dom";
 import Snowfall from "react-snowfall";
-
 import { Helmet } from "react-helmet";
-
+import bg from "./home.png";
 const theme = createTheme({
   palette: {
     primary: {
@@ -61,6 +60,7 @@ const theme = createTheme({
     },
   },
 });
+
 const href = window.location.href;
 const names = [
   "Przedsiębiorców",
@@ -103,8 +103,9 @@ export default function Album() {
       <main>
         <Box
           sx={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1543721241-adfe6a33fd2e?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            // backgroundImage:
+            //   "url('https://images.unsplash.com/photo-1543721241-adfe6a33fd2e?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            backgroundImage:`url(${bg})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
@@ -186,7 +187,9 @@ export default function Album() {
          
           </Container>
         </Box>
-        <Box>
+        <Box
+        sx={{backgroundColor:"white"}}
+        >
           <Container maxWidth="md">
             <Typography
               sx={{ fontStyle: "italic", color: "" }}

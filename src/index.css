@@ -10,8 +10,10 @@ body {
   max-width: 100% !important;
   overflow-x: hidden !important;
   /* background-color: #022911 !important; */
-  background-size: 100%;
-  background-repeat: no-repeat;
+  background-image: url(/public/bg.png);
+  background-size:100%;
+  background-repeat:repeat-y;
+  background-position-x: center;
 }
 
 code {
@@ -91,4 +93,8 @@ margin-bottom: 55px;
 
 .navbarbg{
   background-color: rgba(39, 55, 70, 0.009);
+}
+
+.fireworks{
+  z-index: -4 !important;
 }

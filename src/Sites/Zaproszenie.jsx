@@ -25,6 +25,8 @@ import InputLabel from "@mui/material/InputLabel";
 import Nav from "./nav";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Fireworks } from "@fireworks-js/react";
+
 
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
@@ -182,12 +184,14 @@ const Post = () => {
                   wiadomości przed wakacjami. Bądźcie pewni, że pracujemy nad
                   stworzeniem niezapomnianego wydarzenia, a na koniec wieczoru
                   planujemy wybuchową zabawę, która dostarczy Wam mnóstwo
-                  radości i niezapomnianych chwil. 
-                  <br/>
-                  Chcąc umozliwić wszystkich gościom relkaks i dobrą zabawę, postanowiliśmy
-                  zorganizować ten wyjątkowy dzień wyłącznie dla dorosłych. 
-                  <br/>
-                  Dziękujemy za zrozumienie i z niecierpliwością czekamy na wspólną zabawę!
+                  radości i niezapomnianych chwil.
+                  <br />
+                  Chcąc umozliwić wszystkich gościom relkaks i dobrą zabawę,
+                  postanowiliśmy zorganizować ten wyjątkowy dzień wyłącznie dla
+                  dorosłych.
+                  <br />
+                  Dziękujemy za zrozumienie i z niecierpliwością czekamy na
+                  wspólną zabawę!
                   <br />
                   <br />
                   Z serdecznymi pozdrowieniami,
@@ -205,6 +209,19 @@ const Post = () => {
         </Grid>
 
         <Grid item xs={12} sm={12} md={12} lg={12} elevation={6}>
+        <Box
+            sx={{
+              boxShadow: 3,
+              borderRadius: 10,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: "#ffffffcc",
+
+              minHeight: "100vh",
+              maxWidth: "100vw",
+            }}
+          >
           <Typography component="h1" variant="h5">
             <br />
             <br /> Twoja odpowiedz
@@ -333,6 +350,7 @@ const Post = () => {
               <Typography sx={{ color: "white" }}>Wyślij odpowiedz</Typography>
             </Button>
           </Box>
+       </Box>
         </Grid>
         <br />
         <br />
@@ -347,7 +365,36 @@ const Post = () => {
     <div>
       <ThemeProvider theme={theme}>
         <Nav />
-
+        <Fireworks
+          className="fireworks"
+          // ref={ref}
+          options={{
+            opacity: 0.7,
+            friction: 1,
+            acceleration: 1,
+            particles: 150,
+            gravity: 3.5,
+            lineWidth: {
+              explosion: {
+                min: 1,
+                max: 5,
+              },
+              trace: {
+                min: 1,
+                max: 2,
+              },
+            },
+          }}
+          style={{
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            position: "fixed",
+            background: "#fff",
+            zindex: -3,
+          }}
+        />
         <Container sx={{ minHeight: "100vh", minWidth: "100vw" }}>
           <Box
             sx={{
@@ -355,7 +402,7 @@ const Post = () => {
               flexDirection: "column",
               alignItems: "center",
               // backgroundImage: `url(${bg})`,
-              backgroundImage: `url(${BGIMG})`,
+              //backgroundImage: `url(${BGIMG})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               minHeight: "100vh",
