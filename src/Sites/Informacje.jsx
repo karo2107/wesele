@@ -39,7 +39,7 @@ const info = [
   },
   {
     TITLE: "Wesele w Gospodzie nad Rabą",
-    GMAP: "https://maps.app.goo.gl/5nZGqpYyXNdWHNck8",
+    GMAP: "http://hotelnadraba.pl/",
     DETAILS:
       "Więcej informacji wkrótce",
     DETAILS2: "Więcej informacji wkrótce",
@@ -132,7 +132,7 @@ const Write = () => {
           maxWidth="md"
           sx={{ justifyContent: "flex-end", alignItems: "center" }}
         >
-          <Card sx={{}}>
+          <Card sx={{borderRadius:10}}>
             <CardContent>
               {" "}
               <Typography
@@ -179,8 +179,9 @@ const Write = () => {
                 {data.DETAILS4}
               </Typography>
             </CardContent>
-            <hr />
+           
           </Card>
+          <br/>
         </Container>
         <Helmet>
           <title>{a}</title>

@@ -126,7 +126,7 @@ export default function App() {
       <CssBaseline />
       <main>
         {/* Footer */}
-        <Box sx={{ bgcolor: "", mt: 0, p: 0 }} component="footer">
+        <Box sx={{ backgroundColor: "white", mt: 0, p: 0 }} component="footer">
           <Grid container spacing={0}>
             <Grid
               item

@@ -126,7 +126,7 @@ const Write = () => {
           maxWidth="md"
           sx={{ justifyContent: "flex-end", alignItems: "center" }}
         >
-          <Card sx={{}}>
+          <Card sx={{borderRadius:10}}>
             <CardContent>
               {" "}
               <Typography
@@ -157,9 +157,10 @@ const Write = () => {
               
               
             </CardContent>
-            <hr />
+          
           </Card>
         </Container>
+        <br/>
         <Helmet>
           <title>{a}</title>
           <meta name="description" content="wesele" />
