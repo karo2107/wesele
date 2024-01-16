@@ -24,6 +24,17 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import Castle from "../GraphicAssets/Castle.png";
+import Gospoda from "../GraphicAssets/Gospoda.png";
+import Drinks from "../GraphicAssets/Drinks.png";
+import Wedding from "../GraphicAssets/Wedding.png";
+import Food from "../GraphicAssets/Food.png";
+import line from "../GraphicAssets/line.png";
+import Dance from "../GraphicAssets/Dance.png";
+import Fireworks from "../GraphicAssets/Fireworks.png";
+import Breakfast from "../GraphicAssets/Breakfast.png";
+import { BreakfastDining } from "@mui/icons-material";
+
 
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
@@ -63,39 +74,57 @@ const info = [
     TITLE: "❶ Recepcja przed ślubem",
     DATE: "⏲ 14:30 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
+    IMG: Castle,
     LOCATION: "⛫ Zamek w Wiśniczu",
   },
   {
     TITLE: "❷ Ceremonia ślubu",
     DATE: "⏲ 15:30 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
-
+    IMG: Wedding,
     LOCATION: "⛫ Zamek w Wiśniczu",
   },
   {
     TITLE: "❸ Przyjazd do Gospody nad Rabą",
     DATE: "⏲ 16:30 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
-
+    IMG: Gospoda,
     LOCATION: "⚐ Gospoda nad Rabą",
   },
+  {
+    TITLE: "❹ Toast",
+    DATE: "⏲ 17:00 🗓 31/12/2024",
+    DETAILS:"Więcej szegółów wrótce",
+    IMG: Drinks,
+    LOCATION: "Gospoda nad Rabą",
+  },
+  {
+    TITLE: "❹ Pierwszy ciepły posiłek",
+    DATE: "⏲ 17:00 🗓 31/12/2024",
+    DETAILS:"Więcej szegółów wrótce",
+    IMG: Food,
+    LOCATION: "Gospoda nad Rabą",
+  },
+
   {
     TITLE: "❹ Wesele",
     DATE: "⏲ 17:00 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
-
+    IMG: Dance,
     LOCATION: "Gospoda nad Rabą",
   },
   {
     TITLE: "❺ Fajerwerki",
     DATE: "⏲ 24:00 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
+    IMG: Fireworks,
     LOCATION: "Gospoda nad Rabą",
   },
   {
     TITLE: "❻ Śniadanie noworoczne",
     DATE: "⏲ 10:00 🗓 01/01/2025",
     DETAILS:"Więcej szegółów wrótce",
+    IMG: Breakfast,
     LOCATION: "Gospoda nad Rabą",
   },
 ];
@@ -149,6 +178,7 @@ const Write = () => {
               >
                 {data.TITLE}
               </Typography>
+              <img src={data.IMG} width="50%"/>
               <Typography gutterBottom variant="h5" component="h5">
                 {data.DATE}
                 <br/>
@@ -191,7 +221,8 @@ const Write = () => {
       >
         <br />
         Harmonogram <br />
-        <br />
+        <img src={line} width="50%"/>
+        <br /><br />
       </Typography>
       {items}
       <br />

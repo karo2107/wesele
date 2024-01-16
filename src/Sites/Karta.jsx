@@ -20,7 +20,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import line from "../GraphicAssets/line.png";
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = "Karolina i Kuba";
@@ -51,7 +51,16 @@ const info = [
     TIME: "⏲ 23:00",
     DETAILS: "Więcej informacji wkrótce",
   },
-  
+  {
+    TITLE: "Bufet",
+    TIME: "⏲ 21:00",
+    DETAILS: "Więcej informacji wkrótce",
+  },
+  {
+    TITLE: "Czwarty ciepły posiłek",
+    TIME: "⏲ 01:00",
+    DETAILS: "Więcej informacji wkrótce",
+  },
   {
     TITLE: "Śniadanie",
     TIME: "⏲ 10:00",
@@ -123,30 +132,33 @@ const Write = () => {
       <div>
         <Container
           data-aos="fade-down"
+          alignItems="center"
           maxWidth="md"
-          sx={{ justifyContent: "flex-end", alignItems: "center" }}
+          sx={{ centerContent: "flex-end", alignItems: "center" }}
         >
           <Card sx={{borderRadius:10}}>
             <CardContent>
               {" "}
               <Typography
-                align="justify"
+                align="center"
                 id={data.TITLE}
                 variant="h5"
                 component="h5"
               >
                 {data.TITLE}
               </Typography>
+              <br/>
               <Typography
-                align="justify"
+                align="center"
                 id={data.TIME}
                 variant="h5"
                 component="h5"
               >
                 {data.TIME}
               </Typography>
+              <br/>
               <Typography
-                align="justify"
+                align="center"
                 gutterBottom
                 variant="h6"
                 component="h6"
@@ -160,6 +172,7 @@ const Write = () => {
           
           </Card>
         </Container>
+        <img src={line} width="30%"/>
         <br/>
         <Helmet>
           <title>{a}</title>
@@ -179,14 +192,14 @@ const Write = () => {
     <div sx={{ minHeight: "100vh" }}>
       <Nav />
       <Typography
-        // align="justify"
+        // align="center"
         id={1}
         variant="h2"
         component="h2"
       >
         <br />
         Karta dań <br />
-        <br />
+      <img src={line} width="50%"/><br /><br />
       </Typography>
       {items}
       <br />

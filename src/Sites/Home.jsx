@@ -24,6 +24,8 @@ import ReactDOM from "react-dom";
 import Snowfall from "react-snowfall";
 import { Helmet } from "react-helmet";
 import bg from "./home.png";
+import line from "../GraphicAssets/line.png";
+import pair from "../GraphicAssets/Pair.png"
 const theme = createTheme({
   palette: {
     primary: {
@@ -105,14 +107,16 @@ export default function Album() {
           sx={{
             // backgroundImage:
             //   "url('https://images.unsplash.com/photo-1543721241-adfe6a33fd2e?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-            backgroundImage:`url(${bg})`,
+            // backgroundImage:`url(${bg})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
             height: "100vh",
           }}
         >
-          <Snowfall />
+          <Snowfall
+          color="lightgrey"
+          snowflakeCount={100} />
           <Container
             data-aos="zoom-in"
             data-aos-anchor-placement="top-bottom"
@@ -120,15 +124,16 @@ export default function Album() {
             sx={{
               height: "100vh",
             }}
+            alignItems="center"
           >
-            <Box sx={{ display: { xs: "block", sm: "none" } }}>
+            <Box sx={{ display: { xs: "block", sm: "block" } }}>
               <br /> <br /> <br /> <br />
             </Box>
             <Stack
               direction="column"
               justifyContent="space-between"
-              alignItems=""
-              spacing={{ xs: 1, sm: 2, md: 8, lg: 14 }}
+              alignItems="center"
+              spacing={{ xs: 1, sm: 2, md: 3, lg: 5 }}
               sx={{display: { xs: 'none', sm: 'flex',fontStyle:'italic' }}}
             >
               <Typography />
@@ -145,6 +150,15 @@ export default function Album() {
                 
                 
               </Typography>
+              <img src={line} width="50%"/>
+              <Typography
+                sx={{ fontStyle: "oblique", color: "black" }}
+                component="h3"
+                variant="h3"
+              >
+                 31 Grudnia 2024 roku
+              </Typography>
+              <img src={line} width="50%"/>
               <Typography
                 component="h4"
                 variant="h4"
@@ -153,13 +167,14 @@ export default function Album() {
                 gutterBottom
                 sx={{ fontStyle: "italic" }}
               >
-                {a}
+                {a}<img src={pair} width="15%"/>
               </Typography>
+             
             </Stack>{" "}
             <Stack
               direction="column"
               justifyContent="space-between"
-              alignItems=""
+              alignItems="center"
               spacing={{ xs: 3, sm: 2, md: 8, lg: 14 }}
               sx={{display: { xs: 'flex', sm: 'none',fontStyle:'italic' }}}
             >
@@ -173,6 +188,15 @@ export default function Album() {
               >
                 Drodzy Goście!<br/> Zapraszamy Was na nasze wesele.
               </Typography>
+              <img src={line} width="80%"/>
+              <Typography
+                sx={{ fontStyle: "oblique", color: "black" }}
+                component="h5"
+                variant="h5"
+              >
+                31 Grudnia 2024 roku
+              </Typography>
+              <img src={line} width="80%"/>
               <Typography
                 component="h6"
                 variant="h6"
@@ -183,8 +207,13 @@ export default function Album() {
               >
                 {a}
               </Typography>
+              <div align="right">
+<img  src={pair} width="50%"/>
+            </div>
             </Stack>{" "}
-         
+            
+            
+            
           </Container>
         </Box>
         <Box

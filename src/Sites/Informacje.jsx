@@ -20,7 +20,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import Castle from "../GraphicAssets/Castle.png";
+import Gospoda from "../GraphicAssets/Gospoda.png";
+import Breakfast from "../GraphicAssets/Breakfast.png";
+import Photo from "../GraphicAssets/Photo.png";
+import line from "../GraphicAssets/line.png";
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = "Karolina i Kuba";
@@ -30,13 +34,15 @@ const info = [
     TITLE: "Ślub na Zamku w Wiśniczu",
     GMAP: "https://maps.app.goo.gl/JY8oEdJcqwiZi6A88",
     DETAILS:
-    <div><b>Ślub zostnie potwierdzony pózniej</b> </div>,
+    <div><b>Planujemy dokonać ceremonii ślubu na Zamku w Wiśniczu</b> </div>,
     DETAILS2: <div><p><b>O obiekcie:</b> Więcej informacji wkrótce</p></div>,
     DETAILS3:
     <div><p><b>Planowane wydarzenia:</b> Więcej informacji wkrótce</p></div>,
   DETAILS4:
   <div><p><b>Ubiór:</b> Proponujemy ubrać się ciepło, buty na wysokim obcasie nie są wskazane</p></div>,
-  },
+  IMG: Castle,
+},
+  
   {
     TITLE: "Wesele w Gospodzie nad Rabą",
     GMAP: "http://hotelnadraba.pl/",
@@ -47,6 +53,7 @@ const info = [
       "Więcej informacji wkrótce",
     DETAILS4:
       "Więcej informacji wkrótce",
+      IMG: Gospoda,
   },
   {
     TITLE: "Śniadanie w Gospodzie nad Rabą",
@@ -56,12 +63,14 @@ const info = [
     DETAILS2: <div><p><b>O obiekcie:</b> Więcej informacji wkrótce</p></div>,
     DETAILS3:
     <div><p><b>Planowane wydarzenia:</b> Więcej informacji wkrótce</p></div>,
-  DETAILS4:"Więcej informacji wkrótce"
+  DETAILS4:"Więcej informacji wkrótce",
+  IMG: Breakfast,
   },
   {
     TITLE: "Wasze zdjęcia",
     GMAP: "https://drive.google.com/drive/folders/1kuC6IveYLcKHbMZt1-vQ-KaAwTOhRvw8?usp=sharing",
-    DETAILS:"Prosimy o uploadowanie Waszych zdjęć z uroczystości i przyjęcia pod powyszym linkiem",
+    DETAILS:"Prosimy o uploadowanie Waszych zdjęć z uroczystości i przyjęcia pod powyzszym linkiem",
+    IMG: Photo,
   },
 ];
 const theme = createTheme({
@@ -134,7 +143,7 @@ const Write = () => {
         >
           <Card sx={{borderRadius:10}}>
             <CardContent>
-              {" "}
+              <img src={data.IMG} width="50%"/>
               <Typography
                 // align="justify"
                 id={data.TITLE}
@@ -208,7 +217,7 @@ const Write = () => {
       >
         <br />
         Wazne informacje <br />
-        <br />
+        <img src={line} width="50%"/><br /><br />
       </Typography>
       {items}
       <br />

@@ -26,7 +26,10 @@ import Nav from "./nav";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Fireworks } from "@fireworks-js/react";
-
+import Line from "../GraphicAssets/line.png";
+import Meat from "../GraphicAssets/Meat.png";
+import Vegetables from "../GraphicAssets/Vegetables.png";
+import Anwser from "../GraphicAssets/Anwser.png";
 
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
@@ -126,7 +129,7 @@ const Post = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              backgroundColor: "#ffffffcc",
+              backgroundColor: "#FFFFFFE6",
 
               minHeight: "100vh",
               maxWidth: "100vw",
@@ -165,7 +168,7 @@ const Post = () => {
                   {data.NAME} <br /> {data.GUEST}
                 </Typography>
                 <br />
-                <br />
+                <img src={Line} width="75%"/>
                 <br />
                 <Typography
                   sx={{ fontStyle: "italic" }}
@@ -226,13 +229,14 @@ const Post = () => {
             <br />
             <br /> Twoja odpowiedz
             <br />
-            <br />
+           
           </Typography>
           <Box component="form" sx={{ mt: 2 }}>
             {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}> */}
 
             <Grid container sx={{ px: 2 }}>
               <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
+                <img src={Anwser} width="20%"/>
                 <InputLabel id="demo-simple-select-label">
                   {data.NAME}, czy możemy liczyć na Twoją obecność?
                 </InputLabel>
@@ -369,11 +373,16 @@ const Post = () => {
           className="fireworks"
           // ref={ref}
           options={{
-            opacity: 0.7,
+            opacity: 0.2,
             friction: 1,
             acceleration: 1,
-            particles: 150,
+            particles: 50,
+            intensity: 9,
             gravity: 3.5,
+            brightness: {
+            min: 1,
+            max: 2,
+          },
             lineWidth: {
               explosion: {
                 min: 1,
