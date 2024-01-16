@@ -376,8 +376,8 @@ const Post = () => {
             opacity: 0.2,
             friction: 1,
             acceleration: 1,
-            particles: 50,
-            intensity: 9,
+            particles: 30,
+            intensity: 4,
             gravity: 3.5,
             brightness: {
             min: 1,
