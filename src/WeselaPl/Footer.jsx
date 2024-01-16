@@ -127,6 +127,9 @@ export default function App() {
       <main>
         {/* Footer */}
         <Box sx={{ backgroundColor: "white", mt: 0, p: 0 }} component="footer">
+        <Box sx={{ display: { xs: "block", sm: "none" } }}>
+              <br /> <br /> <br /> <br />
+            </Box>
           <Grid container spacing={0}>
             <Grid
               item
@@ -356,8 +359,8 @@ export default function App() {
                       <Button
                         
                         type="submit"
-                        color="black"
-                        variant="contained"
+                        color="primary"
+                        variant="outlined"
                         large
                         sx={{ mt: 3, mb: 2 }}
                       >

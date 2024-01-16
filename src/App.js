@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Box from "@mui/material/Box";
+
 import Contact from "./WeselaPl/Contact";
 import Obecnosc from "./Sites/Obecnosc";
 import Home from "./Sites/Home";
@@ -157,9 +157,6 @@ export default function App() {
               </Routes>
             </BrowserRouter>
           </main>
-          <Box sx={{ display: { xs: "block", sm: "none" } }}>
-              <br /> <br /> <br /> <br />
-            </Box>
           <Footer />
         </div>
       </DocumentMeta>

@@ -268,7 +268,7 @@ const Post = () => {
                   <MenuItem value={"Brak"}>brak</MenuItem>
                   <MenuItem value={"Wege"}>wegetarianin</MenuItem>
                   <MenuItem value={"uczulenie na lactose"}>
-                    uczulenie na laktose
+                    uczulenie na laktozę
                   </MenuItem>
                 </Select>
               </Grid>
@@ -305,7 +305,7 @@ const Post = () => {
                   <MenuItem value={"Brak"}>brak</MenuItem>
                   <MenuItem value={"Wege"}>wegetarianin</MenuItem>
                   <MenuItem value={"uczulenie na lactose"}>
-                    uczulenie na laktose
+                    uczulenie na laktozę
                   </MenuItem>
                 </Select>
               </Grid>
