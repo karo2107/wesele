@@ -24,7 +24,7 @@ import Castle from "../GraphicAssets/Castle.png";
 import Gospoda from "../GraphicAssets/Gospoda.png";
 import Breakfast from "../GraphicAssets/Breakfast.png";
 import Photo from "../GraphicAssets/Photo.png";
-import line from "../GraphicAssets/line.png";
+import line from "../GraphicAssets/info.svg";
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = "Karolina i Kuba";
@@ -69,7 +69,7 @@ const info = [
   {
     TITLE: "Wasze zdjęcia",
     GMAP: "https://drive.google.com/drive/folders/1kuC6IveYLcKHbMZt1-vQ-KaAwTOhRvw8?usp=sharing",
-    DETAILS:"Prosimy o uploadowanie Waszych zdjęć z uroczystości i przyjęcia pod powyzszym linkiem",
+    DETAILS:"Prosimy o uploadowanie Waszych zdjęć z uroczystości i przyjęcia pod powyższym linkiem",
     IMG: Photo,
   },
 ];
@@ -208,7 +208,7 @@ const Write = () => {
   return (
     <ThemeProvider theme={theme}>
     <div sx={{ minHeight: "100vh" }}>
-      <Nav />
+      <Nav /> <div className="blankspace"/>
       <Typography
         // align="justify"
         id={1}
@@ -220,11 +220,7 @@ const Write = () => {
         <img src={line} width="50%"/><br /><br />
       </Typography>
       {items}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <div className="blankspace"/>
     </div></ThemeProvider>
   );
 };

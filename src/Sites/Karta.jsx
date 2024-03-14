@@ -20,7 +20,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import line from "../GraphicAssets/line.png";
+import line from "../GraphicAssets/food.svg";
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = "Karolina i Kuba";
@@ -169,10 +169,10 @@ const Write = () => {
               
               
             </CardContent>
-          
+           <hr/>
           </Card>
         </Container>
-        <img src={line} width="30%"/>
+       
         <br/>
         <Helmet>
           <title>{a}</title>
@@ -190,7 +190,7 @@ const Write = () => {
   return (
     <ThemeProvider theme={theme}>
     <div sx={{ minHeight: "100vh" }}>
-      <Nav />
+      <Nav /> <div className="blankspace"/>
       <Typography
         // align="center"
         id={1}
@@ -202,11 +202,7 @@ const Write = () => {
       <img src={line} width="50%"/><br /><br />
       </Typography>
       {items}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <div className="blankspace"/>
     </div></ThemeProvider>
   );
 };

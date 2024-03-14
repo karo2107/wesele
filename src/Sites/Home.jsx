@@ -24,7 +24,7 @@ import ReactDOM from "react-dom";
 import Snowfall from "react-snowfall";
 import { Helmet } from "react-helmet";
 import bg from "./home.png";
-import line from "../GraphicAssets/line.png";
+import line from "../GraphicAssets/line.svg";
 import pair from "../GraphicAssets/Pair.png"
 const theme = createTheme({
   palette: {
@@ -126,19 +126,9 @@ export default function Album() {
             }}
             alignItems="center"
           >
-            <Box sx={{ display: { xs: "block", sm: "block" } }}>
-              <br /> <br /> <br /> <br />
-            </Box>
-            <Stack
-              direction="column"
-              justifyContent="space-between"
-              alignItems="center"
-              spacing={{ xs: 1, sm: 2, md: 3, lg: 5 }}
-              sx={{display: { xs: 'none', sm: 'flex',fontStyle:'italic' }}}
-            >
-              <Typography />
-              
-              
+            <Box minHeight="100vh" alignItems="center" sx={{ display: { xs: "none", sm: "flex" } }}>
+             
+
 
               <Typography
                 sx={{ fontStyle: "oblique", color: "black" }}
@@ -149,70 +139,46 @@ export default function Album() {
                  Drodzy Goście!<br/> Zapraszamy Was na nasze wesele.
                 
                 
-              </Typography>
+            
+              <br/>
               <img src={line} width="50%"/>
-              <Typography
-                sx={{ fontStyle: "oblique", color: "black" }}
-                component="h3"
-                variant="h3"
-              >
+            <br/>
                  31 Grudnia 2024 roku
-              </Typography>
-              <img src={line} width="50%"/>
-              <Typography
-                component="h4"
-                variant="h4"
-                align="right"
-                color="black"
-                gutterBottom
-                sx={{ fontStyle: "italic" }}
-              >
-                {a}<img src={pair} width="15%"/>
-              </Typography>
              
-            </Stack>{" "}
-            <Stack
-              direction="column"
-              justifyContent="space-between"
-              alignItems="center"
-              spacing={{ xs: 3, sm: 2, md: 8, lg: 14 }}
-              sx={{display: { xs: 'flex', sm: 'none',fontStyle:'italic' }}}
-            >
-              <Typography />
-              <Typography />
+              <br/>
+              {/* <img src={line} width="50%"/> */}<img src={pair} width="30%"/>
+              <br/>
+              {a}
+              <br/>
+          </Typography>
+            </Box>
+            <Box minHeight="100vh" alignItems="center" sx={{ display: { xs: "flex", sm: "none" } }}>
+             
 
-              <Typography
-                sx={{ fontStyle: "oblique", color: "black" }}
-                component="h5"
-                variant="h5"
-              >
+
+             <Typography
+               sx={{ fontStyle: "oblique", color: "black" }}
+               component="h5"
+               variant="h5"
+             >
+               
                 Drodzy Goście!<br/> Zapraszamy Was na nasze wesele.
-              </Typography>
-              <img src={line} width="80%"/>
-              <Typography
-                sx={{ fontStyle: "oblique", color: "black" }}
-                component="h5"
-                variant="h5"
-              >
+               
+               
+           
+             <br/>
+             <img src={line} width="50%"/>
+           <br/>
                 31 Grudnia 2024 roku
-              </Typography>
-              <img src={line} width="80%"/>
-              <Typography
-                component="h6"
-                variant="h6"
-                align="right"
-                color="black"
-                gutterBottom
-                sx={{ fontStyle: "italic" }}
-              >
-                {a}
-              </Typography>
-              <div align="right">
-<img  src={pair} width="50%"/>
-            </div>
-            </Stack>{" "}
             
-            
+             <br/>
+             {/* <img src={line} width="50%"/> */}<img src={pair} width="30%"/>
+             <br/>
+             {a}
+             <br/>
+         </Typography>
+           </Box>
+        
             
           </Container>
         </Box>
@@ -261,7 +227,9 @@ export default function Album() {
               <br />
             </Typography>
           </Container>{" "}
+          <br/>
         </Box>
+        <div className="blankspace"/>
       </main>{" "}
       <Helmet>
         <title>{a}</title>

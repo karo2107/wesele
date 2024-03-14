@@ -29,7 +29,7 @@ import Gospoda from "../GraphicAssets/Gospoda.png";
 import Drinks from "../GraphicAssets/Drinks.png";
 import Wedding from "../GraphicAssets/Wedding.png";
 import Food from "../GraphicAssets/Food.png";
-import line from "../GraphicAssets/line.png";
+import line from "../GraphicAssets/timetable.svg";
 import Dance from "../GraphicAssets/Dance.png";
 import Fireworks from "../GraphicAssets/Fireworks.png";
 import Breakfast from "../GraphicAssets/Breakfast.png";
@@ -212,7 +212,7 @@ const Write = () => {
 
   return (<ThemeProvider theme={theme}>
     <div sx={{ minHeight: "100vh" }}>
-      <Nav />
+      <Nav /> <div className="blankspace"/>
       <Typography
         // align="justify"
         id={1}
@@ -225,11 +225,7 @@ const Write = () => {
         <br /><br />
       </Typography>
       {items}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <div className="blankspace"/>
     </div></ThemeProvider>
   );
 };

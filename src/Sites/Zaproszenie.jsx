@@ -3,6 +3,8 @@ import React, { useState, useEffect, useLocation } from "react";
 import "firebase/compat/firestore";
 import "firebase/storage";
 import "firebase/database";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+// updateDoc
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -26,10 +28,11 @@ import Nav from "./nav";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Fireworks } from "@fireworks-js/react";
-import Line from "../GraphicAssets/line.png";
+import Line from "../GraphicAssets/line.svg";
 import Meat from "../GraphicAssets/Meat.png";
 import Vegetables from "../GraphicAssets/Vegetables.png";
 import Anwser from "../GraphicAssets/Anwser.png";
+
 
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
@@ -45,12 +48,17 @@ const Post = () => {
   const [foodguest, setFoodguest] = React.useState("");
   const href = window.location.pathname;
   const output = href.replace("/Zaproszenie/", "");
-
+  const [name, setName] = React.useState("");
+  const [guestobecnosc, setGuestobecnosc] = React.useState("");
+  const [id, setId] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [msg, setMsg] = React.useState("");
   // const href = window.location.pathname;
   // const output = href.replace("/Zaproszenie/", "");
   // const BGIMG ="https://images.unsplash.com/photo-1515339760107-1952b7a08454?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  const BGIMG =
-    "https://images.unsplash.com/photo-1543157145-f78c636d023d?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  // const BGIMG =
+  //   "https://images.unsplash.com/photo-1543157145-f78c636d023d?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   // const BGIMG ="https://images.unsplash.com/photo-1518627249530-af3cb4a171ae?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   const handleChange = (event) => {
     setFood(event.target.value);
@@ -87,6 +95,29 @@ const Post = () => {
     });
   }, []);
 
+  const updateDATA = async () => {
+    const ref = doc(db, "goscie", a);
+    await setDoc(
+      ref,
+      {
+        // ID: id,
+        ID: a,
+        // NAME: name,
+        OBECNOSC: obecnosc,
+        GUEST: guest,
+        GUESTOBECNOSC: guestobecnosc,
+        FOOD: food,
+        FOODGUEST: foodguest,
+        EMAIL: email,
+        PHONE: phone,
+        MSG: msg,
+      },
+      { merge: true }
+    );
+
+    window.location.reload(false);
+  };
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -118,6 +149,195 @@ const Post = () => {
     },
   });
   const items = info.map((data) => {
+    if (data.GUEST == "") {
+      return (
+        <Grid container maxWidth="md" sx={{ mt: 10 }}>
+          <Grid item xs={12} sm={12} md={12} lg={12} elevation={1}>
+            <CssBaseline />
+            <Box
+              sx={{
+                boxShadow: 3,
+                borderRadius: 10,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                backgroundColor: "#FFFFFFE6",
+
+                minHeight: "100vh",
+                maxWidth: "100vw",
+              }}
+            >
+              <Container
+                sx={{
+                  alignItems: "center",
+                  py: 2,
+                }}
+                component="main"
+                maxWidth="md"
+              >
+                <Stack
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    minHeight: "80vh",
+                    marginLeft: 1,
+                    marginRight: 1,
+                  }}
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  // spacing={{ xs: 1, sm: 2, md: 8, lg: 14 }}
+                >
+                  <br />
+                  <br />
+                  <br />
+                  <Typography
+                    sx={{ fontStyle: "italic" }}
+                    component="h1"
+                    variant="h2"
+                  >
+                    {data.NAME} <br /> {data.GUEST}
+                  </Typography>
+                  <br />
+                  <img src={Line} width="75%" />
+                  <br />
+                  <Typography
+                    sx={{ fontStyle: "italic" }}
+                    align="justify"
+                    component="h6"
+                    variant="h6"
+                  >
+                    Z ogromną radością pragniemy Was zaprosić na nasz ślub i
+                    wesele. To wyjątkowe wydarzenie odbędzie się w ostatnią noc
+                    roku, 31 grudnia 2024 roku, w malowniczym zakątku, Gospodzie
+                    nad Rabą. Prosimy o zarezerwowanie tego wyjątkowego dnia w
+                    Waszym kalendarzu i dołączenie do zabawy. Będziemy razem
+                    witać nowy rok w świetnym towarzystwie! Szczegóły dotyczące
+                    karty dań, planu wesela oraz ceremonii ślubnej będziemy
+                    stopniowo udostępniać, a wszystkie informacje zostaną podane
+                    do wiadomości przed wakacjami. Bądźcie pewni, że pracujemy
+                    nad stworzeniem niezapomnianego wydarzenia, a na koniec
+                    wieczoru planujemy wybuchową zabawę, która dostarczy Wam
+                    mnóstwo radości i niezapomnianych chwil.
+                    <br />
+                    Chcąc umozliwić wszystkich gościom relkaks i dobrą zabawę,
+                    postanowiliśmy zorganizować ten wyjątkowy dzień wyłącznie
+                    dla dorosłych.
+                    <br />
+                    Dziękujemy za zrozumienie i z niecierpliwością czekamy na
+                    wspólną zabawę!
+                    <br />
+                    <br />
+                    Z serdecznymi pozdrowieniami,
+                    <br />
+                    <br />
+                    Karolina i Kuba
+                    <br />
+                    <br />
+                  </Typography>
+
+                  <Typography component="h1" variant="h5" />
+                </Stack>
+              </Container>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={12} md={12} lg={12} elevation={6}>
+            <div>
+              <h2>Czy możemy liczyć na Twoją obecność?</h2>
+              <br />
+              <br />
+              {/* <TextField
+                fullWidth
+                required
+                placeholder="Tak / nie / jeszcze nie wiem"
+                onChange={(e) => setObecnosc(e.target.value)}
+              /> */}
+              Czy możemy liczyć na Twoją obecność?
+                <Select
+    labelId="Czy możemy liczyć na Twoją obecność?"
+    id="demo-simple-select"
+    value={obecnosc}
+    placeholder="Tak / nie / jeszcze nie wiem"
+    label="Czy możemy liczyć na Twoją obecność?"
+    onChange={(e) => setObecnosc(e.target.value)}
+  >
+    <MenuItem value={"Tak"}>Tak</MenuItem>
+    <MenuItem value={"Nie"}>Nie</MenuItem>
+    <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
+  </Select>
+              <br />
+              <br />
+              
+              <TextField
+                fullWidth
+                required
+                placeholder="Imię i nazwisko osoby towarzyszącej"
+                onChange={(e) => setGuest(e.target.value)}
+              />
+              <br />
+              <br />
+              {data.NAME}
+              <TextField
+                fullWidth
+                required
+                placeholder="Preferencje dietetyczne"
+                onChange={(e) => setFood(e.target.value)}
+              />
+              <br />
+              <br />
+              {guest}
+              <TextField
+                fullWidth
+                required
+                placeholder="Preferencje dietetyczne"
+                onChange={(e) => setFood(e.target.value)}
+              />
+              <br /><br />
+            <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                placeholder="Twój e-mail"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                name="phone"
+                placeholder="Twój numer telefonu"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                multiline
+                rows={4}
+                placeholder="Czy masz dodatkowe pytania?"
+                onChange={(e) => setMsg(e.target.value)}
+              />
+              <br />
+              <br />
+              <Button variant="outlined" className="red" onClick={updateDATA}>
+                Wyślij odpowiedz
+              </Button>
+            </div>
+          </Grid>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </Grid>
+      );
+    }
     return (
       <Grid container maxWidth="md" sx={{ mt: 10 }}>
         <Grid item xs={12} sm={12} md={12} lg={12} elevation={1}>
@@ -168,7 +388,7 @@ const Post = () => {
                   {data.NAME} <br /> {data.GUEST}
                 </Typography>
                 <br />
-                <img src={Line} width="75%"/>
+                <img src={Line} width="75%" />
                 <br />
                 <Typography
                   sx={{ fontStyle: "italic" }}
@@ -212,149 +432,82 @@ const Post = () => {
         </Grid>
 
         <Grid item xs={12} sm={12} md={12} lg={12} elevation={6}>
-        <Box
-            sx={{
-              boxShadow: 3,
-              borderRadius: 10,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              backgroundColor: "#ffffffcc",
-
-              minHeight: "100vh",
-              maxWidth: "100vw",
-            }}
-          >
-          <Typography component="h1" variant="h5">
+          <div>
+            <h2>Czy możemy liczyć na Twoją obecność?</h2>
             <br />
-            <br /> Twoja odpowiedz
             <br />
-           
-          </Typography>
-          <Box component="form" sx={{ mt: 2 }}>
-            {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}> */}
-
-            <Grid container sx={{ px: 2 }}>
-              <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
-                <img src={Anwser} width="20%"/>
-                <InputLabel id="demo-simple-select-label">
-                  {data.NAME}, czy możemy liczyć na Twoją obecność?
-                </InputLabel>
+           {/* <TextField
+                fullWidth
+                required
+                placeholder="Tak / nie / jeszcze nie wiem"
+                onChange={(e) => setObecnosc(e.target.value)}
+              /> */}
+              Czy możemy liczyć na Twoją obecność?
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="obecnosc"
-                  value={obecnosc}
-                  label="Czy możemy liczyć na Twoją obecność?"
-                  onChange={handleChangeObecnosc}
-                  variant="standard"
-                >
-                  <MenuItem value={"tak"}>Tak</MenuItem>
-                  <MenuItem value={"nie"}>Nie</MenuItem>
-                  <MenuItem value={"moze"}>Jeszcze nie wiem</MenuItem>
-                </Select>
-              </Grid>
-              <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
-                <InputLabel id="demo-simple-select-label">
-                  Jakie są Twoje preferencje żywieniowe
-                </InputLabel>
-                <Select
-                  labelId="jedzenie"
-                  id="demo-simple-select"
-                  value={food}
-                  label="Twoje preferencje deietetyczne?"
-                  onChange={handleChangeFood}
-                  variant="standard"
-                >
-                  <MenuItem value={"Brak"}>brak</MenuItem>
-                  <MenuItem value={"Wege"}>wegetarianin</MenuItem>
-                  <MenuItem value={"uczulenie na lactose"}>
-                    uczulenie na laktozę
-                  </MenuItem>
-                </Select>
-              </Grid>
-              <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
-                <InputLabel id="demo-simple-select-label">
-                  {data.GUEST}, czy możemy liczyć na Twoją obecność?
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="obecnosc-goscia"
-                  value={obecnosctowarzysza}
-                  label="Age"
-                  onChange={handleChangeObecnosctowarzysza}
-                  variant="standard"
-                >
-                  <MenuItem value={"tak"}>Tak</MenuItem>
-                  <MenuItem value={"nie"}>Nie</MenuItem>
-                  <MenuItem value={"moze"}>Jeszcze nie wiem</MenuItem>
-                </Select>
-              </Grid>
-
-              <Grid item xs={12} sm={12} md={12} sx={{ px: 2 }}>
-                <InputLabel id="demo-simple-select-label">
-                  Jakie są Twoje preferencje żywieniowe
-                </InputLabel>
-                <Select
-                  labelId="jedzenie-goscia"
-                  id="demo-simple-select"
-                  value={foodguest}
-                  label="Preferencje deietetyczne osoby towarzyszącej"
-                  variant="standard"
-                  onChange={handleChangeFoodguest}
-                >
-                  <MenuItem value={"Brak"}>brak</MenuItem>
-                  <MenuItem value={"Wege"}>wegetarianin</MenuItem>
-                  <MenuItem value={"uczulenie na lactose"}>
-                    uczulenie na laktozę
-                  </MenuItem>
-                </Select>
-              </Grid>
-            </Grid>
+    labelId="Czy możemy liczyć na Twoją obecność?"
+    id="demo-simple-select"
+    value={obecnosc}
+    placeholder="Tak / nie / jeszcze nie wiem"
+    label="Czy możemy liczyć na Twoją obecność?"
+    onChange={(e) => setObecnosc(e.target.value)}
+  >
+    <MenuItem value={"Tak"}>Tak</MenuItem>
+    <MenuItem value={"Nie"}>Nie</MenuItem>
+    <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
+  </Select>
+            <br />
+            <br />
+            {data.NAME}
             <TextField
-              sx={{ px: 2 }}
-              margin="normal"
-              required
               fullWidth
-              id="email"
-              label="E-mail"
+              required
+              placeholder="Preferencje dietetyczne"
+              onChange={(e) => setFood(e.target.value)}
+            />
+            <br />
+            <br />
+            {data.GUEST}
+            <TextField
+              fullWidth
+              required
+              placeholder="Preferencje dietetyczne"
+              onChange={(e) => setFood(e.target.value)}
+            />
+            <br />
+            <br /><br />
+            <br />
+            <TextField
+              fullWidth
+              required
+              placeholder="Twój e-mail"
               name="email"
-              autoComplete=""
-              variant="standard"
+              onChange={(e) => setEmail(e.target.value)}
             />
+            <br />
+            <br />
             <TextField
-              sx={{ px: 2 }}
-              margin="normal"
+              fullWidth
               required
-              fullWidth
-              id="phone"
-              label="Telefon"
               name="phone"
-              autoComplete=""
-              variant="standard"
+              placeholder="Twój numer telefonu"
+              onChange={(e) => setPhone(e.target.value)}
             />
+            <br />
+            <br />
             <TextField
-              sx={{ px: 2 }}
-              margin="normal"
               fullWidth
-              id="text"
-              label="Czy masz jakieś pytania?"
-              name="text"
-              autoComplete=""
-              variant="standard"
+              required
               multiline
               rows={4}
+              placeholder="Czy masz dodatkowe pytania?"
+              onChange={(e) => setMsg(e.target.value)}
             />
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, px: 2 }}
-            >
-              <Typography sx={{ color: "white" }}>Wyślij odpowiedz</Typography>
+            <br />
+            <br />
+            <Button variant="outlined" className="red" onClick={updateDATA}>
+              Wyślij odpowiedz
             </Button>
-          </Box>
-       </Box>
+          </div>
         </Grid>
         <br />
         <br />
@@ -380,9 +533,9 @@ const Post = () => {
             intensity: 4,
             gravity: 3.5,
             brightness: {
-            min: 1,
-            max: 2,
-          },
+              min: 1,
+              max: 2,
+            },
             lineWidth: {
               explosion: {
                 min: 1,
@@ -422,6 +575,7 @@ const Post = () => {
             {items}
           </Box>
         </Container>
+        <div className="blankspace"/>
       </ThemeProvider>{" "}
     </div>
   );

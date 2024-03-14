@@ -15,6 +15,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import logo from "../GraphicAssets/logo wesele.svg";
 
 const theme = createTheme({
   palette: {
@@ -80,9 +81,9 @@ function DrawerAppBar(props) {
 
   return (
     <ThemeProvider theme={theme}>
-    <Box className='navbarbg' sx={{ display: 'flex' }}>
+    <Box alignItems="top" className='navbarbg' sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar style={{ background: 'transparent', boxShadow: 'none'}} component="nav">
+      <AppBar alignItems="top" style={{ background: 'transparent', boxShadow: 'none'}} component="nav">
         <Toolbar className='navbarbg'>
           <IconButton
             color="inherit"
@@ -98,12 +99,12 @@ function DrawerAppBar(props) {
          
             href="/home"
             variant="h4"
-            component="div"
+            component="a"
             sx={{color:'black', fontStyle:'italic', flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}
           >
-           Wesele K&K
+          <img src={logo} />
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box alignItems="top" sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button href={item} key={item} sx={{ color: 'black', fontSize:"larger" }}>
                 {item}

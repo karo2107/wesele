@@ -98,3 +98,8 @@ margin-bottom: 55px;
 .fireworks{
   z-index: -4 !important;
 }
+
+.blankspace{
+  min-height: 15vh !important;
+  vertical-align: middle !important;
+}

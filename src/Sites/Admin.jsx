@@ -13,6 +13,7 @@ import "firebase/compat/firestore";
 import "firebase/storage";
 import "firebase/database";
 import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
+import QRCode from "react-qr-code";
 
 const Write = () => {
   const [info, setInfo] = useState([]);
@@ -98,21 +99,24 @@ const Write = () => {
   const items = info.map((data) => {
     return (
       <Grid container>
-          
-        <Grid item xs={12} sm={12} md={5} ><Typography align="left">gość: {data.NAME}</Typography></Grid>
-        <Grid item xs={12} sm={12} md={2} ><Typography align="left">będzie: {data.OBECNOSC}</Typography></Grid>
-        <Grid item xs={12} sm={12} md={5} ><Typography align="left">dieta: {data.FOOD}</Typography></Grid>
-        <br/>
-        <Grid item xs={12} sm={12} md={5} ><Typography align="left">osoba towarzysząca: {data.GUEST}</Typography></Grid>
-        <Grid item xs={12} sm={12} md={2} ><Typography align="left">będzie: {data.GUESTOBECNOSC}</Typography></Grid>
-        <Grid item xs={12} sm={12} md={5} ><Typography align="left">dieta: {data.FOODGUEST}</Typography></Grid>
-        <br/>
-        <Grid item xs={12} sm={12} md={7} ><Typography align="left">email: {data.EMAIL}</Typography></Grid>
-        <Grid item xs={12} sm={12} md={5} ><Typography align="left">telefon: {data.PHONE}</Typography></Grid>
-        <Grid item xs={12} sm={12} md={12} ><Typography align="left">wiadomość: {data.MSG} <hr/></Typography></Grid>
-        <Divider/>
-</Grid>
+          <Grid item xs={12} sm={12} md={3} > 
+          <QRCode value={"www.localhost:3000/"+`${data.ID})`} />
+          </Grid>
+        <Grid item xs={12} sm={12} md={5} ><Typography align="left">gość: {data.NAME}</Typography><br/>
+        <Typography align="left">będzie: {data.OBECNOSC}</Typography><br/>
+        <Typography align="left">dieta: {data.FOOD}</Typography></Grid>
+      
+        <Grid item xs={12} sm={12} md={2} ><Typography align="left">osoba towarzysząca: {data.GUEST}</Typography><br/>
+        <Typography align="left">będzie: {data.GUESTOBECNOSC}</Typography><br/>
+        <Typography align="left">dieta: {data.FOODGUEST}</Typography></Grid>
         
+        <Grid item xs={12} sm={12} md={2} ><Typography align="left">email: {data.EMAIL}</Typography><br/>
+       <Typography align="left">telefon: {data.PHONE}</Typography><br/>
+       <Typography align="left">wiadomość: {data.MSG}</Typography></Grid>
+       <Grid item xs={12} sm={12} md={12} ><hr/></Grid>
+       
+</Grid>
+         
         // <Grid item xs={12} sm={12} md={12} >
         //   <Modal
         //     actions={[

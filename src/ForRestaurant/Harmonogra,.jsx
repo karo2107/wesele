@@ -61,6 +61,7 @@ const Write = () => {
   const items = info.map((data) => {
     return (
       <div>
+         
         <Container
           data-aos="fade-down"
           maxWidth="md"
@@ -97,6 +98,7 @@ const Write = () => {
             </CardActions>
           </Card>
           <hr />
+          
         </Container>
         <Helmet>
           <title>{a}</title>
@@ -114,7 +116,7 @@ const Write = () => {
   return (
     <div sx={{ minHeight: "100vh" }}>
     <Nav />
-
+    <div className="blankspace"/>
       {items}
     </div>
   );
