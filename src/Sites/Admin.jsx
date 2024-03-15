@@ -1,5 +1,5 @@
 import db from "../firebase.config";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -14,6 +14,11 @@ import "firebase/storage";
 import "firebase/database";
 import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import QRCode from "react-qr-code";
+import generatePDF, { Options } from "react-to-pdf";
+import page1 from "../GraphicAssets/3.svg";
+import page2 from "../GraphicAssets/4.svg";
+import page1ang from "../GraphicAssets/3ang.png";
+import page2ang from "../GraphicAssets/4ang.png";
 
 const Write = () => {
   const [info, setInfo] = useState([]);
@@ -27,8 +32,19 @@ const Write = () => {
   const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [msg, setMsg] = React.useState("");
+  const [przedrostek, setPrzedrostek] = React.useState("");
   // const [loggedin, setLoggedin] = useState();
   const [pass, setPass] = useState();
+  const [print, setPrint] = useState();
+
+  const options = {
+    filename: print,
+    // resolution: Resolution.HIGH,
+    page: {
+      // margin: 20,
+      format: "A5",
+    },
+  };
 
   const login = () => {
     localStorage.setItem("pass", pass);
@@ -78,16 +94,17 @@ const Write = () => {
   const createDATA = async () => {
     const ref = doc(db, "goscie", id);
     await setDoc(ref, {
-        ID: id,
-        NAME: name,
-        OBECNOSC: obecnosc,
-        GUEST: guest,
-        GUESTOBECNOSC: guestobecnosc,
-        FOOD: food,
-        FOODGUEST: foodguest,
-        EMAIL: email,
-        PHONE: phone,
-        MSG: msg,
+      ID: id,
+      NAME: name,
+      OBECNOSC: obecnosc,
+      GUEST: guest,
+      GUESTOBECNOSC: guestobecnosc,
+      FOOD: food,
+      FOODGUEST: foodguest,
+      EMAIL: email,
+      PHONE: phone,
+      MSG: msg,
+      PRZEDROSTEK: przedrostek,
     });
     window.location.reload(false);
   };
@@ -96,149 +113,260 @@ const Write = () => {
     window.location.reload(false);
   };
 
+  const getTargetElement = () => document.getElementById(print);
+
+  const downloadPdf = () => {
+    generatePDF(getTargetElement, options);
+  };
+
+  function Dlpdf({ person }) {
+    generatePDF(document.getElementById(person), options);
+  }
+
+  const pdfs = info.map((data) => {
+    if(data.PRZEDROSTEK=="Dear"){
+    return (
+      <Container>
+        <div id={data.ID}>
+          <div className="a5" title="Zaproszenia">
+            <Typography
+              sx={{
+                fontSize: 70,
+                fontStyle: "oblique",
+                fontWeight: 50,
+                letterSpacing: 6,
+                // color: "grey",
+              }}
+              // fontFamily='"Great Vibes"'
+               fontFamily='Whisper'
+              // variant="h2"
+              align="center"
+            >
+              <br/>
+              {data.PRZEDROSTEK},
+              <br />
+              {data.NAME}
+              <br />
+              {data.GUEST}
+              <br/>
+            </Typography>{" "}
+            <img width="90%" src={page1ang}></img>
+          </div>
+        
+          
+        
+          <div className="a5" title="Zaproszenia">
+           
+            <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+            <img width="86%" src={page2ang} />
+          </div>
+        </div>
+        <hr />
+      </Container>
+    );}
+{
+    return (
+      <Container>
+        <div id={data.ID}>
+          <div className="a5" title="Zaproszenia">
+            <Typography
+              sx={{
+                fontSize: 75,
+                fontStyle: "",
+                fontWeight: 400,
+                letterSpacing: 12,
+                // color: "grey",
+              }}
+              // fontFamily='"Great Vibes"'
+               fontFamily='Whisper'
+              // variant="h2"
+              align="center"
+            >
+              <br/>
+              {data.PRZEDROSTEK},
+              <br />
+              {data.NAME}
+              <br />
+              {data.GUEST}
+              <br/>
+            </Typography>{" "}
+            <img width="90%" src={page1}></img>
+          </div>
+        
+          
+        
+          <div className="a5" title="Zaproszenia">
+           
+            <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+            <img width="86%" src={page2} />
+          </div>
+        </div>
+        <hr />
+      </Container>
+    );}
+  });
+  {
+    /* <Button onClick={
+            () => 
+            {
+            setPrint(data.ID);
+            downloadPdf();
+          }
+        }
+          
+            >  Download PDF</Button> */
+  }
   const items = info.map((data) => {
     return (
       <Grid container>
-          <Grid item xs={12} sm={12} md={3} > 
-          <QRCode value={"www.localhost:3000/"+`${data.ID})`} />
-          </Grid>
-        <Grid item xs={12} sm={12} md={5} ><Typography align="left">gość: {data.NAME}</Typography><br/>
-        <Typography align="left">będzie: {data.OBECNOSC}</Typography><br/>
-        <Typography align="left">dieta: {data.FOOD}</Typography></Grid>
-      
-        <Grid item xs={12} sm={12} md={2} ><Typography align="left">osoba towarzysząca: {data.GUEST}</Typography><br/>
-        <Typography align="left">będzie: {data.GUESTOBECNOSC}</Typography><br/>
-        <Typography align="left">dieta: {data.FOODGUEST}</Typography></Grid>
-        
-        <Grid item xs={12} sm={12} md={2} ><Typography align="left">email: {data.EMAIL}</Typography><br/>
-       <Typography align="left">telefon: {data.PHONE}</Typography><br/>
-       <Typography align="left">wiadomość: {data.MSG}</Typography></Grid>
-       <Grid item xs={12} sm={12} md={12} ><hr/></Grid>
-       
-</Grid>
-         
-        // <Grid item xs={12} sm={12} md={12} >
-        //   <Modal
-        //     actions={[
-        //       <Button flat modal="close" node="button" waves="green">
-        //         Close
-        //       </Button>,
-        //     ]}
-        //     bottomSheet={false}
-        //     fixedFooter={false}
-        //     header={data.ID}
-        //     id={data.ID}
-        //     value={data.ID}
-        //     open={false}
-        //     options={{
-        //       dismissible: true,
-        //       endingTop: "10%",
-        //       inDuration: 250,
-        //       onCloseEnd: null,
-        //       onCloseStart: null,
-        //       onOpenEnd: null,
-        //       onOpenStart: null,
-        //       opacity: 0.5,
-        //       outDuration: 250,
-        //       preventScrolling: true,
-        //       startingTop: "4%",
-        //     }}
-        //     trigger={
-        //       <Button
-        //         value={data.ID}
-        //         className="red"
-        //         node="button"
-        //         onClick={(e) => setId(e.target.value)}
-        //       >
-        //         <Button
-        //           value={data.LOKAL}
-        //           className="red"
-        //           node="button"
-        //           onClick={(e) => {
-        //             // setLokal(e.target.value);
-        //             // setCena(data.CENA);
-        //             // setMetraz(data.METRAZ);
-        //             // setPietro(data.PIETRO);
-        //             // setDostepnosc(data.DOSTEPNOSC);
-        //           }}
-        //         >
-        //           Edytuj
-        //         </Button>
-        //       </Button>
-        //     }
-        //   >
-          
-        //     {/* <input
-        //       placeholder="METRAZ"
-        //       onChange={(e) => setMetraz(e.target.value)}
-        //     />
+        <Grid item xs={12} sm={12} md={3}>
+          <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+          <Button onClick={(e) => setPrint(data.ID)}> load PDF</Button>
+          <Button onClick={downloadPdf}> Download PDF</Button>
+          {/* <Button
+            onClick={() => {
+              Dlpdf(`${data.ID})`)
+            }}
+          >
+            Say Hello and Increment
+          </Button> */}
+        </Grid>
+        <Grid item xs={12} sm={12} md={5}>
+          <Typography align="left">gość: {data.NAME}</Typography>
+          <br />
+          <Typography align="left">będzie: {data.OBECNOSC}</Typography>
+          <br />
+          <Typography align="left">dieta: {data.FOOD}</Typography>
+        </Grid>
 
-        //     <input
-        //       placeholder="PIETRO"
-        //       onChange={(e) => setPietro(e.target.value)}
-        //     />
+        <Grid item xs={12} sm={12} md={2}>
+          <Typography align="left">osoba towarzysząca: {data.GUEST}</Typography>
+          <br />
+          <Typography align="left">będzie: {data.GUESTOBECNOSC}</Typography>
+          <br />
+          <Typography align="left">dieta: {data.FOODGUEST}</Typography>
+        </Grid>
 
-        //     <input
-        //       placeholder="CENA"
-        //       onChange={(e) => setCena(e.target.value)}
-        //     />
+        <Grid item xs={12} sm={12} md={2}>
+          <Typography align="left">email: {data.EMAIL}</Typography>
+          <br />
+          <Typography align="left">telefon: {data.PHONE}</Typography>
+          <br />
+          <Typography align="left">wiadomość: {data.MSG}</Typography>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12}>
+          <hr />
+        </Grid>
+      </Grid>
 
-        //     <input
-        //       placeholder="DOSTEPNOSC"
-        //       onChange={(e) => setDostepnosc(e.target.value)}
-        //     /> */}
+      // <Grid item xs={12} sm={12} md={12} >
+      //   <Modal
+      //     actions={[
+      //       <Button flat modal="close" node="button" waves="green">
+      //         Close
+      //       </Button>,
+      //     ]}
+      //     bottomSheet={false}
+      //     fixedFooter={false}
+      //     header={data.ID}
+      //     id={data.ID}
+      //     value={data.ID}
+      //     open={false}
+      //     options={{
+      //       dismissible: true,
+      //       endingTop: "10%",
+      //       inDuration: 250,
+      //       onCloseEnd: null,
+      //       onCloseStart: null,
+      //       onOpenEnd: null,
+      //       onOpenStart: null,
+      //       opacity: 0.5,
+      //       outDuration: 250,
+      //       preventScrolling: true,
+      //       startingTop: "4%",
+      //     }}
+      //     trigger={
+      //       <Button
+      //         value={data.ID}
+      //         className="red"
+      //         node="button"
+      //         onClick={(e) => setId(e.target.value)}
+      //       >
+      //         <Button
+      //           value={data.LOKAL}
+      //           className="red"
+      //           node="button"
+      //           onClick={(e) => {
+      //             // setLokal(e.target.value);
+      //             // setCena(data.CENA);
+      //             // setMetraz(data.METRAZ);
+      //             // setPietro(data.PIETRO);
+      //             // setDostepnosc(data.DOSTEPNOSC);
+      //           }}
+      //         >
+      //           Edytuj
+      //         </Button>
+      //       </Button>
+      //     }
+      //   >
 
-        //     <Button onClick={updateDATA}>Zapisz</Button>
-        //   </Modal>
-        // </Grid>
-      
+      //     {/* <input
+      //       placeholder="METRAZ"
+      //       onChange={(e) => setMetraz(e.target.value)}
+      //     />
+
+      //     <input
+      //       placeholder="PIETRO"
+      //       onChange={(e) => setPietro(e.target.value)}
+      //     />
+
+      //     <input
+      //       placeholder="CENA"
+      //       onChange={(e) => setCena(e.target.value)}
+      //     />
+
+      //     <input
+      //       placeholder="DOSTEPNOSC"
+      //       onChange={(e) => setDostepnosc(e.target.value)}
+      //     /> */}
+
+      //     <Button onClick={updateDATA}>Zapisz</Button>
+      //   </Modal>
+      // </Grid>
     );
   });
   if (loggedin == "Sylwester2024") {
     return (
-      <Container>
-       
-            
-
-            <Grid item xs={12} sm={12} md={12} >{items}</Grid>
+      <Container><div>
+          <Card>
+            <h5>Dodaj nowego gościa:</h5>
+            <input
+              placeholder="ID - format imie nazwisko bez spacji"
+              onChange={(e) => setId(e.target.value)}
+            />
+            <input
+              placeholder="Imie i nazwisko"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              placeholder="Imie i nazwisko osoby towarzyszącej"
+              onChange={(e) => setGuest(e.target.value)}
+            />
+  <input
+              placeholder="drogi/droga/drodzy?"
+              onChange={(e) => setPrzedrostek(e.target.value)}
+            />
+            <Button className="red" onClick={createDATA}>
+              Dodaj
+            </Button>
+          </Card>
+          <hr/>
+        </div>
+        <Grid item xs={12} sm={12} md={12}>
+          {items}
+        </Grid>
+        {pdfs}
         
-          <div>
-            <Card>
-              <h5>
-                Dodaj nowego gościa: 
-              </h5>
-              <input
-                placeholder="ID - format imie nazwisko bez spacji"
-                onChange={(e) => setId(e.target.value)}
-              />
-              <input
-                placeholder="Imie i nazwisko"
-                onChange={(e) => setName(e.target.value)}
-              />
-               <input
-                placeholder="Imie i nazwisko osoby towarzyszącej"
-                onChange={(e) => setGuest(e.target.value)}
-              />
-              
-              <Button className="red" onClick={createDATA}>
-                Dodaj
-              </Button>
-            </Card>
-          </div>
-          {/* <Row>
-            <Card>
-              <h5>Podaj lokal do usuniecia:</h5>
-
-              <input
-                placeholder="Lokal"
-                onChange={(e) => setLokal(e.target.value)}
-              />
-              <Button className="red" onClick={deleteDATA}>
-                Usun
-              </Button>
-            </Card>
-          </Row> */}
-       
       </Container>
     );
   } else

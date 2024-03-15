@@ -103,3 +103,13 @@ margin-bottom: 55px;
   min-height: 15vh !important;
   vertical-align: middle !important;
 }
+
+.a5{
+  height: 400 !important;
+  width: 260 !important;
+  align-items: center;
+}
+
+.margin{
+  height: 200 !important;
+}

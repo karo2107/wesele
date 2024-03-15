@@ -81,7 +81,8 @@ const theme = createTheme({
       'Roboto',
       '"Helvetica Neue"',
       'Arial',
-      'handwriting'
+      '"Great Vibes"',
+      '"Whisper"'
     ].join(','),
     textTransform: "none",
     button: {
