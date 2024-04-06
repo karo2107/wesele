@@ -26,61 +26,56 @@ import Breakfast from "../GraphicAssets/Breakfast.png";
 import Photo from "../GraphicAssets/Photo.png";
 import line from "../GraphicAssets/info.svg";
 import bear from "../GraphicAssets/bear.png";
-import car from "../GraphicAssets/car.png"
-import meat from "../GraphicAssets/Meat.png"
+import car from "../GraphicAssets/car.png";
+import meat from "../GraphicAssets/Meat.png";
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = "Karolina i Kuba";
 
 const info = [
-//   {
-//     TITLE: "Ślub na Zamku w Wiśniczu",
-//     GMAP: "https://maps.app.goo.gl/JY8oEdJcqwiZi6A88",
-//     DETAILS:
-//     <div><b>Planujemy dokonać ceremonii ślubu na Zamku w Wiśniczu</b> </div>,
-//     DETAILS2: <div><p><b>O obiekcie:</b> Więcej informacji wkrótce</p></div>,
-//     DETAILS3:
-//     <div><p><b>Planowane wydarzenia:</b> Więcej informacji wkrótce</p></div>,
-//   DETAILS4:
-//   <div><p><b>Ubiór:</b> Proponujemy ubrać się ciepło, buty na wysokim obcasie nie są wskazane</p></div>,
-//   IMG: Castle,
-// },
-{
-  TITLE: "Dojazd",
-  GMAP: "https://maps.app.goo.gl/DdzdhLUfRdBYnjyw8",
-  DETAILS:
-    "Przy lokalu znajduje się bezpłatny parking dla samochodów osobowych.",
-  DETAILS2: "Jest mozliwosc dojazdu komunikacja miejska (najlepiej pociag z Krakowa do Bochni + telefon do nas.)",
-  DETAILS3: 
-    "Planujemy wynająć kierowców do rozwozenia gosci do domu po imprezie.",
-  DETAILS4:
-    "Gospoda znajudje się 5min od zjadu 'Bochnia' z autostrady A4",
+  //   {
+  //     TITLE: "Ślub na Zamku w Wiśniczu",
+  //     GMAP: "https://maps.app.goo.gl/JY8oEdJcqwiZi6A88",
+  //     DETAILS:
+  //     <div><b>Planujemy dokonać ceremonii ślubu na Zamku w Wiśniczu</b> </div>,
+  //     DETAILS2: <div><p><b>O obiekcie:</b> Więcej informacji wkrótce</p></div>,
+  //     DETAILS3:
+  //     <div><p><b>Planowane wydarzenia:</b> Więcej informacji wkrótce</p></div>,
+  //   DETAILS4:
+  //   <div><p><b>Ubiór:</b> Proponujemy ubrać się ciepło, buty na wysokim obcasie nie są wskazane</p></div>,
+  //   IMG: Castle,
+  // },
+  {
+    TITLE: "Dojazd",
+    GMAP: "https://maps.app.goo.gl/DdzdhLUfRdBYnjyw8",
+    DETAILS:
+      "Przy lokalu znajduje się bezpłatny parking dla samochodów osobowych.",
+    DETAILS2:
+      "Jest mozliwosc dojazdu komunikacja miejska (najlepiej pociag z Krakowa do Bochni + telefon do nas.)",
+    DETAILS3:
+      "Planujemy wynająć kierowców do rozwozenia gosci do domu po imprezie.",
+    DETAILS4: "Gospoda znajudje się 5min od zjadu 'Bochnia' z autostrady A4",
     IMG: car,
-},
+  },
   {
     TITLE: "Wesele w Gospodzie nad Rabą",
     GMAP: "http://hotelnadraba.pl/",
     DETAILS:
       "Zameldowanie w Hotelu nad Rabą 31.12.2024 od 14.00 (do potwierdzenia) ",
     DETAILS2: "Parking na miejscu",
-    DETAILS3: 
-      "Wymeldowanie 01.01.2025 do 14.00 (do potwierdzenia)",
-    DETAILS4:
-      "Więcej informacji wkrótce",
-      IMG: Gospoda,
+    DETAILS3: "Wymeldowanie 01.01.2025 do 14.00 (do potwierdzenia)",
+    DETAILS4: "Więcej informacji wkrótce",
+    IMG: Gospoda,
   },
   {
     TITLE: "Dzieci",
     GMAP: "http://hotelnadraba.pl/",
     DETAILS:
       "Ze względu na charakter imprezy prosimy, w miarę mozliwości, o pozostawienie swoich pociech w domu.",
-    DETAILS2: 
-    "",
-    DETAILS3:
-      "Jezeli nie jest to mozliwe, prosimy o kontakt.",
-    DETAILS4:
-      "Więcej informacji wkrótce",
-      IMG: bear,
+    DETAILS2: "",
+    DETAILS3: "Jezeli nie jest to mozliwe, prosimy o kontakt.",
+    DETAILS4: "Więcej informacji wkrótce",
+    IMG: bear,
   },
   {
     TITLE: "Preferencje dietetyczne",
@@ -88,39 +83,50 @@ const info = [
     DETAILS:
       "Gospoda słynie z pysznych dań mięsnych i jarskich, prosimy o informacje dotyczącą alergii pokarmowych i wyboru dań miesnych lub wegetariańskich. ",
     DETAILS2: "",
-    DETAILS3: 
-      "",
-    DETAILS4:
-      "Więcej informacji wkrótce",
-      IMG: meat,
+    DETAILS3: "",
+    DETAILS4: "Więcej informacji wkrótce",
+    IMG: meat,
   },
   {
     TITLE: "Dodatkowe informacje",
     GMAP: "http://hotelnadraba.pl/",
-    DETAILS:
-      "Jeśli planujecie obdarować nas prezentami w tym najważniejszym dla nas dniu, prosimy o wsparcie finansowe na realizację naszych planów. Zamiast kwiatów z radością przyjmiemy butelkę wytrawnego wina oraz symboliczny wkład finansowy do koperty. Pieniądze szczęścia nie dają, lecz dom urządzić pozwalają. Dlatego prosimy kochani Goście: prezenty w kopertach przynoście. 1. Bardzo chcemy wszystkich prosić by nam kwiatów nie przynosić Stąd wiadomość ku publice: Chcemy z winem mieć piwnicę!",
+    DETAILS: (
+      <div>
+        Jeśli planujecie obdarować nas prezentami w tym najważniejszym dla nas
+        dniu, prosimy o wsparcie finansowe na realizację naszych planów i
+        zamiast kwiatów z radością przyjmiemy butelkę wytrawnego wina. <br></br> <br/>Zamiast
+        kwiatów z radością przyjmiemy butelkę wytrawnego wina oraz symboliczny
+        wkład finansowy do koperty. <br></br><br/>Pieniądze szczęścia nie dają, lecz
+        realizacje planow pozwalają. <br/>Dlatego prosimy kochani Goście: prezenty w
+        kopertach przynoście. <br/>Bardzo chcemy wszystkich prosić by nam kwiatów nie
+        przynosić. <br/>Stąd wiadomość ku publice: Chcemy z winem wytrawnym mieć
+        piwnicę!
+      </div>
+    ),
     DETAILS2: "",
-    DETAILS3: 
-      "",
-    DETAILS4:
-      "Więcej informacji wkrótce",
-      IMG: meat,
+    DETAILS3: "",
+    DETAILS4: "Więcej informacji wkrótce",
+    IMG: meat,
   },
   {
     TITLE: "Śniadanie w Gospodzie nad Rabą",
     GMAP: "https://maps.app.goo.gl/5nZGqpYyXNdWHNck8",
-    DETAILS:
-    <div>Dnia pierwszego stycznia zapraszamy, do gospody, na śniadanie noworoczne około godziny 10 rano.</div>,
+    DETAILS: (
+      <div>
+        Dnia pierwszego stycznia zapraszamy, do gospody, na śniadanie noworoczne
+        około godziny 10 rano.
+      </div>
+    ),
     DETAILS2: <div></div>,
-    DETAILS3:
-    <div> </div>,
-  DETAILS4:"Więcej informacji wkrótce",
-  IMG: Breakfast,
+    DETAILS3: <div> </div>,
+    DETAILS4: "Więcej informacji wkrótce",
+    IMG: Breakfast,
   },
   {
     TITLE: "Wasze zdjęcia",
     GMAP: "https://drive.google.com/drive/folders/1kuC6IveYLcKHbMZt1-vQ-KaAwTOhRvw8?usp=sharing",
-    DETAILS:"Prosimy o uploadowanie Waszych zdjęć z wydarzenia pod powyższym linkiem",
+    DETAILS:
+      "Prosimy o uploadowanie Waszych zdjęć z wydarzenia pod powyższym linkiem",
     IMG: Photo,
   },
 ];
@@ -147,7 +153,7 @@ const theme = createTheme({
   },
   shadows: ["none"],
   typography: {
-    fontFamily: ['Italianno'].join(","),
+    fontFamily: ["Italianno"].join(","),
     textTransform: "none",
     button: {
       textTransform: "none",
@@ -192,9 +198,9 @@ const Write = () => {
           maxWidth="md"
           sx={{ justifyContent: "flex-end", alignItems: "center" }}
         >
-          <Card sx={{borderRadius:10}}>
+          <Card sx={{ borderRadius: 10 }}>
             <CardContent>
-              <img src={data.IMG} width="50%"/>
+              <img src={data.IMG} width="50%" />
               <Typography
                 // align="justify"
                 id={data.TITLE}
@@ -239,9 +245,8 @@ const Write = () => {
                 {data.DETAILS4}
               </Typography>
             </CardContent>
-           
           </Card>
-          <br/>
+          <br />
         </Container>
         <Helmet>
           <title>{a}</title>
@@ -258,21 +263,24 @@ const Write = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <div sx={{ minHeight: "100vh" }}>
-      <Nav /> <div className="blankspace"/>
-      <Typography
-        // align="justify"
-        id={1}
-        variant="h2"
-        component="h2"
-      >
-        <br />
-        Wazne informacje <br />
-        <img src={line} width="50%"/><br /><br />
-      </Typography>
-      {items}
-      <div className="blankspace"/>
-    </div></ThemeProvider>
+      <div sx={{ minHeight: "100vh" }}>
+        <Nav /> <div className="blankspace" />
+        <Typography
+          // align="justify"
+          id={1}
+          variant="h2"
+          component="h2"
+        >
+          <br />
+          Wazne informacje <br />
+          <img src={line} width="50%" />
+          <br />
+          <br />
+        </Typography>
+        {items}
+        <div className="blankspace" />
+      </div>
+    </ThemeProvider>
   );
 };
 
