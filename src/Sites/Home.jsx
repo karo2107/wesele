@@ -203,7 +203,7 @@ export default function Album() {
               component="h6"
               variant="h6"
             >
-              Z ogromną radością pragniemy Was zaprosić na nasz ślub i wesele.
+              {/* Z ogromną radością pragniemy Was zaprosić na nasz ślub i wesele.
               To wyjątkowe wydarzenie odbędzie się w ostatnią noc roku, 31
               grudnia 2024 roku, w malowniczym zakątku, Gospodzie nad Rabą i
               (mamy nadzieję) na Zamku w Wiśniczu. Prosimy o zarezerwowanie tego
@@ -216,10 +216,26 @@ export default function Album() {
               planujemy wybuchową zabawę, która dostarczy Wam mnóstwo radości i
               niezapomnianych chwil. Liczymy, że razem z nami stworzycie
               magiczną atmosferę tego wyjątkowego dnia. Z niecierpliwością
-              czekamy na wspólną zabawę!
+              czekamy na wspólną zabawę! */}
+              Z ogromną radością pragniemy zaprosić Was na nasz ślub i wesele,
+              które odbędzie się w ostatnią noc roku, 31 grudnia 2024 roku, 
+              w urokliwej Gospodzie nad Rabą. 
+              <br/>
+              <br/>
+              Prosimy o zarezerwowanie 31.12.2024r. w Waszym kalendarzu i dołączenie do wspólnej zabawy.
+              <br/>
+              Razem powitamy Nowy Rok w świetnym towarzystwie! 
+              <br/>
+              <br/>
+              Szczegóły dotyczące planu wesela oraz ceremonii ślubnej będziemy
+              sukcesywnie udostępniać, a wszystkie niezbędne informacje zostaną przekazane przed wakacjami.
+              
+              <br/>
+              <br/> Z niecerpliwością czekamy na wspólną zabawę i na stworzenie
+              magicznej atmosfery tego wyjątkowego dla Nas dnia. 
               <br />
               <br />
-              Z serdecznymi pozdrowieniami,
+              Pozdrowiamy,
               <br />
               <br />
               Karolina i Kuba

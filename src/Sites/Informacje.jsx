@@ -92,15 +92,10 @@ const info = [
     GMAP: "http://hotelnadraba.pl/",
     DETAILS: (
       <div>
-        Jeśli planujecie obdarować nas prezentami w tym najważniejszym dla nas
-        dniu, prosimy o wsparcie finansowe na realizację naszych planów i
-        zamiast kwiatów z radością przyjmiemy butelkę wytrawnego wina. <br></br> <br/>Zamiast
-        kwiatów z radością przyjmiemy butelkę wytrawnego wina oraz symboliczny
-        wkład finansowy do koperty. <br></br><br/>Pieniądze szczęścia nie dają, lecz
-        realizacje planow pozwalają. <br/>Dlatego prosimy kochani Goście: prezenty w
-        kopertach przynoście. <br/>Bardzo chcemy wszystkich prosić by nam kwiatów nie
-        przynosić. <br/>Stąd wiadomość ku publice: Chcemy z winem wytrawnym mieć
-        piwnicę!
+        Szanowni Goście, 
+        <br/>
+        <br/>
+        będzie nam niezmiernie miło jezeli zamiast bukietu kwiatów obdarujecie nas butelką wytrawnego (czerwonego) wina. <br></br><br/>
       </div>
     ),
     DETAILS2: "",
