@@ -193,7 +193,7 @@ export default function Album() {
             >
               <br />
               <br />
-              <b>Szanowni Rodzice, Krewni, Bliscy i Przyjaciele!</b>
+              <b>Drodzy Rodzice, Krewni, Bliscy i Przyjaciele!</b>
               <br />
               <br />
             </Typography>
@@ -217,30 +217,11 @@ export default function Album() {
               niezapomnianych chwil. Liczymy, że razem z nami stworzycie
               magiczną atmosferę tego wyjątkowego dnia. Z niecierpliwością
               czekamy na wspólną zabawę! */}
-              Z ogromną radością pragniemy zaprosić Was na nasz ślub i wesele,
-              które odbędzie się w ostatnią noc roku, 31 grudnia 2024 roku, 
-              w urokliwej Gospodzie nad Rabą. 
-              <br/>
-              <br/>
-              Prosimy o zarezerwowanie 31.12.2024r. w Waszym kalendarzu i dołączenie do wspólnej zabawy.
-              <br/>
-              Razem powitamy Nowy Rok w świetnym towarzystwie! 
-              <br/>
-              <br/>
-              Szczegóły dotyczące planu wesela oraz ceremonii ślubnej będziemy
-              sukcesywnie udostępniać, a wszystkie niezbędne informacje zostaną przekazane przed wakacjami.
-              
-              <br/>
-              <br/> Z niecerpliwością czekamy na wspólną zabawę i na stworzenie
-              magicznej atmosfery tego wyjątkowego dla Nas dnia. 
-              <br />
-              <br />
-              Pozdrowiamy,
-              <br />
-              <br />
-              Karolina i Kuba
-              <br />
-              <br />
+        Z ogromną radością pragniemy zaprosić Was na nasz ślub i wesele, które odbędzie się w ostatnią noc roku, 31 grudnia 2024 roku, w urokliwej Gospodzie nad Rabą.<br/><br/>
+        Szczegóły dotyczące planu wesela oraz ceremonii ślubnej będziemy sukcesywnie udostępniać.<br/><br/>
+        Cieszymy się na możliwość podzielenia się z Wami naszą radością w ten wyjątkowy dzień.<br/><br/>
+        Ściskamy mocno,<br/>
+        Karolina i Kuba
             </Typography>
           </Container>{" "}
           <br/>

@@ -33,7 +33,6 @@ import Meat from "../GraphicAssets/Meat.png";
 import Vegetables from "../GraphicAssets/Vegetables.png";
 import Anwser from "../GraphicAssets/Anwser.png";
 
-
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = splitString[1];
@@ -51,6 +50,7 @@ const Post = () => {
   const [name, setName] = React.useState("");
   const [guestobecnosc, setGuestobecnosc] = React.useState("");
   const [id, setId] = React.useState("");
+  const [invite, setInvite] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [msg, setMsg] = React.useState("");
@@ -110,6 +110,7 @@ const Post = () => {
         FOODGUEST: foodguest,
         EMAIL: email,
         PHONE: phone,
+        INVITE: invite,
         MSG: msg,
       },
       { merge: true }
@@ -197,45 +198,39 @@ const Post = () => {
                     component="h1"
                     variant="h2"
                   >
-                    {data.NAME} <br /> {data.GUEST}
+                    {data.INVITE}
                   </Typography>
                   <br />
                   <img src={Line} width="75%" />
                   <br />
                   <Typography
-                    sx={{ fontStyle: "italic" }}
-                    align="justify"
-                    component="h6"
-                    variant="h6"
-                  >
-                    Z ogromną radością pragniemy Was zaprosić na nasz ślub i
-                    wesele. To wyjątkowe wydarzenie odbędzie się w ostatnią noc
-                    roku, 31 grudnia 2024 roku, w malowniczym zakątku, Gospodzie
-                    nad Rabą. Prosimy o zarezerwowanie tego wyjątkowego dnia w
-                    Waszym kalendarzu i dołączenie do zabawy. Będziemy razem
-                    witać nowy rok w świetnym towarzystwie! Szczegóły dotyczące
-                    karty dań, planu wesela oraz ceremonii ślubnej będziemy
-                    stopniowo udostępniać, a wszystkie informacje zostaną podane
-                    do wiadomości przed wakacjami. Bądźcie pewni, że pracujemy
-                    nad stworzeniem niezapomnianego wydarzenia, a na koniec
-                    wieczoru planujemy wybuchową zabawę, która dostarczy Wam
-                    mnóstwo radości i niezapomnianych chwil.
-                    <br />
-                    Chcąc umozliwić wszystkich gościom relkaks i dobrą zabawę,
-                    postanowiliśmy zorganizować ten wyjątkowy dzień wyłącznie
-                    dla dorosłych.
-                    <br />
-                    Dziękujemy za zrozumienie i z niecierpliwością czekamy na
-                    wspólną zabawę!
-                    <br />
-                    <br />
-                    Z serdecznymi pozdrowieniami,
-                    <br />
-                    <br />
-                    Karolina i Kuba
-                    <br />
-                    <br />
-                  </Typography>
+                  sx={{ fontStyle: "italic" }}
+                  align="justify"
+                  component="h6"
+                  variant="h6"
+                >
+                  Z wielką radością chcielibyśmy podzielić się z Tobą wyjątkowym
+                  momentem w naszym życiu.
+                  <br />Z tej okazji serdecznie zapraszamy Cię na nasze wesele,
+                  które odbędzie się w sylwestra 31.12.2024r. o godzinie 15.00 w
+                  Gospodzie nad Rabą w Bochni. 
+                  <br/>Będzie to dla nas niezapomniana
+                  chwila, którą pragniemy spędzić w gronie najbliższych
+                  przyjaciół i rodziny.
+                  
+                   
+                  <br />
+                  Prosimy o potwierdzenie obecności do 31.10.2024r. 
+                  <br/>Z
+                  niecierpliwością czekamy na wspólne świętowanie!
+                  <br />
+                  <br />
+                  Z serdecznymi pozdrowieniami,
+                  <br />
+                  Karolina i Kuba
+                  <br />
+                  <br />
+                </Typography>
 
                   <Typography component="h1" variant="h5" />
                 </Stack>
@@ -255,21 +250,20 @@ const Post = () => {
                 onChange={(e) => setObecnosc(e.target.value)}
               /> */}
               Czy możemy liczyć na Twoją obecność?
-                <Select
-    labelId="Czy możemy liczyć na Twoją obecność?"
-    id="demo-simple-select"
-    value={obecnosc}
-    placeholder="Tak / nie / jeszcze nie wiem"
-    label="Czy możemy liczyć na Twoją obecność?"
-    onChange={(e) => setObecnosc(e.target.value)}
-  >
-    <MenuItem value={"Tak"}>Tak</MenuItem>
-    <MenuItem value={"Nie"}>Nie</MenuItem>
-    <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
-  </Select>
+              <Select
+                labelId="Czy możemy liczyć na Twoją obecność?"
+                id="demo-simple-select"
+                value={obecnosc}
+                placeholder="Tak / nie / jeszcze nie wiem"
+                label="Czy możemy liczyć na Twoją obecność?"
+                onChange={(e) => setObecnosc(e.target.value)}
+              >
+                <MenuItem value={"Tak"}>Tak</MenuItem>
+                <MenuItem value={"Nie"}>Nie</MenuItem>
+                <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
+              </Select>
               <br />
               <br />
-              
               <TextField
                 fullWidth
                 required
@@ -294,8 +288,9 @@ const Post = () => {
                 placeholder="Preferencje dietetyczne"
                 onChange={(e) => setFood(e.target.value)}
               />
-              <br /><br />
-            <br />
+              <br />
+              <br />
+              <br />
               <br />
               <TextField
                 fullWidth
@@ -385,7 +380,7 @@ const Post = () => {
                   component="h1"
                   variant="h2"
                 >
-                  {data.NAME} <br /> {data.GUEST}
+                  {data.INVITE}
                 </Typography>
                 <br />
                 <img src={Line} width="75%" />
@@ -396,29 +391,21 @@ const Post = () => {
                   component="h6"
                   variant="h6"
                 >
-                  Z ogromną radością pragniemy Was zaprosić na nasz ślub i
-                  wesele. To wyjątkowe wydarzenie odbędzie się w ostatnią noc
-                  roku, 31 grudnia 2024 roku, w malowniczym zakątku, Gospodzie
-                  nad Rabą. Prosimy o zarezerwowanie tego wyjątkowego dnia w
-                  Waszym kalendarzu i dołączenie do zabawy. Będziemy razem witać
-                  nowy rok w świetnym towarzystwie! Szczegóły dotyczące karty
-                  dań, planu wesela oraz ceremonii ślubnej będziemy stopniowo
-                  udostępniać, a wszystkie informacje zostaną podane do
-                  wiadomości przed wakacjami. Bądźcie pewni, że pracujemy nad
-                  stworzeniem niezapomnianego wydarzenia, a na koniec wieczoru
-                  planujemy wybuchową zabawę, która dostarczy Wam mnóstwo
-                  radości i niezapomnianych chwil.
+                  Z wielką radością chcielibyśmy podzielić się z Wami wyjątkowym
+                  momentem w naszym życiu.
+                  <br />Z tej okazji serdecznie zapraszamy Was na nasze wesele,
+                  które odbędzie się w sylwestra 31.12.2024r. o godzinie 15.00 w
+                  Gospodzie nad Rabą w Bochni. <br/>Będzie to dla nas niezapomniana
+                  chwila, którą pragniemy spędzić w gronie najbliższych
+                  przyjaciół i rodziny.
                   <br />
-                  Chcąc umozliwić wszystkich gościom relkaks i dobrą zabawę,
-                  postanowiliśmy zorganizować ten wyjątkowy dzień wyłącznie dla
-                  dorosłych.
-                  <br />
-                  Dziękujemy za zrozumienie i z niecierpliwością czekamy na
-                  wspólną zabawę!
+                
+                  Prosimy o potwierdzenie obecności do 31.10.2024r. 
+                  <br/>Z
+                  niecierpliwością czekamy na wspólne świętowanie!
                   <br />
                   <br />
                   Z serdecznymi pozdrowieniami,
-                  <br />
                   <br />
                   Karolina i Kuba
                   <br />
@@ -436,25 +423,25 @@ const Post = () => {
             <h2>Czy możemy liczyć na Twoją obecność?</h2>
             <br />
             <br />
-           {/* <TextField
+            {/* <TextField
                 fullWidth
                 required
                 placeholder="Tak / nie / jeszcze nie wiem"
                 onChange={(e) => setObecnosc(e.target.value)}
               /> */}
-              Czy możemy liczyć na Twoją obecność?
-                <Select
-    labelId="Czy możemy liczyć na Twoją obecność?"
-    id="demo-simple-select"
-    value={obecnosc}
-    placeholder="Tak / nie / jeszcze nie wiem"
-    label="Czy możemy liczyć na Twoją obecność?"
-    onChange={(e) => setObecnosc(e.target.value)}
-  >
-    <MenuItem value={"Tak"}>Tak</MenuItem>
-    <MenuItem value={"Nie"}>Nie</MenuItem>
-    <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
-  </Select>
+            Czy możemy liczyć na Twoją obecność?
+            <Select
+              labelId="Czy możemy liczyć na Twoją obecność?"
+              id="demo-simple-select"
+              value={obecnosc}
+              placeholder="Tak / nie / jeszcze nie wiem"
+              label="Czy możemy liczyć na Twoją obecność?"
+              onChange={(e) => setObecnosc(e.target.value)}
+            >
+              <MenuItem value={"Tak"}>Tak</MenuItem>
+              <MenuItem value={"Nie"}>Nie</MenuItem>
+              <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
+            </Select>
             <br />
             <br />
             {data.NAME}
@@ -474,7 +461,8 @@ const Post = () => {
               onChange={(e) => setFood(e.target.value)}
             />
             <br />
-            <br /><br />
+            <br />
+            <br />
             <br />
             <TextField
               fullWidth
@@ -575,7 +563,7 @@ const Post = () => {
             {items}
           </Box>
         </Container>
-        <div className="blankspace"/>
+        <div className="blankspace" />
       </ThemeProvider>{" "}
     </div>
   );

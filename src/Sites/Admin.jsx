@@ -16,7 +16,7 @@ import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import QRCode from "react-qr-code";
 import generatePDF, { Options } from "react-to-pdf";
 import page1 from "../GraphicAssets/3.svg";
-import page2 from "../GraphicAssets/4.svg";
+import page2 from "../GraphicAssets/page2.svg";
 import page1ang from "../GraphicAssets/3ang.png";
 import page2ang from "../GraphicAssets/4ang.png";
 
