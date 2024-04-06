@@ -406,6 +406,10 @@ const Write = () => {
               placeholder="drogi/droga/drodzy?"
               onChange={(e) => setPrzedrostek(e.target.value)}
             />
+              <input
+              placeholder="Agato nazwisko"
+              onChange={(e) => setInvite(e.target.value)}
+            />
             <Button className="red" onClick={createDATA}>
               Dodaj
             </Button>
