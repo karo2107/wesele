@@ -142,7 +142,7 @@ export default function App() {
                 <Route path={`/Harmonogram`} element={<Harmonogram />} />
                 <Route path={`/Obecnosc`} element={<Obecnosc />} />
                 <Route path={`/Informacje`} element={<Informacje />} />
-                <Route path={`/Karta`} element={<Karta />} />
+                <Route path={`/Menu`} element={<Karta />} />
                 <Route path="/:Zaproszenie" element={<Zaproszenie/>} />
                 <Route path={`/wprowadzzmiany`} element={<Admin />} />
                 {/* <Route path={`${a}/:any `} element={<LandingPage />} /> */}

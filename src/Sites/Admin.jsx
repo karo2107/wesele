@@ -28,6 +28,7 @@ const Write = () => {
   const [guest, setGuest] = React.useState("");
   const [food, setFood] = React.useState("");
   const [foodguest, setFoodguest] = React.useState("");
+  const [invite, setInvite] = React.useState("");
   const [id, setId] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -84,6 +85,7 @@ const Write = () => {
         EMAIL: email,
         PHONE: phone,
         MSG: msg,
+        INVITE: invite,
       },
       { merge: true }
     );
@@ -105,6 +107,7 @@ const Write = () => {
       PHONE: phone,
       MSG: msg,
       PRZEDROSTEK: przedrostek,
+      INVITE: invite,
     });
     window.location.reload(false);
   };
@@ -131,7 +134,7 @@ const Write = () => {
           <div className="a5" title="Zaproszenia">
             <Typography
               sx={{
-                fontSize: 70,
+                fontSize: 80,
                 fontStyle: "oblique",
                 fontWeight: 50,
                 letterSpacing: 6,
@@ -148,7 +151,7 @@ const Write = () => {
               {data.NAME}
               <br />
               {data.GUEST}
-              <br/>
+            
             </Typography>{" "}
             <img width="90%" src={page1ang}></img>
           </div>
@@ -156,22 +159,64 @@ const Write = () => {
           
         
           <div className="a5" title="Zaproszenia">
-           
+          <br /><br/>
             <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
-            <img width="86%" src={page2ang} />
+            <img width="84%" src={page2ang} />
           </div>
         </div>
         <hr />
       </Container>
     );}
-{
-    return (
+    else  if(data.PRZEDROSTEK=="Drodzy"){
+      return (
+        <Container>
+          <div id={data.ID}>
+            <div className="a5" title="Zaproszenia">
+              <Typography
+                sx={{
+                  fontSize: 80,
+                  fontStyle: "oblique",
+                  fontWeight: 50,
+                  letterSpacing: 6,
+                  // color: "grey",
+                }}
+                // fontFamily='"Great Vibes"'
+                 fontFamily='Whisper'
+                // variant="h2"
+                align="center"
+              >
+                <br/>
+                {data.PRZEDROSTEK},
+              <br/>
+              {data.INVITE}
+              <br/>
+              </Typography>{" "}
+              <img width="90%" src={page1}></img>
+            </div>
+          
+            
+          
+           
+            <div className="a5" title="Zaproszenia">
+          <br /><br/>
+            <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+            <img width="84%" src={page2} />
+            </div>
+          </div>
+          <hr />
+        </Container>
+      );}
+  
+
+  else { return (
+      
+      
       <Container>
         <div id={data.ID}>
           <div className="a5" title="Zaproszenia">
             <Typography
               sx={{
-                fontSize: 75,
+                fontSize: 80,
                 fontStyle: "",
                 fontWeight: 400,
                 letterSpacing: 12,
@@ -182,13 +227,18 @@ const Write = () => {
               // variant="h2"
               align="center"
             >
+             <br/>
+              {data.PRZEDROSTEK},
               <br/>
+              {data.INVITE}
+              <br/>
+              {/* <br/>
               {data.PRZEDROSTEK},
               <br />
               {data.NAME}
               <br />
               {data.GUEST}
-              <br/>
+              <br/> */}
             </Typography>{" "}
             <img width="90%" src={page1}></img>
           </div>
@@ -196,9 +246,9 @@ const Write = () => {
           
         
           <div className="a5" title="Zaproszenia">
-           
+          <br /><br/>
             <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
-            <img width="86%" src={page2} />
+            <img width="84%" src={page2} />
           </div>
         </div>
         <hr />

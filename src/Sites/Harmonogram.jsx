@@ -70,20 +70,20 @@ const theme = createTheme({
   },
 });
 const info = [
-  {
-    TITLE: "❶ Recepcja przed ślubem",
-    DATE: "⏲ 14:30 🗓 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-    IMG: Castle,
-    LOCATION: "⛫ Zamek w Wiśniczu",
-  },
-  {
-    TITLE: "❷ Ceremonia ślubu",
-    DATE: "⏲ 15:30 🗓 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-    IMG: Wedding,
-    LOCATION: "⛫ Zamek w Wiśniczu",
-  },
+  // {
+  //   TITLE: "❶ Recepcja przed ślubem",
+  //   DATE: "⏲ 14:30 🗓 31/12/2024",
+  //   DETAILS:"Więcej szegółów wrótce",
+  //   IMG: Castle,
+  //   LOCATION: "⛫ Zamek w Wiśniczu",
+  // },
+  // {
+  //   TITLE: "❷ Ceremonia ślubu",
+  //   DATE: "⏲ 15:30 🗓 31/12/2024",
+  //   DETAILS:"Więcej szegółów wrótce",
+  //   IMG: Wedding,
+  //   LOCATION: "⛫ Zamek w Wiśniczu",
+  // },
   {
     TITLE: "❸ Przyjazd do Gospody nad Rabą",
     DATE: "⏲ 16:30 🗓 31/12/2024",
