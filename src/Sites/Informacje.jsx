@@ -211,7 +211,7 @@ const Write = () => {
                 {data.TITLE}
               </Typography>
               <Button variant="outlined" href={data.GMAP} id={data.GMAP}>
-                Link
+                Więcej informacji
               </Button>
               <Typography
                 align="justify"

@@ -28,13 +28,13 @@ function Copyright() {
       Państwa urządzeniu końcowym. Możecie Państwo dokonać w każdym czasie
       zmiany ustawień dotyczących cookies.
       <br />
-      <Link color="inherit" href="/cookies">
+      {/* <Link color="inherit" href="/cookies">
         Naciśnij po więcej szczegółów o Polityce Prywatności i Cookies.
-      </Link>{" "}
+      </Link>
       <br />
       <Link color="inherit" href="/AML-RODO">
         Naciśnij po więcej szczegółów o AML-RODO.
-      </Link>{" "}
+      </Link> */}
       <hr />
       {
         "Copyright © Choluj Design s.c."
