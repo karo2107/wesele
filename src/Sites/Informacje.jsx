@@ -45,16 +45,18 @@ const info = [
   //   <div><p><b>Ubiór:</b> Proponujemy ubrać się ciepło, buty na wysokim obcasie nie są wskazane</p></div>,
   //   IMG: Castle,
   // },
+
+ 
   {
     TITLE: "Dojazd",
     GMAP: "https://maps.app.goo.gl/DdzdhLUfRdBYnjyw8",
     DETAILS:
       "Przy lokalu znajduje się bezpłatny parking dla samochodów osobowych.",
     DETAILS2:
-      "Jest mozliwosc dojazdu komunikacja miejska (najlepiej pociag z Krakowa do Bochni + telefon do nas.)",
+      "Jest możliwość dojazdu komunikacją miejską (najlepiej pociąg z Krakowa do Bochni + telefon do nas).",
     DETAILS3:
-      "Planujemy wynająć kierowców do rozwozenia gosci do domu po imprezie.",
-    DETAILS4: "Gospoda znajudje się 5min od zjadu 'Bochnia' z autostrady A4",
+      "Planujemy wynająć kierowców do rozwożenia gości do domów po imprezie.",
+    DETAILS4: "Gospoda znajudje się 5 min od zjadu 'Bochnia' z autostrady A4",
     IMG: car,
   },
   {
@@ -73,49 +75,53 @@ const info = [
     DETAILS:
       "Ze względu na charakter imprezy prosimy, w miarę mozliwości, o pozostawienie swoich pociech w domu.",
     DETAILS2: "",
-    DETAILS3: "Jezeli nie jest to mozliwe, prosimy o kontakt.",
-    DETAILS4: "Więcej informacji wkrótce",
+    DETAILS3: "Jeżeli nie jest to możliwe, prosimy o kontakt.",
+    DETAILS4: "",
     IMG: bear,
   },
   {
     TITLE: "Preferencje dietetyczne",
-    GMAP: "http://hotelnadraba.pl/",
+    GMAP: "http://hotelnadraba.pl/wp-content/uploads/2022/12/Menu-weselne-v2.pdf",
     DETAILS:
       "Gospoda słynie z pysznych dań mięsnych i jarskich, prosimy o informacje dotyczącą alergii pokarmowych i wyboru dań miesnych lub wegetariańskich. ",
     DETAILS2: "",
     DETAILS3: "",
-    DETAILS4: "Więcej informacji wkrótce",
+    DETAILS4: "",
     IMG: meat,
   },
-  {
-    TITLE: "Dodatkowe informacje",
-    GMAP: "http://hotelnadraba.pl/",
-    DETAILS: (
-      <div>
-        Szanowni Goście, 
-        <br/>
-        <br/>
-        będzie nam niezmiernie miło jezeli zamiast bukietu kwiatów obdarujecie nas butelką wytrawnego (czerwonego) wina. <br></br><br/>
-      </div>
-    ),
-    DETAILS2: "",
-    DETAILS3: "",
-    DETAILS4: "Więcej informacji wkrótce",
-    IMG: meat,
-  },
+
   {
     TITLE: "Śniadanie w Gospodzie nad Rabą",
     GMAP: "https://maps.app.goo.gl/5nZGqpYyXNdWHNck8",
     DETAILS: (
       <div>
-        Dnia pierwszego stycznia zapraszamy, do gospody, na śniadanie noworoczne
+        Dnia pierwszego stycznia zapraszamy do gospody na śniadanie noworoczne,
         około godziny 10 rano.
       </div>
     ),
     DETAILS2: <div></div>,
     DETAILS3: <div> </div>,
-    DETAILS4: "Więcej informacji wkrótce",
+    DETAILS4: "",
     IMG: Breakfast,
+  }, 
+  {
+    TITLE: "Dodatkowe informacje",
+    GMAP: "http://hotelnadraba.pl/",
+    DETAILS: (
+      <div>
+        Szanowni Goście,
+       
+        <br />
+        będzie nam niezmiernie miło jeżeli zamiast bukietu kwiatów obdarujecie
+        nas butelką wytrawnego (czerwonego) wina. <br></br>
+        <br />
+      </div>
+    ),
+    DETAILS2: "",
+    DETAILS3: "",
+    DETAILS4:
+      "",
+    IMG: "",
   },
   {
     TITLE: "Wasze zdjęcia",
@@ -267,11 +273,30 @@ const Write = () => {
           component="h2"
         >
           <br />
-          Wazne informacje <br />
+          Ważne informacje <br />
+          
           <img src={line} width="50%" />
           <br />
-          <br />
+        
         </Typography>
+        <Typography
+          // align="justify"
+          id={1}
+          variant="h5"
+          component="h5"
+        >
+          Szanowni Goście,
+        <br />
+        Do wesela jeszcze dużo czasu i nie wszystko zostało ustalone. 
+        <br/>Będziemy,
+        na bierząco, dzielić się z Wami informacjami dotyczącymi organizacji
+        wydarzenia.
+          <br />
+          Poniżej znajdziecie aktualne pomocne informacje.
+          
+        
+        </Typography>
+        
         {items}
         <div className="blankspace" />
       </div>

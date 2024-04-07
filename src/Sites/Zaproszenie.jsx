@@ -32,7 +32,12 @@ import Line from "../GraphicAssets/line.svg";
 import Meat from "../GraphicAssets/Meat.png";
 import Vegetables from "../GraphicAssets/Vegetables.png";
 import Anwser from "../GraphicAssets/Anwser.png";
-import banana from "../GraphicAssets/Banana.svg"
+import banana from "../GraphicAssets/Banana.svg";
+import Alert from "@mui/material/Alert";
+
+
+
+
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
 const a = splitString[1];
@@ -55,6 +60,8 @@ const Post = () => {
   const [email, setEmail] = React.useState("");
   const [msg, setMsg] = React.useState("");
   const [przedrostek, setPrzedrostek] = React.useState("");
+  const [wyslanoWiadomosc, setwyslanoWiadomosc] = React.useState(false);
+
   // const href = window.location.pathname;
   // const output = href.replace("/Zaproszenie/", "");
   // const BGIMG ="https://images.unsplash.com/photo-1515339760107-1952b7a08454?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -76,7 +83,24 @@ const Post = () => {
   const handleChangeFoodguest = (event) => {
     setFoodguest(event.target.value);
   };
-
+  const Wyslano = () => {
+    return (
+      <div>
+        {wyslanoWiadomosc ? (
+          <Alert
+            sx
+            // action={
+            //   <Button onClick={refreshPage} color="inherit" size="small">
+            //     X
+            //   </Button>
+            // }
+          >
+            Wiadomość wysłana!
+          </Alert>
+        ) : null}
+      </div>
+    );
+  };
   useEffect(() => {
     const Fetchdata = async () => {
       await db
@@ -87,6 +111,7 @@ const Post = () => {
           querySnapshot.forEach((element) => {
             var data = element.data();
             setInfo((arr) => [...arr, data]);
+            setGuest(data.GUEST)
           });
         });
     };
@@ -96,7 +121,8 @@ const Post = () => {
     });
   }, []);
 
-  const updateDATA = async () => {
+  const updateDATA = async (e) => {
+    e.preventDefault();
     const ref = doc(db, "goscie", a);
     await setDoc(
       ref,
@@ -111,14 +137,16 @@ const Post = () => {
         FOODGUEST: foodguest,
         EMAIL: email,
         PHONE: phone,
-        INVITE: invite,
+       
         MSG: msg,
-        PRZEDROSTEK: przedrostek,
+       
       },
       { merge: true }
     );
-
-    window.location.reload(false);
+    
+        setwyslanoWiadomosc(true);
+       
+    // window.location.reload(false);
   };
 
   const theme = createTheme({
@@ -241,20 +269,15 @@ const Post = () => {
               <h2>Czy możemy liczyć na Twoją obecność?</h2>
               <br />
               <br />
-              {/* <TextField
-              fullWidth
-              required
-              placeholder="Tak / nie / jeszcze nie wiem"
-              onChange={(e) => setObecnosc(e.target.value)}
-            /> */}
-             {data.NAME}, czy możemy liczyć na Twoją obecność?
+             
+              {data.NAME}, czy możemy liczyć na Twoją obecność?
               <Select
                 labelId="Czy możemy liczyć na Twoją obecność?"
                 id="demo-simple-select"
-                value={obecnosc}
+                
                 placeholder="Tak / nie / jeszcze nie wiem"
                 label="Tak / nie / jeszcze nie wiem"
-                onChange={(e) => setObecnosctowarzysza(e.target.value)}
+                onChange={(e) => setObecnosc(e.target.value)}
               >
                 <MenuItem value={"Tak"}>Tak</MenuItem>
                 <MenuItem value={"Nie"}>Nie</MenuItem>
@@ -266,16 +289,15 @@ const Post = () => {
               <Select
                 labelId="Czy możemy liczyć na Twoją obecność?"
                 id="demo-simple-select"
-                value={obecnosc}
+                
                 placeholder="Tak / nie / jeszcze nie wiem"
                 label="Tak / nie / jeszcze nie wiem"
-                onChange={(e) => setObecnosc(e.target.value)}
+                onChange={(e) => setObecnosctowarzysza(e.target.value)}
               >
                 <MenuItem value={"Tak"}>Tak</MenuItem>
                 <MenuItem value={"Nie"}>Nie</MenuItem>
                 <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
               </Select>
-              
               <TextField
                 fullWidth
                 required
@@ -284,12 +306,11 @@ const Post = () => {
               />
               <br />
               <br />
-              
               <TextField
                 fullWidth
                 required
                 placeholder={"Preferencje dietetyczne :" + `  ${data.GUEST}`}
-                onChange={(e) => setFood(e.target.value)}
+                onChange={(e) => setFoodguest(e.target.value)}
               />
               <br />
               <br />
@@ -323,7 +344,7 @@ const Post = () => {
               />
               <br />
               <br />
-              <Button variant="outlined" className="red" onClick={updateDATA}>
+             <Wyslano /><Wyslano /> <Button variant="outlined" className="red" onClick={updateDATA}>
                 Wyślij odpowiedz
               </Button>
             </div>
@@ -434,7 +455,7 @@ const Post = () => {
               <Select
                 labelId="Czy możemy liczyć na Twoją obecność?"
                 id="demo-simple-select"
-                value={obecnosc}
+                
                 placeholder="Tak / nie / jeszcze nie wiem"
                 label="Czy możemy liczyć na Twoją obecność?"
                 onChange={(e) => setObecnosc(e.target.value)}
@@ -484,7 +505,7 @@ const Post = () => {
               />
               <br />
               <br />
-              <Button variant="outlined" className="red" onClick={updateDATA}>
+             <Wyslano /> <Button variant="outlined" className="red" onClick={updateDATA}>
                 Wyślij odpowiedz
               </Button>
             </div>
@@ -561,7 +582,8 @@ const Post = () => {
                     <br />
                     For this occasion, we warmly invite you to our wedding,
                     which will take place on New Year's Eve, December 31 2024,
-                    at 3:00 PM at Gospoda nad Rabą in Bochnia(just outside of Krakow). <br />
+                    at 3:00 PM at Gospoda nad Rabą in Bochnia(just outside of
+                    Krakow). <br />
                     It will be an unforgettable moment for us, which we wish to
                     spend with our closest friends and family.
                     <br />
@@ -596,7 +618,7 @@ const Post = () => {
               <Select
                 labelId="Can we count on your presence?"
                 id="demo-simple-select"
-                value={obecnosc}
+                
                 placeholder="yes/no"
                 label="Can we count on your presence?"
                 onChange={(e) => setObecnosc(e.target.value)}
@@ -607,8 +629,6 @@ const Post = () => {
               </Select>
               <br />
               <br />
-             
-              
               <TextField
                 fullWidth
                 required
@@ -626,12 +646,11 @@ const Post = () => {
               />
               <br />
               <br />
-              
               <TextField
                 fullWidth
                 required
                 placeholder={"Dietary preferences of :" + `  ${guest}`}
-                onChange={(e) => setFood(e.target.value)}
+                onChange={(e) => setFoodguest(e.target.value)}
               />
               <br />
               <br />
@@ -665,7 +684,7 @@ const Post = () => {
               />
               <br />
               <br />
-              <Button variant="outlined" className="red" onClick={updateDATA}>
+              <Wyslano /> <Button variant="outlined" className="red" onClick={updateDATA}>
                 Send answer
               </Button>
             </div>
@@ -766,43 +785,11 @@ const Post = () => {
           <Grid item xs={12} sm={12} md={12} lg={12} elevation={6}>
             <div>
               <h2>Czy możemy liczyć na Twoją obecność?</h2>
-              <br />
-              <br />
-              {/* <TextField
-           fullWidth
-           required
-           placeholder="Tak / nie / jeszcze nie wiem"
-           onChange={(e) => setObecnosc(e.target.value)}
-         /> */}
-              <h2>Czy możemy liczyć na Twoją obecność?</h2>
-              <br />
-              <br />
-              {/* <TextField
-              fullWidth
-              required
-              placeholder="Tak / nie / jeszcze nie wiem"
-              onChange={(e) => setObecnosc(e.target.value)}
-            /> */}
-             {data.NAME}, czy możemy liczyć na Twoją obecność?
+              {data.NAME}, czy możemy liczyć na Twoją obecność?
               <Select
                 labelId="Czy możemy liczyć na Twoją obecność?"
                 id="demo-simple-select"
-                value={obecnosc}
-                placeholder="Tak / nie / jeszcze nie wiem"
-                label="Tak / nie / jeszcze nie wiem"
-                onChange={(e) => setObecnosctowarzysza(e.target.value)}
-              >
-                <MenuItem value={"Tak"}>Tak</MenuItem>
-                <MenuItem value={"Nie"}>Nie</MenuItem>
-                <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
-              </Select>
-              <br />
-              <br />
-              {data.GUEST}, czy możemy liczyć na Twoją obecność?
-              <Select
-                labelId="Czy możemy liczyć na Twoją obecność?"
-                id="demo-simple-select"
-                value={obecnosc}
+                
                 placeholder="Tak / nie / jeszcze nie wiem"
                 label="Tak / nie / jeszcze nie wiem"
                 onChange={(e) => setObecnosc(e.target.value)}
@@ -811,7 +798,6 @@ const Post = () => {
                 <MenuItem value={"Nie"}>Nie</MenuItem>
                 <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
               </Select>
-              
               <TextField
                 fullWidth
                 required
@@ -820,12 +806,20 @@ const Post = () => {
               />
               <br />
               <br />
-              {data.GUEST}
               <TextField
                 fullWidth
                 required
-                placeholder={"Preferencje dietetyczne :" + `   ${data.GUEST}`}
-                onChange={(e) => setFood(e.target.value)}
+                placeholder="Imię i nazwisko osoby towarzyszącej"
+                defaultValue={data.GUEST}
+                onChange={(e) => setGuest(e.target.value)}
+              />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                placeholder={"Preferencje dietetyczne osoby towarzyszącej"}
+                onChange={(e) => setFoodguest(e.target.value)}
               />
               <br />
               <br />
@@ -859,7 +853,7 @@ const Post = () => {
               />
               <br />
               <br />
-              <Button variant="outlined" className="red" onClick={updateDATA}>
+             <Wyslano /> <Button variant="outlined" className="red" onClick={updateDATA}>
                 Wyślij odpowiedz
               </Button>
             </div>
