@@ -270,7 +270,7 @@ const Write = () => {
     return (
       <Grid container>
         <Grid item xs={12} sm={12} md={3}>
-          <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+          {/* <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} /> */}
           <Button onClick={(e) => setPrint(data.ID)}> load PDF</Button>
           <Button onClick={downloadPdf}> Download PDF</Button>
           {/* <Button
@@ -282,7 +282,7 @@ const Write = () => {
           </Button> */}
         </Grid>
         <Grid item xs={12} sm={12} md={5}>
-          <Typography align="left">gość: {data.NAME}</Typography>
+          <Typography align="left">gość: <br/><b>{data.NAME}</b></Typography>
           <br />
           <Typography align="left">będzie: {data.OBECNOSC}</Typography>
           <br />
@@ -290,7 +290,7 @@ const Write = () => {
         </Grid>
 
         <Grid item xs={12} sm={12} md={2}>
-          <Typography align="left">osoba towarzysząca: {data.GUEST}</Typography>
+          <Typography align="left">osoba towarzysząca:<br/> <b>{data.GUEST}</b></Typography>
           <br />
           <Typography align="left">będzie: {data.GUESTOBECNOSC}</Typography>
           <br />
@@ -305,6 +305,7 @@ const Write = () => {
           <Typography align="left">wiadomość: {data.MSG}</Typography>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
+        <Typography align="center">Zaproszenie: {data.PRZEDROSTEK}, {data.INVITE}</Typography>
           <hr />
         </Grid>
       </Grid>

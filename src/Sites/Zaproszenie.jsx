@@ -54,6 +54,7 @@ const Post = () => {
   const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [msg, setMsg] = React.useState("");
+  const [przedrostek, setPrzedrostek] = React.useState("");
   // const href = window.location.pathname;
   // const output = href.replace("/Zaproszenie/", "");
   // const BGIMG ="https://images.unsplash.com/photo-1515339760107-1952b7a08454?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -112,6 +113,7 @@ const Post = () => {
         PHONE: phone,
         INVITE: invite,
         MSG: msg,
+        PRZEDROSTEK: przedrostek,
       },
       { merge: true }
     );
@@ -150,7 +152,8 @@ const Post = () => {
     },
   });
   const items = info.map((data) => {
-    if (data.GUEST == "") {
+    if (data.GUEST == "") 
+    {
       return (
         <Grid container maxWidth="md" sx={{ mt: 10 }}>
           <Grid item xs={12} sm={12} md={12} lg={12} elevation={1}>
@@ -211,7 +214,7 @@ const Post = () => {
                 >
                   Z wielką radością chcielibyśmy podzielić się z Tobą wyjątkowym
                   momentem w naszym życiu.
-                  <br />Z tej okazji serdecznie zapraszamy Cię na nasze wesele,
+                  <br />Z tej okazji serdecznie zapraszamy Cię, wraz z osobą towarzyszącą, na nasze wesele,
                   które odbędzie się w sylwestra 31.12.2024r. o godzinie 15.00 w
                   Gospodzie nad Rabą w Bochni. 
                   <br/>Będzie to dla nas niezapomniana
@@ -333,6 +336,349 @@ const Post = () => {
         </Grid>
       );
     }
+    else if (data.GUEST=="brak")
+    {
+      return (
+        <Grid container maxWidth="md" sx={{ mt: 10 }}>
+          <Grid item xs={12} sm={12} md={12} lg={12} elevation={1}>
+            <CssBaseline />
+            <Box
+              sx={{
+                boxShadow: 3,
+                borderRadius: 10,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                backgroundColor: "#FFFFFFE6",
+  
+                minHeight: "100vh",
+                maxWidth: "100vw",
+              }}
+            >
+              <Container
+                sx={{
+                  alignItems: "center",
+                  py: 2,
+                }}
+                component="main"
+                maxWidth="md"
+              >
+                <Stack
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    minHeight: "80vh",
+                    marginLeft: 1,
+                    marginRight: 1,
+                  }}
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  // spacing={{ xs: 1, sm: 2, md: 8, lg: 14 }}
+                >
+                  <br />
+                  <br />
+                  <br />
+                  <Typography
+                    sx={{ fontStyle: "italic" }}
+                    component="h1"
+                    variant="h2"
+                  >
+                    {data.INVITE}
+                  </Typography>
+                  <br />
+                  <img src={Line} width="75%" />
+                  <br />
+                  <Typography
+                    sx={{ fontStyle: "italic" }}
+                    align="justify"
+                    component="h6"
+                    variant="h6"
+                  >
+                    Z wielką radością chcielibyśmy podzielić się z Tobą wyjątkowym
+                    momentem w naszym życiu.
+                    <br />Z tej okazji serdecznie zapraszamy Ciebie na nasze wesele,
+                    które odbędzie się w sylwestra 31.12.2024r. o godzinie 15.00 w
+                    Gospodzie nad Rabą w Bochni. <br/>Będzie to dla nas niezapomniana
+                    chwila, którą pragniemy spędzić w gronie najbliższych
+                    przyjaciół i rodziny.
+                    <br />
+                  
+                    Prosimy o potwierdzenie obecności do 31.10.2024r. 
+                    <br/>Z
+                    niecierpliwością czekamy na wspólne świętowanie!
+                    <br />
+                    <br />
+                    Z serdecznymi pozdrowieniami,
+                    <br />
+                    Karolina i Kuba
+                    <br />
+                    <br />
+                  </Typography>
+  
+                  <Typography component="h1" variant="h5" />
+                </Stack>
+              </Container>
+            </Box>
+          </Grid>
+  
+          <Grid item xs={12} sm={12} md={12} lg={12} elevation={6}>
+            <div>
+              <h2>Czy możemy liczyć na Twoją obecność?</h2>
+              <br />
+              <br />
+              {/* <TextField
+                  fullWidth
+                  required
+                  placeholder="Tak / nie / jeszcze nie wiem"
+                  onChange={(e) => setObecnosc(e.target.value)}
+                /> */}
+              Czy możemy liczyć na Twoją obecność?
+              <Select
+                labelId="Czy możemy liczyć na Twoją obecność?"
+                id="demo-simple-select"
+                value={obecnosc}
+                placeholder="Tak / nie / jeszcze nie wiem"
+                label="Czy możemy liczyć na Twoją obecność?"
+                onChange={(e) => setObecnosc(e.target.value)}
+              >
+                <MenuItem value={"Tak"}>Tak</MenuItem>
+                <MenuItem value={"Nie"}>Nie</MenuItem>
+                <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
+              </Select>
+              <br />
+              <br />
+              {data.INVITE}
+              <TextField
+                fullWidth
+                required
+                placeholder="Twoje preferencje dietetyczne"
+                onChange={(e) => setFood(e.target.value)}
+              />
+            
+              <br />
+              <br />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                placeholder="Twój e-mail"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                name="phone"
+                placeholder="Twój numer telefonu"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                multiline
+                rows={4}
+                placeholder="Czy masz dodatkowe pytania?"
+                onChange={(e) => setMsg(e.target.value)}
+              />
+              <br />
+              <br />
+              <Button variant="outlined" className="red" onClick={updateDATA}>
+                Wyślij odpowiedz
+              </Button>
+            </div>
+          </Grid>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </Grid>
+      );
+    }
+    else if (data.PRZEDROSTEK=="Dear")
+    {
+      return (
+        <Grid container maxWidth="md" sx={{ mt: 10 }}>
+          <Grid item xs={12} sm={12} md={12} lg={12} elevation={1}>
+            <CssBaseline />
+            <Box
+              sx={{
+                boxShadow: 3,
+                borderRadius: 10,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                backgroundColor: "#FFFFFFE6",
+  
+                minHeight: "100vh",
+                maxWidth: "100vw",
+              }}
+            >
+              <Container
+                sx={{
+                  alignItems: "center",
+                  py: 2,
+                }}
+                component="main"
+                maxWidth="md"
+              >
+                <Stack
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    minHeight: "80vh",
+                    marginLeft: 1,
+                    marginRight: 1,
+                  }}
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  // spacing={{ xs: 1, sm: 2, md: 8, lg: 14 }}
+                >
+                  <br />
+                  <br />
+                  <br />
+                  <Typography
+                    sx={{ fontStyle: "italic" }}
+                    component="h1"
+                    variant="h2"
+                  >
+                    {data.INVITE}
+                  </Typography>
+                  <br />
+                  <img src={Line} width="75%" />
+                  <br />
+                  <Typography
+                    sx={{ fontStyle: "italic" }}
+                    align="justify"
+                    component="h6"
+                    variant="h6"
+                  >
+                    WERSJA ANGIELSKA <br/>
+                    Z wielką radością chcielibyśmy podzielić się z Wami wyjątkowym
+                    momentem w naszym życiu.
+                    <br />Z tej okazji serdecznie zapraszamy Was na nasze wesele,
+                    które odbędzie się w sylwestra 31.12.2024r. o godzinie 15.00 w
+                    Gospodzie nad Rabą w Bochni. <br/>Będzie to dla nas niezapomniana
+                    chwila, którą pragniemy spędzić w gronie najbliższych
+                    przyjaciół i rodziny.
+                    <br />
+                  
+                    Prosimy o potwierdzenie obecności do 31.10.2024r. 
+                    <br/>Z
+                    niecierpliwością czekamy na wspólne świętowanie!
+                    <br />
+                    <br />
+                    Z serdecznymi pozdrowieniami,
+                    <br />
+                    Karolina i Kuba
+                    <br />
+                    <br />
+                  </Typography>
+  
+                  <Typography component="h1" variant="h5" />
+                </Stack>
+              </Container>
+            </Box>
+          </Grid>
+  
+          <Grid item xs={12} sm={12} md={12} lg={12} elevation={6}>
+            <div>
+              <h2>Czy możemy liczyć na Twoją obecność?</h2>
+              <br />
+              <br />
+              {/* <TextField
+                  fullWidth
+                  required
+                  placeholder="Tak / nie / jeszcze nie wiem"
+                  onChange={(e) => setObecnosc(e.target.value)}
+                /> */}
+              Czy możemy liczyć na Twoją obecność?
+              <Select
+                labelId="Czy możemy liczyć na Twoją obecność?"
+                id="demo-simple-select"
+                value={obecnosc}
+                placeholder="Tak / nie / jeszcze nie wiem"
+                label="Czy możemy liczyć na Twoją obecność?"
+                onChange={(e) => setObecnosc(e.target.value)}
+              >
+                <MenuItem value={"Tak"}>Tak</MenuItem>
+                <MenuItem value={"Nie"}>Nie</MenuItem>
+                <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
+              </Select>
+              <br />
+              <br />
+              {data.NAME}
+              <TextField
+                fullWidth
+                required
+                placeholder="Preferencje dietetyczne"
+                onChange={(e) => setFood(e.target.value)}
+              />
+              <br />
+              <br />
+              {data.GUEST}
+              <TextField
+                fullWidth
+                required
+                placeholder="Preferencje dietetyczne"
+                onChange={(e) => setFood(e.target.value)}
+              />
+              <br />
+              <br />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                placeholder="Twój e-mail"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                name="phone"
+                placeholder="Twój numer telefonu"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <br />
+              <br />
+              <TextField
+                fullWidth
+                required
+                multiline
+                rows={4}
+                placeholder="Czy masz dodatkowe pytania?"
+                onChange={(e) => setMsg(e.target.value)}
+              />
+              <br />
+              <br />
+              <Button variant="outlined" className="red" onClick={updateDATA}>
+                Wyślij odpowiedz
+              </Button>
+            </div>
+          </Grid>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </Grid>
+      );
+    }
+
+
     return (
       <Grid container maxWidth="md" sx={{ mt: 10 }}>
         <Grid item xs={12} sm={12} md={12} lg={12} elevation={1}>
