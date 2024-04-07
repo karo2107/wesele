@@ -14,11 +14,14 @@ import "firebase/storage";
 import "firebase/database";
 import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import QRCode from "react-qr-code";
-import generatePDF, { Options } from "react-to-pdf";
-import page1 from "../GraphicAssets/3.svg";
+import generatePDF, { Options, Resolution } from "react-to-pdf";
+import page1cie from "../GraphicAssets/page1cie.svg";
+import page1ciebez from "../GraphicAssets/page1ciebez.svg";
+import page1was from "../GraphicAssets/page1was.svg";
 import page2 from "../GraphicAssets/page2.svg";
-import page1ang from "../GraphicAssets/3ang.png";
+import page1ang from "../GraphicAssets/page1you.svg";
 import page2ang from "../GraphicAssets/4ang.png";
+import { VerticalAlignCenter } from "@mui/icons-material";
 
 const Write = () => {
   const [info, setInfo] = useState([]);
@@ -40,7 +43,7 @@ const Write = () => {
 
   const options = {
     filename: print,
-    // resolution: Resolution.HIGH,
+     resolution: 3,
     page: {
       // margin: 20,
       format: "A5",
@@ -131,7 +134,8 @@ const Write = () => {
     return (
       <Container>
         <div id={data.ID}>
-          <div className="a5" title="Zaproszenia">
+          <div className="" title="Zaproszenia">
+          <Box sx={{ alignContent: 'flex-end', height:"1600px" }}>
             <Typography
               sx={{
                 fontSize: 80,
@@ -145,7 +149,7 @@ const Write = () => {
               // variant="h2"
               align="center"
             >
-              <br/>
+            
               {data.PRZEDROSTEK},
               <br />
               {data.NAME}
@@ -153,7 +157,7 @@ const Write = () => {
               {data.GUEST}
             
             </Typography>{" "}
-            <img width="90%" src={page1ang}></img>
+            <img width="90%" src={page1ang}></img></Box>
           </div>
         
           
@@ -171,7 +175,8 @@ const Write = () => {
       return (
         <Container>
           <div id={data.ID}>
-            <div className="a5" title="Zaproszenia">
+            <div className="" title="Zaproszenia">
+            <Box sx={{ alignContent: 'flex-end', height:"1600px" }}>
               <Typography
                 sx={{
                   fontSize: 80,
@@ -185,13 +190,14 @@ const Write = () => {
                 // variant="h2"
                 align="center"
               >
-                <br/>
+                
                 {data.PRZEDROSTEK},
               <br/>
               {data.INVITE}
               <br/>
               </Typography>{" "}
-              <img width="90%" src={page1}></img>
+              <img width="90%" src={page1was}></img>
+              </Box>
             </div>
           
             
@@ -206,32 +212,72 @@ const Write = () => {
           <hr />
         </Container>
       );}
-  
+      else  if(data.GUEST=="bez"){
+        return (
+          <Container>
+            <div id={data.ID}>
+              <div className="" title="Zaproszenia">
+              <Box sx={{ alignContent: 'flex-end', height:"1600px" }}>
+                <Typography
+                  sx={{
+                    fontSize: 80,
+                    fontStyle: "oblique",
+                    fontWeight: 50,
+                    letterSpacing: 6,
+                    // color: "grey",
+                  }}
+                  // fontFamily='"Great Vibes"'
+                   fontFamily='Whisper'
+                  // variant="h2"
+                  align="center"
+                >
+                 
+                  {data.PRZEDROSTEK},
+                <br/>
+                {data.INVITE}
+                
+                </Typography>{" "}
+                <img width="90%" src={page1ciebez}></img></Box>
+              </div>
+            
+              
+            
+             
+              <div className="a5" title="Zaproszenia">
+            <br /><br/>
+              <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+              <img width="84%" src={page2} />
+              </div>
+            </div>
+            <hr />
+          </Container>
+        );}
 
   else { return (
       
       
       <Container>
         <div id={data.ID}>
-          <div className="a5" title="Zaproszenia">
+          <div className="" title="Zaproszenia">
+          <Box sx={{ alignContent: 'flex-end', height:"1600px" }}>
             <Typography
               sx={{
                 fontSize: 80,
                 fontStyle: "",
                 fontWeight: 400,
                 letterSpacing: 12,
-                // color: "grey",
+                
               }}
               // fontFamily='"Great Vibes"'
                fontFamily='Whisper'
               // variant="h2"
               align="center"
             >
-             <br/>
+             
               {data.PRZEDROSTEK},
               <br/>
               {data.INVITE}
-              <br/>
+              
               {/* <br/>
               {data.PRZEDROSTEK},
               <br />
@@ -240,7 +286,9 @@ const Write = () => {
               {data.GUEST}
               <br/> */}
             </Typography>{" "}
-            <img width="90%" src={page1}></img>
+            
+            <img width="90%" src={page1cie}></img>
+            </Box>
           </div>
         
           

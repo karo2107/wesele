@@ -97,12 +97,13 @@ function DrawerAppBar(props) {
            
           <Typography
          
-            href="/home"
-            variant="h4"
-            component="a"
+           
             sx={{color:'black', fontStyle:'italic', flexGrow: 1, display: { xs: 'none', sm: 'flex' } }}
           >
-          <img src={logo} width="20%" />
+            <Button  href="/home"
+            variant="h"
+            component="a"><img src={logo} width="60%" /></Button>
+          
           </Typography>
           <Box alignItems="top" sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
