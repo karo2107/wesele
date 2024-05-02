@@ -228,6 +228,7 @@ const Post = () => {
                     component="h1"
                     variant="h2"
                   >
+                 {data.PRZEDROSTEK}, <br/>
                     {data.INVITE}
                   </Typography>
                   <br />
@@ -403,7 +404,7 @@ const Post = () => {
                     sx={{ fontStyle: "italic" }}
                     component="h1"
                     variant="h2"
-                  >
+                  >{data.PRZEDROSTEK}, <br/>
                     {data.INVITE}
                   </Typography>
                   <br />
@@ -565,6 +566,7 @@ const Post = () => {
                     component="h1"
                     variant="h2"
                   >
+                    {data.PRZEDROSTEK}, <br/>
                     {data.INVITE}
                   </Typography>
                   <br />
@@ -743,7 +745,7 @@ const Post = () => {
                     sx={{ fontStyle: "italic" }}
                     component="h1"
                     variant="h2"
-                  >
+                  >{data.PRZEDROSTEK}, <br/>
                     {data.INVITE}
                   </Typography>
                   <br />
