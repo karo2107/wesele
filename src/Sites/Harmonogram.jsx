@@ -77,19 +77,20 @@ const info = [
   //   IMG: Castle,
   //   LOCATION: "⛫ Zamek w Wiśniczu",
   // },
+ 
   {
-    TITLE: "① Ceremonia ślubu",
+    TITLE: "① Przyjazd do Gospody nad Rabą",
     DATE: "⏲ 15:00 🗓 31/12/2024",
+    DETAILS:"Powitalne drinki i poczęstunek",
+    IMG: Gospoda,
+    LOCATION: "⚐ Gospoda nad Rabą",
+  },
+  {
+    TITLE: " ② Ceremonia ślubu",
+    DATE: "⏲ 16:00 🗓 31/12/2024",
     DETAILS:"Więcej szegółów wrótce",
     IMG: Wedding,
     LOCATION: "",
-  },
-  {
-    TITLE: "② Przyjazd do Gospody nad Rabą",
-    DATE: "⏲ 16:45 🗓 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
-    IMG: Gospoda,
-    LOCATION: "⚐ Gospoda nad Rabą",
   },
   {
     TITLE: "③ Toast",
