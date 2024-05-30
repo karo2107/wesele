@@ -16,7 +16,7 @@ import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
 import QRCode from "react-qr-code";
 import generatePDF, { Options, Resolution } from "react-to-pdf";
 import page1cie from "../GraphicAssets/page1cie.svg";
-import page1ciebez from "../GraphicAssets/page1ciebez.svg";
+import page1ciebez from "../GraphicAssets/page1bez.svg";
 import page1was from "../GraphicAssets/page1was.svg";
 import page2 from "../GraphicAssets/page2.svg";
 import page1ang from "../GraphicAssets/page1you.svg";
@@ -43,7 +43,7 @@ const Write = () => {
 
   const options = {
     filename: print,
-     resolution: 3,
+    resolution: 3,
     page: {
       // margin: 20,
       format: "A5",
@@ -130,94 +130,12 @@ const Write = () => {
   }
 
   const pdfs = info.map((data) => {
-    if(data.PRZEDROSTEK=="Dear"){
-    return (
-      <Container>
-        <div id={data.ID}>
-          <div className="" title="Zaproszenia">
-          <Box sx={{ alignContent: 'flex-end', height:"1600px" }}>
-            <Typography
-              sx={{
-                fontSize: 80,
-                fontStyle: "oblique",
-                fontWeight: 50,
-                letterSpacing: 6,
-                // color: "grey",
-              }}
-              // fontFamily='"Great Vibes"'
-               fontFamily='Whisper'
-              // variant="h2"
-              align="center"
-            >
-            
-              {data.PRZEDROSTEK},
-              <br />
-              {data.NAME}
-              <br />
-              {data.GUEST}
-            
-            </Typography>{" "}
-            <img width="90%" src={page1ang}></img></Box>
-          </div>
-        
-          
-        
-          <div className="a5" title="Zaproszenia">
-          <br /><br/>
-            <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
-            <img width="84%" src={page2ang} />
-          </div>
-        </div>
-        <hr />
-      </Container>
-    );}
-    else  if(data.PRZEDROSTEK=="Drodzy"){
+    if (data.PRZEDROSTEK == "Dear") {
       return (
         <Container>
           <div id={data.ID}>
             <div className="" title="Zaproszenia">
-            <Box sx={{ alignContent: 'flex-end', height:"1600px" }}>
-              <Typography
-                sx={{
-                  fontSize: 80,
-                  fontStyle: "oblique",
-                  fontWeight: 50,
-                  letterSpacing: 6,
-                  // color: "grey",
-                }}
-                // fontFamily='"Great Vibes"'
-                 fontFamily='Whisper'
-                // variant="h2"
-                align="center"
-              >
-                
-                {data.PRZEDROSTEK},
-              <br/>
-              {data.INVITE}
-              <br/>
-              </Typography>{" "}
-              <img width="90%" src={page1was}></img>
-              </Box>
-            </div>
-          
-            
-          
-           
-            <div className="a5" title="Zaproszenia">
-          <br /><br/>
-            <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
-            <img width="84%" src={page2} />
-            </div>
-          </div>
-          <hr />
-        </Container>
-      );}
-      else  if(data.GUEST=="bez"){
-        return (
-          <Container>
-            <div id={data.ID}>
-              <div className="" title="Zaproszenia">
-              <Box sx={{ alignContent: 'flex-end', height:"1600px" }}>
+              <Box sx={{ alignContent: "flex-end", height: "1600px" }}>
                 <Typography
                   sx={{
                     fontSize: 80,
@@ -227,81 +145,147 @@ const Write = () => {
                     // color: "grey",
                   }}
                   // fontFamily='"Great Vibes"'
-                   fontFamily='Whisper'
+                  fontFamily="Whisper"
                   // variant="h2"
                   align="center"
                 >
-                 
                   {data.PRZEDROSTEK},
-                <br/>
-                {data.INVITE}
-                
+                  <br />
+                  {data.INVITE}
                 </Typography>{" "}
-                <img width="90%" src={page1ciebez}></img></Box>
-              </div>
-            
-              
-            
-             
-              <div className="a5" title="Zaproszenia">
-            <br /><br/>
+                <img width="90%" src={page1ang}></img>
+              </Box>
+            </div>
+
+            <div className="a5" title="Zaproszenia">
+              <br />
+              <br />
+              <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+              <img width="84%" src={page2ang} />
+            </div>
+          </div>
+          <hr />
+        </Container>
+      );
+    } else if (data.PRZEDROSTEK == "Drodzy") {
+      return (
+        <Container>
+          <div id={data.ID}>
+            <div className="" title="Zaproszenia">
+              <Box sx={{ alignContent: "flex-end", height: "1600px" }}>
+                <Typography
+                  sx={{
+                    fontSize: 83,
+                    fontStyle: "oblique",
+                    fontWeight: 50,
+                    letterSpacing: 6,
+                    // color: "grey",
+                  }}
+                  // fontFamily='"Great Vibes"'
+                  fontFamily="Whisper"
+                  // variant="h2"
+                  align="center"
+                >
+                  {data.PRZEDROSTEK},
+                  <br />
+                  {data.INVITE}
+                  <br />
+                </Typography>{" "}
+                <img width="90%" src={page1was}></img>
+              </Box>
+            </div>
+
+            <div className="a5" title="Zaproszenia">
+              <br />
+              <br />
               <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
               <img width="84%" src={page2} />
-              </div>
             </div>
-            <hr />
-          </Container>
-        );}
+          </div>
+          <hr />
+        </Container>
+      );
+    } else if (data.GUEST == "brak") {
+      return (
+        <Container>
+          <div id={data.ID}>
+            <div className="" title="Zaproszenia">
+              <Box sx={{ alignContent: "flex-end", height: "1600px" }}>
+                <Typography
+                  sx={{
+                    fontSize: 80,
+                    fontStyle: "oblique",
+                    fontWeight: 50,
+                    letterSpacing: 6,
+                    // color: "grey",
+                  }}
+                  // fontFamily='"Great Vibes"'
+                  fontFamily="Whisper"
+                  // variant="h2"
+                  align="center"
+                >
+                  {data.PRZEDROSTEK},
+                  <br />
+                  {data.INVITE}
+                </Typography>{" "}
+                <img width="90%" src={page1ciebez}></img>
+              </Box>
+            </div>
 
-  else { return (
-      
-      
-      <Container>
-        <div id={data.ID}>
-          <div className="" title="Zaproszenia">
-          <Box sx={{ alignContent: 'flex-end', height:"1600px" }}>
-            <Typography
-              sx={{
-                fontSize: 80,
-                fontStyle: "",
-                fontWeight: 400,
-                letterSpacing: 12,
-                
-              }}
-              // fontFamily='"Great Vibes"'
-               fontFamily='Whisper'
-              // variant="h2"
-              align="center"
-            >
-             
-              {data.PRZEDROSTEK},
-              <br/>
-              {data.INVITE}
-              
-              {/* <br/>
+            <div className="a5" title="Zaproszenia">
+              <br />
+              <br />
+              <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+              <img width="84%" src={page2} />
+            </div>
+          </div>
+          <hr />
+        </Container>
+      );
+    } else {
+      return (
+        <Container>
+          <div id={data.ID}>
+            <div className="" title="Zaproszenia">
+              <Box sx={{ alignContent: "flex-end", height: "1600px" }}>
+                <Typography
+                  sx={{
+                    fontSize: 80,
+                    fontStyle: "",
+                    fontWeight: 400,
+                    letterSpacing: 12,
+                  }}
+                  // fontFamily='"Great Vibes"'
+                  fontFamily="Whisper"
+                  // variant="h2"
+                  align="center"
+                >
+                  {data.PRZEDROSTEK},
+                  <br />
+                  {data.INVITE}
+                  {/* <br/>
               {data.PRZEDROSTEK},
               <br />
               {data.NAME}
               <br />
               {data.GUEST}
               <br/> */}
-            </Typography>{" "}
-            
-            <img width="90%" src={page1cie}></img>
-            </Box>
+                </Typography>{" "}
+                <img width="90%" src={page1cie}></img>
+              </Box>
+            </div>
+
+            <div className="a5" title="Zaproszenia">
+              <br />
+              <br />
+              <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+              <img width="84%" src={page2} />
+            </div>
           </div>
-        
-          
-        
-          <div className="a5" title="Zaproszenia">
-          <br /><br/>
-            <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
-            <img width="84%" src={page2} />
-          </div>
-        </div>
-        <hr />
-      </Container>
-    );}
+          <hr />
+        </Container>
+      );
+    }
   });
   {
     /* <Button onClick={
@@ -330,7 +314,10 @@ const Write = () => {
           </Button> */}
         </Grid>
         <Grid item xs={12} sm={12} md={5}>
-          <Typography align="left">gość: <br/><b>{data.NAME}</b></Typography>
+          <Typography align="left">
+            gość: <br />
+            <b>{data.NAME}</b>
+          </Typography>
           <br />
           <Typography align="left">będzie: {data.OBECNOSC}</Typography>
           <br />
@@ -338,7 +325,10 @@ const Write = () => {
         </Grid>
 
         <Grid item xs={12} sm={12} md={2}>
-          <Typography align="left">osoba towarzysząca:<br/> <b>{data.GUEST}</b></Typography>
+          <Typography align="left">
+            osoba towarzysząca:
+            <br /> <b>{data.GUEST}</b>
+          </Typography>
           <br />
           <Typography align="left">będzie: {data.GUESTOBECNOSC}</Typography>
           <br />
@@ -353,7 +343,9 @@ const Write = () => {
           <Typography align="left">wiadomość: {data.MSG}</Typography>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-        <Typography align="center">Zaproszenie: {data.PRZEDROSTEK}, {data.INVITE}</Typography>
+          <Typography align="center">
+            Zaproszenie: {data.PRZEDROSTEK}, {data.INVITE}
+          </Typography>
           <hr />
         </Grid>
       </Grid>
@@ -436,7 +428,8 @@ const Write = () => {
   });
   if (loggedin == "Sylwester2024") {
     return (
-      <Container><div>
+      <Container>
+        <div>
           <Card>
             <h5>Dodaj nowego gościa:</h5>
             <input
@@ -451,11 +444,11 @@ const Write = () => {
               placeholder="Imie i nazwisko osoby towarzyszącej"
               onChange={(e) => setGuest(e.target.value)}
             />
-  <input
+            <input
               placeholder="drogi/droga/drodzy?"
               onChange={(e) => setPrzedrostek(e.target.value)}
             />
-              <input
+            <input
               placeholder="Agato nazwisko"
               onChange={(e) => setInvite(e.target.value)}
             />
@@ -463,13 +456,12 @@ const Write = () => {
               Dodaj
             </Button>
           </Card>
-          <hr/>
+          <hr />
         </div>
         <Grid item xs={12} sm={12} md={12}>
           {items}
         </Grid>
         {pdfs}
-        
       </Container>
     );
   } else

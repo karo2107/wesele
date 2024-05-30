@@ -72,7 +72,9 @@ const Post = () => {
     setFood(event.target.value);
   };
   const handleChangeObecnosc = (event) => {
-    setObecnosc(event.target.value);
+    setObecnosc(event.target.value)
+    
+    ;
   };
   const handleChangeObecnosctowarzysza = (event) => {
     setObecnosctowarzysza(event.target.value);
@@ -111,7 +113,8 @@ const Post = () => {
           querySnapshot.forEach((element) => {
             var data = element.data();
             setInfo((arr) => [...arr, data]);
-            setGuest(data.GUEST)
+            setGuest(data.GUEST);
+            setName(data.NAME)
           });
         });
     };
@@ -124,12 +127,13 @@ const Post = () => {
   const updateDATA = async (e) => {
     e.preventDefault();
     const ref = doc(db, "goscie", a);
+    
     await setDoc(
       ref,
       {
         // ID: id,
         ID: a,
-        // NAME: name,
+       NAME: name,
         OBECNOSC: obecnosc,
         GUEST: guest,
         GUESTOBECNOSC: guestobecnosc,
@@ -179,6 +183,7 @@ const Post = () => {
       },
     },
   });
+  
   const items = info.map((data) => {
     if (data.PRZEDROSTEK == "Drodzy") {
       return (
@@ -869,7 +874,7 @@ const Post = () => {
       );
     }
   });
-
+  
   return (
     <div>
       <ThemeProvider theme={theme}>
