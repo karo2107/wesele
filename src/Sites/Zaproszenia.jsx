@@ -187,7 +187,164 @@ const Write = () => {
     generatePDF(document.getElementById(person), options);
   }
 
-  
+  const pdfs = info.map((data) => {
+    if (data.PRZEDROSTEK == "Dear") {
+      return (
+        <Container>
+          <div id={data.ID}>
+            <div className="" title="Zaproszenia">
+              <Box sx={{ alignContent: "flex-end", height: "1600px" }}>
+                <Typography
+                  sx={{
+                    fontSize: 80,
+                    fontStyle: "oblique",
+                    fontWeight: 50,
+                    letterSpacing: 6,
+                    // color: "grey",
+                  }}
+                  // fontFamily='"Great Vibes"'
+                  fontFamily="Whisper"
+                  // variant="h2"
+                  align="center"
+                >
+                  {data.PRZEDROSTEK},
+                  <br />
+                  {data.INVITE}
+                </Typography>{" "}
+                <img width="90%" src={page1ang}></img>
+              </Box>
+            </div>
+
+            <div className="a5" title="Zaproszenia">
+              <br />
+              <br />
+              <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+              <img width="84%" src={page2ang} />
+            </div>
+          </div>
+          <hr />
+        </Container>
+      );
+    } else if (data.PRZEDROSTEK == "Drodzy") {
+      return (
+        <Container>
+          <div id={data.ID}>
+            <div className="" title="Zaproszenia">
+              <Box sx={{ alignContent: "flex-end", height: "1600px" }}>
+                <Typography
+                  sx={{
+                    fontSize: 83,
+                    fontStyle: "oblique",
+                    fontWeight: 50,
+                    letterSpacing: 6,
+                    // color: "grey",
+                  }}
+                  // fontFamily='"Great Vibes"'
+                  fontFamily="Whisper"
+                  // variant="h2"
+                  align="center"
+                >
+                  {data.PRZEDROSTEK},
+                  <br />
+                  {data.INVITE}
+                  <br />
+                </Typography>{" "}
+                <img width="90%" src={page1was}></img>
+              </Box>
+            </div>
+
+            <div className="a5" title="Zaproszenia">
+              <br />
+              <br />
+              <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+              <img width="84%" src={page2} />
+            </div>
+          </div>
+          <hr />
+        </Container>
+      );
+    } else if (data.GUEST == "brak") {
+      return (
+        <Container>
+          <div id={data.ID}>
+            <div className="" title="Zaproszenia">
+              <Box sx={{ alignContent: "flex-end", height: "1600px" }}>
+                <Typography
+                  sx={{
+                    fontSize: 80,
+                    fontStyle: "oblique",
+                    fontWeight: 50,
+                    letterSpacing: 6,
+                    // color: "grey",
+                  }}
+                  // fontFamily='"Great Vibes"'
+                  fontFamily="Whisper"
+                  // variant="h2"
+                  align="center"
+                >
+                  {data.PRZEDROSTEK},
+                  <br />
+                  {data.INVITE}
+                </Typography>{" "}
+                <img width="90%" src={page1ciebez}></img>
+              </Box>
+            </div>
+
+            <div className="a5" title="Zaproszenia">
+              <br />
+              <br />
+              <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+              <img width="84%" src={page2} />
+            </div>
+          </div>
+          <hr />
+        </Container>
+      );
+    } else {
+      return (
+        <Container>
+          <div id={data.ID}>
+            <div className="" title="Zaproszenia">
+              <Box sx={{ alignContent: "flex-end", height: "1600px" }}>
+                <Typography
+                  sx={{
+                    fontSize: 80,
+                    fontStyle: "",
+                    fontWeight: 400,
+                    letterSpacing: 12,
+                  }}
+                  // fontFamily='"Great Vibes"'
+                  fontFamily="Whisper"
+                  // variant="h2"
+                  align="center"
+                >
+                  {data.PRZEDROSTEK},
+                  <br />
+                  {data.INVITE}
+                  {/* <br/>
+              {data.PRZEDROSTEK},
+              <br />
+              {data.NAME}
+              <br />
+              {data.GUEST}
+              <br/> */}
+                </Typography>{" "}
+                <img width="90%" src={page1cie}></img>
+              </Box>
+            </div>
+
+            <div className="a5" title="Zaproszenia">
+              <br />
+              <br />
+              <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} />
+              <img width="84%" src={page2} />
+            </div>
+          </div>
+          <hr />
+        </Container>
+      );
+    }
+  });
 const [expanded, setExpanded] = React.useState(false);
 
   // const handleExpandClick = () => {
@@ -196,11 +353,10 @@ const [expanded, setExpanded] = React.useState(false);
 
   const items = info.map((data) => {
     return (
-      
-       
-        <Card variant="outlined"
+      <Grid container>
+        <Card 
         // sx={{ maxWidth: 345 }}
-        > 
+        >
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -227,28 +383,28 @@ const [expanded, setExpanded] = React.useState(false);
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               <ul>
-                <div>
+                <li>
                   Obecność - {data.NAME}: {data.OBECNOSC}
-                </div>
-                <div>
+                </li>
+                <li>
                   Obecność - {data.GUEST}: {data.GUESTOBECNOSC}
-                </div>
-                <div>
+                </li>
+                <li>
                   Preferencje dietetyczne - {data.NAME}: {data.FOOD}
-                </div>
-                <div>
+                </li>
+                <li>
                   Preferencje dietetyczne - {data.GUEST}: {data.FOODGUEST}
-                </div>
-                <div>
+                </li>
+                <li>
                   Wiadomość - {data.GUEST}: {data.FOODGUEST}
-                </div>
+                </li>
               </ul>
           
-          {/* <Button onClick={(e) => setPrint(data.ID)}> load PDF</Button> <br />
-          <Button onClick={downloadPdf}> Download PDF</Button> <br /> */}
-          <IconButton href={'tel:'+data.PHONE} aria-label="phone">tel:{data.PHONE}</IconButton>
+          <Button onClick={(e) => setPrint(data.ID)}> load PDF</Button> <br />
+          <Button onClick={downloadPdf}> Download PDF</Button> <br />
+          <IconButton href={"tel:"+{phone}} aria-label="phone">tel</IconButton>
             <br />
-            <IconButton href={"mailto:"+data.EMAIL} aria-label="e-mail">e-mail:{data.EMAIL}</IconButton>
+            <IconButton href={"mailto:"+{email}} aria-label="e-mail">e-mail</IconButton>
             <br />
      
             </Typography>
@@ -315,7 +471,7 @@ const [expanded, setExpanded] = React.useState(false);
                   />
                   <br />
                   <br />
-                  Obecność gościa:
+                  Obecność:
                   <br />
                   {data.NAME}
                   <Select
@@ -331,7 +487,7 @@ const [expanded, setExpanded] = React.useState(false);
                   </Select>
                   <br />
                   <br />
-                  Obecność osoby tow. {data.GUEST}
+                  {data.GUEST}
                   <Select
                     labelId="Obecność"
                     id="demo-simple-select"
@@ -411,7 +567,6 @@ const [expanded, setExpanded] = React.useState(false);
                     Zapisz zmiany
                   </Button>
                 </div>
-                <hr/>
               </Grid>
 
               {/* <Typography paragraph>
@@ -422,9 +577,42 @@ const [expanded, setExpanded] = React.useState(false);
           </Collapse>
         </Card>
         
-       
+        {/* <Grid item xs={12} sm={12} md={5}>
+          <Typography align="left">
+            gość: <br />
+            <b>{data.NAME}</b>
+          </Typography>
+          <br />
+          <Typography align="left">będzie: {data.OBECNOSC}</Typography>
+          <br />
+          <Typography align="left">dieta: {data.FOOD}</Typography>
+        </Grid> */}
 
-    
+        {/* <Grid item xs={12} sm={12} md={2}>
+          <Typography align="left">
+            osoba towarzysząca:
+            <br /> <b>{data.GUEST}</b>
+          </Typography>
+          <br />
+          <Typography align="left">będzie: {data.GUESTOBECNOSC}</Typography>
+          <br />
+          <Typography align="left">dieta: {data.FOODGUEST}</Typography>
+        </Grid> */}
+{/* 
+        <Grid item xs={12} sm={12} md={2}>
+          <Typography align="left">email: {data.EMAIL}</Typography>
+          <br />
+          <Typography align="left">telefon: {data.PHONE}</Typography>
+          <br />
+          <Typography align="left">wiadomość: {data.MSG}</Typography>
+        </Grid> */}
+        {/* <Grid item xs={12} sm={12} md={12}>
+          <Typography align="center">
+            Zaproszenie: {data.PRZEDROSTEK}, {data.INVITE}
+          </Typography>
+          <hr />
+        </Grid> */}
+      </Grid>
 
       // <Grid item xs={12} sm={12} md={12} >
       //   <Modal
@@ -504,7 +692,7 @@ const [expanded, setExpanded] = React.useState(false);
   });
   if (loggedin == "Sylwester2024") {
     return (
-      <div>
+      <Box sx={{ justifyContent: 'center', alignItems: 'center'  }}>
         <div>
           <div>Ilosc Gosci: {2 * info.length - 7}</div>
           <Card>
@@ -535,12 +723,12 @@ const [expanded, setExpanded] = React.useState(false);
           </Card>
           <hr />
         </div>
-        <Box sx={{ maxWidth: 'sm' }} display="block" m="auto">{items}</Box>
-    
-          
-   
-      
-          </div>
+        <Box sx={{ justifyContent: 'center', alignItems: 'center'  }}>
+        
+          {items}
+    </Box>
+        {pdfs}
+      </Box>
     );
   } else
     return (

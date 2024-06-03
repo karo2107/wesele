@@ -19,7 +19,7 @@ import DocumentMeta from "react-document-meta";
 import MoreInfo from "./WeselaPl/MoreInfo.jsx";
 import Karta from "./Sites/Karta";
 import Admin from "./Sites/Admin";
-
+import Tables from "./Sites/Tables.jsx"
 function Copyright() {
   return (
     <Typography variant="body2" color="white" align="center">
@@ -141,6 +141,7 @@ export default function App() {
                 <Route path={`/Kontakt`} element={<Contact />} />
                 <Route path={`/Harmonogram`} element={<Harmonogram />} />
                 <Route path={`/Obecnosc`} element={<Obecnosc />} />
+                <Route path={`/Tables`} element={<Tables />} />
                 <Route path={`/Informacje`} element={<Informacje />} />
                 <Route path={`/Menu`} element={<Karta />} />
                 <Route path="/:Zaproszenie" element={<Zaproszenie/>} />
