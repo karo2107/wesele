@@ -136,25 +136,7 @@ const Write = () => {
     window.location.reload(false);
   };
 
-  const createDATA = async () => {
-    const ref = doc(db, "goscie", id);
-    await setDoc(ref, {
-      ID: id,
-      NAME: name,
-      OBECNOSC: obecnosc,
-      GUEST: guest,
-      GUESTOBECNOSC: guestobecnosc,
-      FOOD: food,
-      FOODGUEST: foodguest,
-      EMAIL: email,
-      PHONE: phone,
-      MSG: msg,
-      PRZEDROSTEK: przedrostek,
-      INVITE: invite,
-      TABLE: "",
-    });
-    window.location.reload(false);
-  };
+  
   const deleteDATA = async () => {
     await deleteDoc(doc(db, "goscie", id));
     window.location.reload(false);
@@ -354,230 +336,9 @@ const [expanded, setExpanded] = React.useState(false);
   const items = info.map((data) => {
     return (
       <Grid container>
-        <Card 
-        // sx={{ maxWidth: 345 }}
-        >
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {data.TABLE}
-              </Avatar>
-            }
-            // action={
-            //   <IconButton aria-label="settings">
-            //     <Button>tel</Button>
-            //     <Button>email</Button>
-            //   </IconButton>
-            // }
-            title={data.NAME}
-            subheader={data.GUEST}
-          />
-          <CardMedia>
-            {/* // component="img"
-        // height="194"
-        // image="/static/images/cards/paella.jpg"
-        // alt="Paella dish"
-      /> */}
-            {/* <QRCode value={"weselekarolinyikuby.info/" + `${data.ID})`} /> */}
-          </CardMedia>
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              <ul>
-                <li>
-                  Obecność - {data.NAME}: {data.OBECNOSC}
-                </li>
-                <li>
-                  Obecność - {data.GUEST}: {data.GUESTOBECNOSC}
-                </li>
-                <li>
-                  Preferencje dietetyczne - {data.NAME}: {data.FOOD}
-                </li>
-                <li>
-                  Preferencje dietetyczne - {data.GUEST}: {data.FOODGUEST}
-                </li>
-                <li>
-                  Wiadomość - {data.GUEST}: {data.FOODGUEST}
-                </li>
-              </ul>
-          
-          <Button onClick={(e) => setPrint(data.ID)}> load PDF</Button> <br />
+    <Button onClick={(e) => setPrint(data.ID)}> load PDF</Button> <br />
           <Button onClick={downloadPdf}> Download PDF</Button> <br />
-          <IconButton href={"tel:"+{phone}} aria-label="phone">tel</IconButton>
-            <br />
-            <IconButton href={"mailto:"+{email}} aria-label="e-mail">e-mail</IconButton>
-            <br />
-     
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            
-            <ExpandMore
-              expand={ data.ID == expanded}
-              onClick={(e) => {
-                setExpanded(data.ID);
-                setId(data.ID);
-                setName(data.NAME);
-                setGuest(data.GUEST);
-                setFoodguest(data.FOODGUEST);
-                setFood(data.FOOD);
-                setMsg(data.MSG);
-                setPhone(data.PHONE);
-                setEmail(data.EMAIL);
-                setTable(data.TABLE);
-              }}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              Wprowadz zmiany
-              <ExpandMoreIcon />
-            </ExpandMore>
-          </CardActions>
-          <Collapse in={ data.ID == expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Grid item xs={12} sm={12} md={12} lg={12} elevation={6}>
-                <div>
-                  <h2>Wprowadz zmiany i zapisz.</h2>
-                  <br />
-                  <br />
-                  Imię i nazwisko gościa
-                  <TextField
-                    fullWidth
-                    placeholder={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  Imię i nazwisko osoby towarzyszącej
-                  <TextField
-                    fullWidth
-                    placeholder={guest}
-                    onChange={(e) => setGuest(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  przedrotek (np. Drogi, Droga, Drodzy)
-                  <TextField
-                    fullWidth
-                    placeholder={przedrostek}
-                    onChange={(e) => setPrzedrostek(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  Zwrot na zaproszeniu (np. Agato, Agatko, Agato Kowalska)
-                  <TextField
-                    fullWidth
-                    placeholder={invite}
-                    onChange={(e) => setInvite(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  Obecność:
-                  <br />
-                  {data.NAME}
-                  <Select
-                    labelId="Obecność"
-                    id="demo-simple-select"
-                    placeholder="Tak / nie / jeszcze nie wiem"
-                    label="Tak / nie / jeszcze nie wiem"
-                    onChange={(e) => setObecnosc(e.target.value)}
-                  >
-                    <MenuItem value={"Tak"}>Tak</MenuItem>
-                    <MenuItem value={"Nie"}>Nie</MenuItem>
-                    <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
-                  </Select>
-                  <br />
-                  <br />
-                  {data.GUEST}
-                  <Select
-                    labelId="Obecność"
-                    id="demo-simple-select"
-                    placeholder="Tak / nie / jeszcze nie wiem"
-                    label="Tak / nie / jeszcze nie wiem"
-                    onChange={(e) => setObecnosctowarzysza(e.target.value)}
-                  >
-                    <MenuItem value={"Tak"}>Tak</MenuItem>
-                    <MenuItem value={"Nie"}>Nie</MenuItem>
-                    <MenuItem value={"Nie wiem"}>Nie wiem</MenuItem>
-                  </Select>
-                  <TextField
-                    fullWidth
-                    required
-                    placeholder={"Preferencje dietetyczne :" + ` ${data.NAME}`}
-                    onChange={(e) => setFood(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  <TextField
-                    fullWidth
-                    required
-                    placeholder={
-                      "Preferencje dietetyczne :" + `  ${data.GUEST}`
-                    }
-                    onChange={(e) => setFoodguest(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <TextField
-                    fullWidth
-                    required
-                    placeholder=" e-mail"
-                    name="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  <TextField
-                    fullWidth
-                    required
-                    name="phone"
-                    placeholder=" numer telefonu"
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  <TextField
-                    fullWidth
-                    required
-                    multiline
-                    rows={4}
-                    placeholder="Dodatkowe pytania"
-                    onChange={(e) => setMsg(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  <TextField
-                    fullWidth
-                    required
-                    multiline
-                    rows={4}
-                    placeholder="Przydziel do stołu"
-                    onChange={(e) => setTable(e.target.value)}
-                  />
-                  <br />
-                  <br />
-                  <Wyslano />
-                  <Wyslano />{" "}
-                  <Button
-                    variant="outlined"
-                    className="red"
-                    onClick={updateDATA}
-                  >
-                    Zapisz zmiany
-                  </Button>
-                </div>
-              </Grid>
-
-              {/* <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography> */}
-            </CardContent>
-          </Collapse>
-        </Card>
-        
-        {/* <Grid item xs={12} sm={12} md={5}>
+         <Grid item xs={12} sm={12} md={5}>
           <Typography align="left">
             gość: <br />
             <b>{data.NAME}</b>
@@ -586,9 +347,9 @@ const [expanded, setExpanded] = React.useState(false);
           <Typography align="left">będzie: {data.OBECNOSC}</Typography>
           <br />
           <Typography align="left">dieta: {data.FOOD}</Typography>
-        </Grid> */}
+        </Grid> 
 
-        {/* <Grid item xs={12} sm={12} md={2}>
+         <Grid item xs={12} sm={12} md={2}>
           <Typography align="left">
             osoba towarzysząca:
             <br /> <b>{data.GUEST}</b>
@@ -597,97 +358,24 @@ const [expanded, setExpanded] = React.useState(false);
           <Typography align="left">będzie: {data.GUESTOBECNOSC}</Typography>
           <br />
           <Typography align="left">dieta: {data.FOODGUEST}</Typography>
-        </Grid> */}
-{/* 
+        </Grid> 
+
         <Grid item xs={12} sm={12} md={2}>
           <Typography align="left">email: {data.EMAIL}</Typography>
           <br />
           <Typography align="left">telefon: {data.PHONE}</Typography>
           <br />
           <Typography align="left">wiadomość: {data.MSG}</Typography>
-        </Grid> */}
-        {/* <Grid item xs={12} sm={12} md={12}>
+        </Grid> 
+        <Grid item xs={12} sm={12} md={12}>
           <Typography align="center">
             Zaproszenie: {data.PRZEDROSTEK}, {data.INVITE}
           </Typography>
           <hr />
-        </Grid> */}
+        </Grid>
       </Grid>
 
-      // <Grid item xs={12} sm={12} md={12} >
-      //   <Modal
-      //     actions={[
-      //       <Button flat modal="close" node="button" waves="green">
-      //         Close
-      //       </Button>,
-      //     ]}
-      //     bottomSheet={false}
-      //     fixedFooter={false}
-      //     header={data.ID}
-      //     id={data.ID}
-      //     value={data.ID}
-      //     open={false}
-      //     options={{
-      //       dismissible: true,
-      //       endingTop: "10%",
-      //       inDuration: 250,
-      //       onCloseEnd: null,
-      //       onCloseStart: null,
-      //       onOpenEnd: null,
-      //       onOpenStart: null,
-      //       opacity: 0.5,
-      //       outDuration: 250,
-      //       preventScrolling: true,
-      //       startingTop: "4%",
-      //     }}
-      //     trigger={
-      //       <Button
-      //         value={data.ID}
-      //         className="red"
-      //         node="button"
-      //         onClick={(e) => setId(e.target.value)}
-      //       >
-      //         <Button
-      //           value={data.LOKAL}
-      //           className="red"
-      //           node="button"
-      //           onClick={(e) => {
-      //             // setLokal(e.target.value);
-      //             // setCena(data.CENA);
-      //             // setMetraz(data.METRAZ);
-      //             // setPietro(data.PIETRO);
-      //             // setDostepnosc(data.DOSTEPNOSC);
-      //           }}
-      //         >
-      //           Edytuj
-      //         </Button>
-      //       </Button>
-      //     }
-      //   >
-
-      //     {/* <input
-      //       placeholder="METRAZ"
-      //       onChange={(e) => setMetraz(e.target.value)}
-      //     />
-
-      //     <input
-      //       placeholder="PIETRO"
-      //       onChange={(e) => setPietro(e.target.value)}
-      //     />
-
-      //     <input
-      //       placeholder="CENA"
-      //       onChange={(e) => setCena(e.target.value)}
-      //     />
-
-      //     <input
-      //       placeholder="DOSTEPNOSC"
-      //       onChange={(e) => setDostepnosc(e.target.value)}
-      //     /> */}
-
-      //     <Button onClick={updateDATA}>Zapisz</Button>
-      //   </Modal>
-      // </Grid>
+    
     );
   });
   if (loggedin == "Sylwester2024") {
@@ -695,32 +383,7 @@ const [expanded, setExpanded] = React.useState(false);
       <Box sx={{ justifyContent: 'center', alignItems: 'center'  }}>
         <div>
           <div>Ilosc Gosci: {2 * info.length - 7}</div>
-          <Card>
-            <h5>Dodaj nowego gościa:</h5>
-            <input
-              placeholder="ID - format imie nazwisko bez spacji"
-              onChange={(e) => setId(e.target.value)}
-            />
-            <input
-              placeholder="Imie i nazwisko"
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              placeholder="Imie i nazwisko osoby towarzyszącej"
-              onChange={(e) => setGuest(e.target.value)}
-            />
-            <input
-              placeholder="drogi/droga/drodzy?"
-              onChange={(e) => setPrzedrostek(e.target.value)}
-            />
-            <input
-              placeholder="Agato nazwisko"
-              onChange={(e) => setInvite(e.target.value)}
-            />
-            <Button className="red" onClick={createDATA}>
-              Dodaj
-            </Button>
-          </Card>
+         
           <hr />
         </div>
         <Box sx={{ justifyContent: 'center', alignItems: 'center'  }}>

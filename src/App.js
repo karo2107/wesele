@@ -12,6 +12,8 @@ import Home from "./Sites/Home";
 import Harmonogram from "./Sites/Harmonogram";
 import Informacje from "./Sites/Informacje";
 import Zaproszenie from "./Sites/Zaproszenie";
+import Zaproszenia from "./Sites/Zaproszenia";
+
 import LandingPage from "./WeselaPl/LandingPage.jsx";
 import emailjs from "@emailjs/browser";
 import Footer from "./WeselaPl/Footer";
@@ -145,6 +147,7 @@ export default function App() {
                 <Route path={`/Informacje`} element={<Informacje />} />
                 <Route path={`/Menu`} element={<Karta />} />
                 <Route path="/:Zaproszenie" element={<Zaproszenie/>} />
+                <Route path={`/Zaproszenia`} element={<Zaproszenia />} />
                 <Route path={`/wprowadzzmiany`} element={<Admin />} />
                 {/* <Route path={`${a}/:any `} element={<LandingPage />} /> */}
                 <Route path={`${a}`} element={<Home />} />
