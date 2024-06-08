@@ -73,7 +73,7 @@ const info = [
   // {
   //   TITLE: "❶ Recepcja przed ślubem",
   //   DATE: "⏲ 14:30 🗓 31/12/2024",
-  //   DETAILS:"Więcej szegółów wrótce",
+  //   DETAILS:"Więcej szczegółów wrótce",
   //   IMG: Castle,
   //   LOCATION: "⛫ Zamek w Wiśniczu",
   // },
@@ -88,21 +88,21 @@ const info = [
   {
     TITLE: " ② Ceremonia ślubu",
     DATE: "⏲ 16:00 🗓 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
+    DETAILS:"Więcej szczegółów wrótce",
     IMG: Wedding,
     LOCATION: "",
   },
   {
     TITLE: "③ Toast",
     DATE: "⏲ 17:00 🗓 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
+    DETAILS:"Więcej szczegółów wrótce",
     IMG: Drinks,
     LOCATION: "Gospoda nad Rabą",
   },
   {
     TITLE: "④ Pierwszy ciepły posiłek",
     DATE: "⏲ 17:00 🗓 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
+    DETAILS:"Więcej szczegółów wrótce",
     IMG: Food,
     LOCATION: "Gospoda nad Rabą",
   },
@@ -110,21 +110,21 @@ const info = [
   {
     TITLE: "⑤ Wesele",
     DATE: "⏲ 17:00 🗓 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
+    DETAILS:"Więcej szczegółów wrótce",
     IMG: Dance,
     LOCATION: "Gospoda nad Rabą",
   },
   {
     TITLE: "⑥ Fajerwerki",
     DATE: "⏲ 24:00 🗓 31/12/2024",
-    DETAILS:"Więcej szegółów wrótce",
+    DETAILS:"Więcej szczegółów wrótce",
     IMG: Fireworks,
     LOCATION: "Gospoda nad Rabą",
   },
   {
     TITLE: "⑦ Śniadanie noworoczne",
     DATE: "⏲ 10:00 🗓 01/01/2025",
-    DETAILS:"Więcej szegółów wrótce",
+    DETAILS:"Więcej szczegółów wrótce",
     IMG: Breakfast,
     LOCATION: "Gospoda nad Rabą",
   },

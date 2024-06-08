@@ -28,8 +28,8 @@ const a = "Karolina i Kuba";
 const info = [
   {
     TITLE: "Przystawki i powitalny drink ",
-    TIME: "⏲ 14:30",
-    DETAILS: "przystawki, prossecco, Więcej informacji wkrótce",
+    TIME: "⏲ 15:00",
+    DETAILS: "Więcej informacji wkrótce",
   },
   {
     TITLE: "Pierwszy ciepły posiłek w gospodzie",

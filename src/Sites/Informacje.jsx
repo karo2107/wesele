@@ -73,7 +73,7 @@ const info = [
     TITLE: "Dzieci",
     GMAP: "http://hotelnadraba.pl/",
     DETAILS:
-      "Ze względu na charakter imprezy prosimy, w miarę mozliwości, o pozostawienie swoich pociech w domu.",
+      "Ze względu na charakter imprezy prosimy, w miarę możliwości, o pozostawienie swoich pociech w domu.",
     DETAILS2: "",
     DETAILS3: "Jeżeli nie jest to możliwe, prosimy o kontakt.",
     DETAILS4: "",
@@ -83,7 +83,7 @@ const info = [
     TITLE: "Preferencje dietetyczne",
     GMAP: "http://hotelnadraba.pl/wp-content/uploads/2022/12/Menu-weselne-v2.pdf",
     DETAILS:
-      "Gospoda słynie z pysznych dań mięsnych i jarskich. W związku z tym uprzejmie prosimy o informacje dotyczącą ewentualnych alergii pokarmowych",
+      "Gospoda słynie z pysznych dań mięsnych i jarskich. W związku z tym uprzejmie prosimy o informacje dotyczącą ewentualnych alergii pokarmowych.",
     DETAILS2: "",
     DETAILS3: "",
     DETAILS4: "",
@@ -127,7 +127,7 @@ const info = [
     TITLE: "Wasze zdjęcia",
     GMAP: "https://drive.google.com/drive/folders/1kuC6IveYLcKHbMZt1-vQ-KaAwTOhRvw8?usp=sharing",
     DETAILS:
-      "Prosimy o uploadowanie Waszych zdjęć z wydarzenia pod powyższym linkiem",
+      "Prosimy o przesyłanie/uploadowanie Waszych zdjęć z imprezy używając linka powyżej.",
     IMG: Photo,
   },
 ];
