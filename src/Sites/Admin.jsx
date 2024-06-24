@@ -213,7 +213,7 @@ const [expanded, setExpanded] = React.useState(false);
             //     <Button>email</Button>
             //   </IconButton>
             // }
-            title={data.NAME + 'osoba towarzysząca: ' + data.GUEST}
+            title={data.NAME + ', osoba towarzysząca: ' + data.GUEST}
             subheader={data.PRZEDROSTEK +',  '+ data.INVITE}
           />
           <CardMedia>
