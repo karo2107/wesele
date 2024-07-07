@@ -78,7 +78,7 @@ const Write = () => {
   const [table, setTable] = useState();
   const [wyslanoWiadomosc, setwyslanoWiadomosc] = React.useState(false);
   const [obecnosctowarzysza, setObecnosctowarzysza] = React.useState(false);
-
+  const [search, setSearch] = useState();
   const options = {
     filename: print,
     resolution: 3,
@@ -136,7 +136,11 @@ const Write = () => {
     window.location.reload(false);
   };
 
-  
+  const searchSpace = (event) => {
+    let keyword = event.target.value;
+    setSearch(keyword)
+    ;
+  };
   const deleteDATA = async () => {
     await deleteDoc(doc(db, "goscie", id));
     window.location.reload(false);
@@ -333,7 +337,20 @@ const [expanded, setExpanded] = React.useState(false);
   //   setExpanded(!expanded);
   // };
 
-  const items = info.map((data) => {
+  const items = info
+  .filter((data) => {
+    if (search == null) return data;
+    else if (
+      data.NAME.toLowerCase().includes(search.toLowerCase()) ||
+      data.GUEST
+        .toLowerCase()
+        .includes(search.toLowerCase()) 
+   
+    ) {
+      return data;
+    }
+  })
+  .map((data) => {
     return (
       <Grid container>
     <Button onClick={(e) => setPrint(data.ID)}> load PDF</Button> <br />
@@ -387,6 +404,13 @@ const [expanded, setExpanded] = React.useState(false);
          
           <hr />
         </div>
+        <input
+                className="input"
+                type="text"
+                placeholder="Wyszukaj"
+                onChange={(e) => searchSpace(e)}
+              />
+              <br/><br/>
         <Box sx={{ justifyContent: 'center', alignItems: 'center'  }}>
         
           {items}

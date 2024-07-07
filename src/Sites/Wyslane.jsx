@@ -70,7 +70,7 @@ const Write = () => {
   const [table, setTable] = useState();
   const [obecnosctowarzysza, setObecnosctowarzysza] = React.useState(false);
   const [open, setOpen] = useState(false);
-
+  const [search, setSearch] = useState();
   const options = {
     filename: print,
     resolution: 3,
@@ -135,6 +135,18 @@ const Write = () => {
     .filter((data) => {
       if (data.SENT == "Wręczono zaproszenie") return data;
     })
+    .filter((data) => {
+      if (search == null) return data;
+      else if (
+        data.NAME.toLowerCase().includes(search.toLowerCase()) ||
+        data.GUEST
+          .toLowerCase()
+          .includes(search.toLowerCase()) 
+     
+      ) {
+        return data;
+      }
+    })
     .map((data) => {
       return (
         <Card sx={{ m: 0.5 }} variant="outlined">
@@ -153,10 +165,32 @@ const Write = () => {
         </Card>
       );
     });
+
+    const searchSpace = (event) => {
+      let keyword = event.target.value;
+      setSearch(keyword)
+      ;
+    };
+
   const niewreczono = info
     .filter((data) => {
       if (data.SENT !== "Wręczono zaproszenie") return data;
     })
+ 
+  
+    .filter((data) => {
+      if (search == null) return data;
+      else if (
+        data.NAME.toLowerCase().includes(search.toLowerCase()) ||
+        data.GUEST
+          .toLowerCase()
+          .includes(search.toLowerCase()) 
+     
+      ) {
+        return data;
+      }
+    })
+    
     .map((data) => {
       return (
         <Card sx={{ m: 4 }} variant="">
@@ -209,6 +243,12 @@ const Write = () => {
           Liczba niewręczonych zaproszeń: {niewreczono.length}
           <hr />
         </div>
+        <input
+                className="input"
+                type="text"
+                placeholder="Wyszukaj"
+                onChange={(e) => searchSpace(e)}
+              />
         <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
           {niewreczono}
         </Box>

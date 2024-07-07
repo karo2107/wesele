@@ -64,7 +64,7 @@ const Write = () => {
   const [description, setDescription] = React.useState("");
   const [importance, setImportance] = React.useState("");
   const [uid, setUid] = React.useState("");
-
+  const [search, setSearch] = React.useState("");
   const login = () => {
     localStorage.setItem("pass", pass);
     window.location.reload(false);
@@ -114,7 +114,27 @@ const Write = () => {
    
     
   };
-  const items = info.map((data) => {
+
+  const searchSpace = (event) => {
+    let keyword = event.target.value;
+    setSearch(keyword)
+    ;
+  };
+
+  const items = info.filter((data) => {
+    if (search == null) return data;
+    else if (
+      data.TASK.toLowerCase().includes(search.toLowerCase()) ||
+      data.DESCRIPTION
+        .toLowerCase()
+        .includes(search.toLowerCase()) 
+   
+    ) {
+      return data;
+    }
+  })
+  
+  .map((data) => {
     return (
       <Card sx={{ display: 'flex', m: 2 }} variant="outlined">
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -182,6 +202,15 @@ const Write = () => {
             </Button>
           </Card>
           <hr />
+        </div>
+        <div>
+          Wyszukaj:
+          <input
+               
+                type="text"
+                placeholder="Wyszukaj "
+                onChange={(e) => searchSpace(e)}
+              />
         </div>
         <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
           {items}

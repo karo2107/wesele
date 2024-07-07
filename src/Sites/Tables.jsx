@@ -72,6 +72,7 @@ const Write = () => {
   const [obecnosctowarzysza, setObecnosctowarzysza] = React.useState(false);
   const [currentTable, setCurrentTable] = useState("1");
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState();
   const theme = createTheme({
     palette: {
       primary: {
@@ -122,6 +123,11 @@ const Write = () => {
         });
       });
   };
+  const searchSpace = (event) => {
+    let keyword = event.target.value;
+    setSearch(keyword)
+    ;
+  };
   useEffect(() => {
     setTimeout(() => {
       Fetchdata();
@@ -152,6 +158,18 @@ const Write = () => {
   
 
   const items = info
+  .filter((data) => {
+    if (search == null) return data;
+    else if (
+      data.NAME.toLowerCase().includes(search.toLowerCase()) ||
+      data.GUEST
+        .toLowerCase()
+        .includes(search.toLowerCase()) 
+   
+    ) {
+      return data;
+    }
+  })
     .map((data) => {
       return (
         <Card sx={{ m: 0.5 }} variant="outlined">
@@ -331,6 +349,12 @@ const Write = () => {
         <hr />
         Lista wszystkich gości
           <br/>
+          <input
+                className="input"
+                type="text"
+                placeholder="Wyszukaj"
+                onChange={(e) => searchSpace(e)}
+              />
         <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
           {items}
         </Box>
