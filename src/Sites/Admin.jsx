@@ -15,7 +15,7 @@ import "firebase/database";
 import {
   doc,
   setDoc,
-  getDoc,
+  updateDoc,
   deleteDoc,
   collectionRef,
 } from "firebase/firestore";
@@ -114,10 +114,10 @@ const Write = () => {
 
   const updateDATA = async () => {
     const ref = doc(db, "goscie", id);
-    await setDoc(
+    await updateDoc(
       ref,
       {
-        ID: id,
+        
         NAME: name,
         OBECNOSC: obecnosc,
         GUEST: guest,
