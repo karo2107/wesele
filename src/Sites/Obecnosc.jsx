@@ -14,6 +14,7 @@ import { SettingsInputAntenna } from "@mui/icons-material";
 import Alert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Nav from "./nav";
+import NavAdmin from "./NavAdmin"
 const options = [
   "Bez dodtakowych wymagań",
   "Dieta wegetariańska",

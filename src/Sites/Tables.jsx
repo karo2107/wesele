@@ -9,20 +9,15 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CloseIcon from '@mui/icons-material/Close';
 import "firebase/compat/firestore";
 import "firebase/storage";
 import "firebase/database";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import CardContent from "@mui/material/CardContent";
-import { CardActionArea } from "@mui/material";
-
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import {
   doc,
   setDoc,
-  getDoc,
+  updateDoc,
   deleteDoc,
   collectionRef,
 } from "firebase/firestore";
@@ -35,7 +30,25 @@ import page2 from "../GraphicAssets/page2.svg";
 import page1ang from "../GraphicAssets/page1you.svg";
 import page2ang from "../GraphicAssets/4ang.png";
 import { VerticalAlignCenter } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
 
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import { red, green } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Alert from "@mui/material/Alert";
+import NavAdmin from "./NavAdmin"
+import Snackbar from '@mui/material/Snackbar';
 const Write = () => {
   const [info, setInfo] = useState([]);
   const [name, setName] = React.useState("");
@@ -53,18 +66,43 @@ const Write = () => {
   // const [loggedin, setLoggedin] = useState();
   const [pass, setPass] = useState();
   const [print, setPrint] = useState();
-  const [tables, setTables] = useState();
+  const [sent, setSent] = useState();
+  const [guests, setGuests] = useState();
   const [table, setTable] = useState();
-
-  const options = {
-    filename: print,
-    resolution: 3,
-    page: {
-      // margin: 20,
-      format: "A5",
+  const [obecnosctowarzysza, setObecnosctowarzysza] = React.useState(false);
+  const [currentTable, setCurrentTable] = useState("1");
+  const [open, setOpen] = useState(false);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#825b07",
+        main: "#825b07",
+        dark: "#825b07",
+        contrastText: "#000",
+      },
+      secondary: {
+        light: "#022911",
+        main: "#022911",
+        dark: "#022911",
+        contrastText: "#fff",
+      },
+      third: {
+        light: "#000000",
+        main: "#000000",
+        dark: "#000000",
+        contrastText: "#000000",
+      },
     },
-  };
-
+    shadows: ["none"],
+    typography: {
+      fontFamily: ['Italianno'].join(","),
+      textTransform: "none",
+      button: {
+        textTransform: "none",
+      },
+    },
+  });
+ 
   const login = () => {
     localStorage.setItem("pass", pass);
     window.location.reload(false);
@@ -73,7 +111,7 @@ const Write = () => {
   const Fetchdata = async () => {
     await db
       .collection("goscie")
-      .orderBy("TABLE", "desc")
+      .orderBy('TABLE')
       .get()
       .then((querySnapshot) => {
         // Loop through the data and store
@@ -89,150 +127,219 @@ const Write = () => {
       Fetchdata();
     }, 1); //miliseconds
   }, []);
- 
-  const updateDATA = async () => {
-    const ref = doc(db, "goscie", id);
-    await setDoc(
-      ref,
-      {
-        ID: id,
-        TABLE:table
-      },
-      { merge: true }
-    );
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
 
-    window.location.reload(false);
+    setOpen(false);
   };
 
-  const createDATA = async () => {
-    const ref = doc(db, "weddingdata", id);
-    await setDoc(ref, {
-      ID: id,
-      NAME: name,
+  const updateDATA = async (a, b) => {
     
+    const ref = doc(db, "goscie", a);
+    await updateDoc(ref, {
+      TABLE: b,
     });
-    window.location.reload(false);
+    console.log(ref, a, b);
+    setOpen(true);
+   
+    
   };
-  const deleteDATA = async () => {
-    await deleteDoc(doc(db, "goscie", id));
-    window.location.reload(false);
-  };
-
-  const getTargetElement = () => document.getElementById(print);
-
-  const downloadPdf = () => {
-    generatePDF(getTargetElement, options);
-  };
-
-  function Dlpdf({ person }) {
-    generatePDF(document.getElementById(person), options);
-  }
  
-  var res = info.sort((a, b) => b.age-a.age)
 
   
- 
-  const notassigned = info.map(
-    (data) => {
-     
+
+  const items = info
+    .map((data) => {
       return (
-        <div id={data.ID}>
-          <Card variant="outlined">
-            <Typography component="h5" variant="h5" align="center">
-              {data.NAME},{data.GUEST}
-            </Typography>{" "}
-            <FormControl fullWidth>
-              <InputLabel id={data.ID}>Stół nr {data.TABLE}</InputLabel>
-              <Select
-              onClick={(e) => setId(data.ID)}
-                labelId={data.ID}
-                id={data.ID}
-                //value={}
-                label="Przydziel"
-                //onChange={handleChange}
-              >
-                <MenuItem onClick={(e) => setTable(1)} value={1}>1</MenuItem>
-                <MenuItem onClick={(e) => setTable(2) } value={2}>2</MenuItem>
-                <MenuItem onClick={(e) => setTable(3) } value={3}>3</MenuItem>
-                <MenuItem onClick={(e) => setTable(4)} value={4}>4</MenuItem>
-                <MenuItem onClick={(e) => setTable(5) } value={5}>5</MenuItem>
-                <MenuItem onClick={(e) => setTable(6) } value={6}>6</MenuItem>
-                <MenuItem onClick={(e) => setTable(7)} value={7}>7</MenuItem>
-                <MenuItem onClick={(e) => setTable(8) } value={8}>8</MenuItem>
-                <MenuItem onClick={(e) => setTable(9) } value={9}>9</MenuItem>
-                <MenuItem onClick={(e) => setTable(10)} value={10}>10</MenuItem>
-                <MenuItem onClick={(e) => setTable(11) } value={11}>11</MenuItem>
-                <MenuItem onClick={(e) => setTable(12) } value={12}>12</MenuItem>
-              </Select>
-            </FormControl>
-            <Button onClick={(e) => updateDATA(data.ID)}>
-                Zapisz
-            </Button>
-          </Card>
-          <br />
-        </div>
+        <Card sx={{ m: 0.5 }} variant="outlined">
+          <Typography color="" align="left">
+            {data.NAME + ", osoba towarzysząca: " + data.GUEST}<br/>Obecność: {data.OBECNOSC}
+            <br />
+            Numer stolika: {data.TABLE}
+          </Typography>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "1")} >
+          1
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "2")} >
+          2
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "3")} >
+          3
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 4)} >
+          4
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 5)} >
+          5
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 6)} >
+          6
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 7)} >
+          7
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 8)} >
+          8
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 9)} >
+          9
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 10)} >
+          10
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 11)} >
+          11
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 12)} >
+          12
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 13)} >
+          13
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 14)} >
+          14
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 15)} >
+          15
+          </Button>
+         
+        </Card>
       );
-    }
-    //   }
-  );
-  {
-  }
+    });
+
+    const itemstoshow = info
+    .filter((data) => {
+      if (data.TABLE == currentTable) return data;
+    })
+    .map((data) => {
+      return (
+        <Card sx={{ m: 3 }} variant="">
+          <Typography component="h5"
+              variant="h5" color="" align="center">
+           Gość: {data.NAME + ", osoba towarzysząca: " + data.GUEST} / 
+            Obecność: {data.OBECNOSC} / Zmień przydzielony stolik:
+            <br />
+          
+          </Typography>
+          
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "1")} >
+          1
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "2")} >
+          2
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "3")} >
+          3
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 4)} >
+          4
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 5)} >
+          5
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 6)} >
+          6
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 7)} >
+          7
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 8)} >
+          8
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 9)} >
+          9
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 10)} >
+          10
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 11)} >
+          11
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 12)} >
+          12
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 13)} >
+          13
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 14)} >
+          14
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 15)} >
+          15
+          </Button>
+        
+        </Card>
+      );
+    });
   if (loggedin == "Sylwester2024") {
     return (
-      <Container>
-        <Grid
-          container
-          //   spacing={0}
-          //   direction="column"
-          //   alignItems="center"
-          //   justifyContent="center"
-          sx={{ minHeight: "100vh" }}
+      <div>
+        <NavAdmin/>
+        <div>
+        <Snackbar
+  open={open}
+  autoHideDuration={1000}
+  message="Wprowadzono zmiany"
+  onClose={handleClose}
+  
+>
+<Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
         >
-          <Grid xs={12} md={6}>
-            <Grid
-              container
-              spacing={2}
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-              sx={{ minHeight: "100vh" }}
+         Wprowadzono zmiany!
+        </Alert>
+        </Snackbar>
+          <hr />
+          Wybierz stolik do podglądu
+          <br/>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(1)} >
+          1
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(2)} >
+          2
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(3)} >
+          3
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(4)} >
+          4
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(5)} >
+          5
+          </Button>
+          <hr />
+       
+        </div>
+        <Box bgcolor="primary.main"   sx={{ maxWidth: "lg"  }} display="block" m="auto">
+          <Card>
+          <Typography
+              align="justify"
+              sx={{ fontStyle: "italic", color: "" }}
+              component="h6"
+              variant="h6"
             >
-              {/* <div>Ilosc Gosci: {2 * info.length - 7}</div> */}
-              <Typography component="h4" variant="h4" align="center">
-                <br />
-                <br />
-                Lista Gości
-                <br />
-                <br />
-              </Typography>
-              <Box sx={{ maxWidth: "md" }}>
-                <Card variant="outlined">{notassigned}</Card>
-              </Box>
-            </Grid>
-          </Grid>
-          <Grid xs={12} md={6}>
-            <Grid
-              container
-              spacing={4}
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-              sx={{ minHeight: "100vh" }}
-            >
-              <Typography component="h4" variant="h4" align="center">
-                Lista stolików
-                <br />
-                <br />
-         
-             </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Container>
+              Aktulanie wybrany stolik: {currentTable}
+             </Typography></Card>
+          {itemstoshow}
+        </Box>
+        <hr />
+        Lista wszystkich gości
+          <br/>
+        <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
+          {items}
+        </Box>
+      </div>
     );
   } else
     return (
       <Container>
+
         <Card>
           <input
             type="password"

@@ -128,12 +128,11 @@ const Post = () => {
     e.preventDefault();
     const ref = doc(db, "goscie", a);
     
-    await setDoc(
+    await updateDoc(
       ref,
       {
-        // ID: id,
-        ID: a,
-       NAME: name,
+       
+     
         OBECNOSC: obecnosc,
         GUEST: guest,
         GUESTOBECNOSC: guestobecnosc,

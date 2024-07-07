@@ -45,7 +45,7 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Alert from "@mui/material/Alert";
-
+import NavAdmin from "./NavAdmin"
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -382,6 +382,7 @@ const [expanded, setExpanded] = React.useState(false);
     return (
       <Box sx={{ justifyContent: 'center', alignItems: 'center'  }}>
         <div>
+        <NavAdmin/>
           <div>Ilosc Gosci: {2 * info.length - 7}</div>
          
           <hr />

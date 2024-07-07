@@ -29,7 +29,7 @@ import page1ang from "../GraphicAssets/page1you.svg";
 import page2ang from "../GraphicAssets/4ang.png";
 import { VerticalAlignCenter } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
-
+import NavAdmin from "./NavAdmin"
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -283,10 +283,10 @@ const [expanded, setExpanded] = React.useState(false);
                   <h2>Wprowadz zmiany i zapisz.</h2>
                   <br />
                   <br />
-                  Imię i nazwisko gościa
+                  Imię i nazwisko gościa.
                   <TextField
                     fullWidth
-                    placeholder={name}
+                    placeholder='imię i nazwisko'
                     onChange={(e) => setName(e.target.value)}
                   />
                   <br />
@@ -505,6 +505,7 @@ const [expanded, setExpanded] = React.useState(false);
   if (loggedin == "Sylwester2024") {
     return (
       <div>
+        <NavAdmin/>
         <div>
           <div>Ilosc Gosci: {2 * info.length - 7}</div>
           <Card>
