@@ -23,6 +23,7 @@ import Karta from "./Sites/Karta";
 import Admin from "./Sites/Admin";
 import Tables from "./Sites/Tables.jsx";
 import Wyslane from "./Sites/Wyslane.jsx";
+import Zadania from "./Sites/Todo.jsx";
 function Copyright() {
   return (
     <Typography variant="body2" color="white" align="center">
@@ -151,6 +152,7 @@ export default function App() {
                 <Route path={`/Zaproszenia`} element={<Zaproszenia />} />
                 <Route path={`/Admin`} element={<Admin />} />
                 <Route path={`/Wyslane`} element={<Wyslane />} />
+                <Route path={`/Zadania`} element={<Zadania />} />
                 {/* <Route path={`${a}/:any `} element={<LandingPage />} /> */}
                 <Route path={`${a}`} element={<Home />} />
                 <Route path={`/:any `} element={<Home />} />
