@@ -388,6 +388,11 @@ const [expanded, setExpanded] = React.useState(false);
           <Typography align="center">
             Zaproszenie: {data.PRZEDROSTEK}, {data.INVITE}
           </Typography>
+          <br/>
+          <Typography align="center">
+            Link:  
+            <a href={"https://weselekarolinyikuby.info/"+data.ID} target="_blank" rel="noreferrer">https://weselekarolinyikuby.info/{data.ID}</a>
+          </Typography>
           <hr />
         </Grid>
       </Grid>
