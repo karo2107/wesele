@@ -24,6 +24,9 @@ import Admin from "./Sites/Admin";
 import Tables from "./Sites/Tables.jsx";
 import Wyslane from "./Sites/Wyslane.jsx";
 import Zadania from "./Sites/Todo.jsx";
+import Zakwaterowanie from "./Sites/Zakwaterowanie.jsx";
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="white" align="center">
@@ -151,6 +154,7 @@ export default function App() {
                 <Route path="/:Zaproszenie" element={<Zaproszenie/>} />
                 <Route path={`/Zaproszenia`} element={<Zaproszenia />} />
                 <Route path={`/Admin`} element={<Admin />} />
+                <Route path={`/Zakwaterowanie`} element={<Zakwaterowanie />} />
                 <Route path={`/Wyslane`} element={<Wyslane />} />
                 <Route path={`/Zadania`} element={<Zadania />} />
                 {/* <Route path={`${a}/:any `} element={<LandingPage />} /> */}
