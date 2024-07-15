@@ -1,394 +1,316 @@
-
-import React, { setState } from "react";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
+import db from "../firebase.config";
+import React, { useState, useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Autocomplete from "@mui/material/Autocomplete";
-import { SettingsInputAntenna } from "@mui/icons-material";
-import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Nav from "./nav";
+import CloseIcon from '@mui/icons-material/Close';
+import "firebase/compat/firestore";
+import "firebase/storage";
+import "firebase/database";
+import {
+  doc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+  collectionRef,
+} from "firebase/firestore";
+import QRCode from "react-qr-code";
+import generatePDF, { Options, Resolution } from "react-to-pdf";
+import page1cie from "../GraphicAssets/page1cie.svg";
+import page1ciebez from "../GraphicAssets/page1bez.svg";
+import page1was from "../GraphicAssets/page1was.svg";
+import page2 from "../GraphicAssets/page2.svg";
+import page1ang from "../GraphicAssets/page1you.svg";
+import page2ang from "../GraphicAssets/4ang.png";
+import { VerticalAlignCenter } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
+
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import { red, green } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Alert from "@mui/material/Alert";
 import NavAdmin from "./NavAdmin"
-const options = [
-  "Bez dodtakowych wymagań",
-  "Dieta wegetariańska",
-  "Dieta wegańska",
-  "Uczulenie na laktozę",
-  "Uczulenie na gluten",
-];
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: "#825b07",
-      main: "#825b07",
-      dark: "#825b07",
-      contrastText: "#000",
+import Snackbar from '@mui/material/Snackbar';
+const Write = () => {
+  const [info, setInfo] = useState([]);
+  const [name, setName] = React.useState("");
+ 
+  
+  const [guest, setGuest] = React.useState("");
+  const [food, setFood] = React.useState("");
+  const [foodguest, setFoodguest] = React.useState("");
+  const [invite, setInvite] = React.useState("");
+  const [id, setId] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [msg, setMsg] = React.useState("");
+  const [przedrostek, setPrzedrostek] = React.useState("");
+  // const [loggedin, setLoggedin] = useState();
+  const [pass, setPass] = useState();
+  const [print, setPrint] = useState();
+  const [sent, setSent] = useState();
+  const [guests, setGuests] = useState();
+
+  const [currentOBECNOSC, setCurrentOBECNOSC] = useState('Niepotrzebne');
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState();
+  const [obecnosc, setObecnosc] = useState();
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        light: "#825b07",
+        main: "#825b07",
+        dark: "#825b07",
+        contrastText: "#000",
+      },
+      secondary: {
+        light: "#022911",
+        main: "#022911",
+        dark: "#022911",
+        contrastText: "#fff",
+      },
+      third: {
+        light: "#000000",
+        main: "#000000",
+        dark: "#000000",
+        contrastText: "#000000",
+      },
     },
-    secondary: {
-      light: "#022911",
-      main: "#022911",
-      dark: "#022911",
-      contrastText: "#fff",
-    },
-    third: {
-      light: "#000000",
-      main: "#000000",
-      dark: "#000000",
-      contrastText: "#000000",
-    },
-  },
-  shadows: ["none"],
-  typography: {
-    fontFamily: ['Italianno'].join(","),
-    textTransform: "none",
-    button: {
+    shadows: ["none"],
+    typography: {
+      fontFamily: ['Italianno'].join(","),
       textTransform: "none",
+      button: {
+        textTransform: "none",
+      },
     },
-  },
-});
-export default function Obecnosc() {
-  const [wyslanoWiadomosc, setwyslanoWiadomosc] = React.useState(false);
-  const [validated, setValidated] = React.useState(false);
-  const [extra, setExtra] = React.useState(0);
-  const Wyslano = () => {
+  });
+ 
+  const login = () => {
+    localStorage.setItem("pass", pass);
+    window.location.reload(false);
+  };
+  let loggedin = localStorage.getItem("pass");
+  const Fetchdata = async () => {
+    await db
+      .collection("goscie")
+      .orderBy('OBECNOSC')
+      .get()
+      .then((querySnapshot) => {
+        // Loop through the data and store
+        // it in array to display
+        querySnapshot.forEach((element) => {
+          var data = element.data();
+          setInfo((arr) => [...arr, data]);
+        });
+      });
+  };
+  const searchSpace = (event) => {
+    let keyword = event.target.value;
+    setSearch(keyword)
+    ;
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      Fetchdata();
+    }, 1); //miliseconds
+  }, []);
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const updateDATA = async (a, b) => {
+    
+    const ref = doc(db, "goscie", a);
+    await updateDoc(ref, {
+      OBECNOSC: b,
+    });
+    console.log(ref, a, b);
+    setOpen(true);
+   
+    
+  };
+ 
+
+  
+
+  const items = info
+  
+  .filter((data) => {
+    if (search == null) return data;
+    else if (
+      data.NAME.toLowerCase().includes(search.toLowerCase()) ||
+      data.GUEST
+        .toLowerCase()
+        .includes(search.toLowerCase()) 
+   
+    ) {
+      return data;
+    }
+  })
+    .map((data) => {
+      return (
+        <Card sx={{ m: 0.5 }} variant="outlined">
+          <Typography color="" align="left">
+            {data.NAME + ", osoba towarzysząca: " + data.GUEST}<br/>
+            <br />
+            Obecnosc: {data.OBECNOSC}
+          </Typography>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Tak")} >
+          Tak
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie")} >
+          Nie
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie wiem")} >
+          Nie wiem
+          </Button>
+       
+        
+        
+         
+        </Card>
+      );
+    });
+
+    const itemstoshow = info
+    
+    
+    .filter((data) => {
+      if (data.OBECNOSC == currentOBECNOSC) return data;
+    })
+    .map((data, key) => {
+      return (
+        <Card key={key} sx={{ m: 3 }} variant="">
+          
+          Nr : {key+1}
+          <Typography component="h6"
+              variant="h6" color="" align="center">
+           Gość: {data.NAME + ", osoba towarzysząca: " + data.GUEST} / 
+             Zmień obecnosc:
+            <br />
+          
+          </Typography>
+          
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Tak")} >
+          Tak
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie")} >
+          Nie
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie wiem")} >
+          Nie wiem
+          </Button>
+         
+         
+        
+        </Card>
+      );
+    });
+  if (loggedin == "Sylwester2024") {
     return (
       <div>
-        {wyslanoWiadomosc ? (
-          <Alert
-          //sx
-          // action={
-          //   <Button onClick={refreshPage} color="inherit" size="small">
-          //     X
-          //   </Button>
-          // }
-          >
-            Wiadomość wysłana!
-          </Alert>
-        ) : null}
+        <NavAdmin/>
+        <div>
+        <Snackbar
+  open={open}
+  autoHideDuration={1000}
+  message="Wprowadzono zmiany"
+  onClose={handleClose}
+  
+>
+<Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+         Wprowadzono zmiany!
+        </Alert>
+        </Snackbar>
+          <hr />
+          Wybierz obecnosc do podglądu: 
+          <br/>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentOBECNOSC("Tak")} >
+          Tak
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentOBECNOSC("Nie")} >
+          Nie
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentOBECNOSC("Nie wiem")} >
+         Nie wiem
+          </Button>
+          
+          <hr />
+       
+        </div>
+        <Box bgcolor=""   sx={{ maxWidth: "lg"  }} display="block" m="auto">
+          <Card>
+          <Typography
+              align="justify"
+              sx={{ fontStyle: "italic", color: "" }}
+              component="h6"
+              variant="h6"
+            >
+              Obecnosc: {currentOBECNOSC}
+             </Typography></Card>
+          {itemstoshow}
+        </Box>
+        <hr />
+        <br/><br/><br/><br/><br/><br/>
+        Lista wszystkich gości
+          <br/>
+          <input
+                className="input"
+                type="text"
+                placeholder="Wyszukaj"
+                onChange={(e) => searchSpace(e)}
+              />
+        <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
+          {items}
+        </Box>
       </div>
     );
-  };
+  } else
+    return (
+      <Container>
 
-  const Extra = () => {
-    if (extra === 1)
-      return (
-        <Box
-          sx={{
-            marginTop: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            py: 5,
-          }}
-        >
-           <Typography component="h1" variant="h3">
-            Pojawie się z osobą towarzyszącą
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={options}
-                  sx={{ width: 300 }}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Wymagania dietetyczne" />
-                  )}
-                />
-              </Grid>
-              <Grid item xs={12} sm={12}>
-              <Typography component="h1" variant="h3">
-            Dane osoby towarzyszącej
-          </Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Grid item xs={12} sm={12}>
-                  <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={options}
-                    sx={{ width: 300 }}
-                    renderInput={(params) => (
-                      <TextField {...params} label="Wymagania dietetyczne" />
-                    )}
-                  />
-                  {Extra}
-                </Grid>
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              <Typography component="h4" variant="h4">Wyslij</Typography>
-            </Button>
-            <Wyslano />
-          </Box>
-        </Box>
-      );
-    else if (extra === 2)
-      return (
-        <Box
-          sx={{
-            marginTop: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            py: 5,
-          }}
-        >
-          <Typography component="h1" variant="h3">
-          Pojawie się bez osoby towarzyszącej
-          </Typography>
-
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <Autocomplete
-                  disablePortal
-                  id="combo-box-demo"
-                  options={options}
-                  sx={{ width: 300 }}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Wymagania dietetyczne" />
-                  )}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              <Typography component="h4" variant="h4">Wyslij</Typography>
-            </Button>
-          </Box>
-        </Box>
-      );
-      else if (extra === 3)
-      return (
-        <Box
-          sx={{
-            marginTop: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            py: 5,
-          }}
-        >
-          <Typography component="h1" variant="h3">
-            Nie pojawie się
-          </Typography>
-
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              <Typography component="h4" variant="h4">Wyslij</Typography>
-            </Button>
-          </Box>
-        </Box>
-      );
-      else if (extra === 0)
-      return (
-        <Box
-          sx={{
-            marginTop: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            py: 25,
-          }}
-        >
-       </Box>
-      );
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
-  };
-
-  return (
-    <div>
- <Nav />
-    <Container component="main" maxWidth="lg">
-      <br/>
-      <Box  sx={{py:2,px:3, backgroundColor:'#ffffffde', borderRadius:15}}>
-      <CssBaseline />
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={12}>
-          <Typography component="h1" variant="h3">
-            <br/><br/>
-            Potwierdzenie obecności<br/>
-            W razie zmiany planów prosimy o kontakt
-             <hr />
-          </Typography>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Button fullWidth variant="outlined" onClick={() => setExtra(1)}>
-            {" "}<Typography component="h4" variant="h4">
-            Przyjdę z osoba towarzyszącą
-            </Typography>
+        <Card>
+          <input
+            type="password"
+            placeholder="haslo"
+            onChange={(e) => setPass(e.target.value)}
+          />
+          <Button className="red" onClick={login}>
+            Zaloguj
           </Button>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Button fullWidth variant="outlined" onClick={() => setExtra(2)}>
-            {" "}<Typography component="h4" variant="h4">
-            Przyjdę bez osoby towarzyszącej</Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Button fullWidth variant="outlined" onClick={() => setExtra(3)}>
-            {" "}<Typography component="h4" variant="h4">
-            Nie pojawie się</Typography>
-          </Button>
-        </Grid>
-      </Grid>
-      <Extra /></Box>
-    </Container></div>
-  );
-}
+        </Card>
+      </Container>
+    );
+};
+
+export default Write;
