@@ -322,7 +322,7 @@ return
               <TextField
                 fullWidth
                 required
-                placeholder={"Preferencje dietetyczne :" + ` ${data.NAME}`}
+                placeholder={"Alergie pokarmowe:" + ` ${data.NAME}`}
                 onChange={(e) => setFood(e.target.value)}
               />
               <br />
@@ -330,7 +330,7 @@ return
               <TextField
                 fullWidth
                 required
-                placeholder={"Preferencje dietetyczne :" + `  ${data.GUEST}`}
+                placeholder={"Alergie pokarmowe:" + `  ${data.GUEST}`}
                 onChange={(e) => setFoodguest(e.target.value)}
               />
               <br />
@@ -823,7 +823,7 @@ return
               <TextField
                 fullWidth
                 required
-                placeholder={"Preferencje dietetyczne :" + ` ${data.NAME}`}
+                placeholder={"Alergie pokarmowe:" + ` ${data.NAME}`}
                 onChange={(e) => setFood(e.target.value)}
               />
               <br />

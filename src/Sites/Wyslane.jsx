@@ -172,12 +172,10 @@ const Write = () => {
       ;
     };
 
-  const niewreczono = info
+    const bledne = info
     .filter((data) => {
-      if (data.SENT !== "Wręczono zaproszenie") return data;
+      if (data.SENT == "Błędne zaproszenie") return data;
     })
- 
-  
     .filter((data) => {
       if (search == null) return data;
       else if (
@@ -190,7 +188,49 @@ const Write = () => {
         return data;
       }
     })
+    .map((data) => {
+      return (
+        <Card sx={{ m: 4 }} variant="">
+          <Typography color="blue" align="left">
+            {data.NAME + ", osoba towarzysząca: " + data.GUEST}
+            <br />
+            {data.SENT}
+          </Typography>
+
+          <Button variant="outlined" size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value,"Wręczono zaproszenie")} >
+            Wręczono zaproszenie 
+          </Button>
+          <Button variant="outlined" size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value,"Błędne zaproszenie")} >
+          Błędne zaproszenie
+          </Button>
+          <Button variant="outlined" size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value,"Nie wydrukowano")} >
+          Nie wydrukowano
+          </Button>
+          <Button variant="outlined" size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value,"Nie wręczono")} >
+          Nie wręczono
+          </Button>
+         
+        
+        </Card>
+      );
+    });
     
+  const niewreczono = info
+    .filter((data) => {
+      if (data.SENT !== "Wręczono zaproszenie") return data;
+    })
+    .filter((data) => {
+      if (search == null) return data;
+      else if (
+        data.NAME.toLowerCase().includes(search.toLowerCase()) ||
+        data.GUEST
+          .toLowerCase()
+          .includes(search.toLowerCase()) 
+     
+      ) {
+        return data;
+      }
+    })
     .map((data) => {
       return (
         <Card sx={{ m: 4 }} variant="">
@@ -209,7 +249,9 @@ const Write = () => {
           <Button variant="outlined" size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value,"Nie wydrukowano")} >
           Nie wydrukowano
           </Button>
-         
+          <Button variant="outlined" size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value,"Nie wręczono")} >
+          Nie wręczono
+          </Button>
          
         
         </Card>
@@ -249,10 +291,17 @@ const Write = () => {
                 placeholder="Wyszukaj"
                 onChange={(e) => searchSpace(e)}
               />
+              <br/><br/><br/>
+               <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
+                 Błedne zaproszenia
+          {bledne}
+        </Box>
         <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
+        Niewręczone zaproszenia
           {niewreczono}
         </Box>
         <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
+        Wręczone zaproszenia
           {wreczono}
         </Box>
       </div>
