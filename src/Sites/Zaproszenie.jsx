@@ -40,11 +40,21 @@ import Alert from "@mui/material/Alert";
 
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
-const a = splitString[1];
+const b = splitString[1];
+const a = b.replace(')','')
+
+// if (splitString.slice(-1)==")")
+// {
+// return(
+//  setA(splitString.slice(0, -1)[1])
+// )
+// }
+// else{
+//   setA(splitString[1])
+// }
 
 const Post = () => {
   const [info, setInfo] = useState([]);
-
   const [obecnosc, setObecnosc] = React.useState("");
   const [obecnosctowarzysza, setObecnosctowarzysza] = React.useState("");
   const [guest, setGuest] = React.useState("");
@@ -61,6 +71,10 @@ const Post = () => {
   const [msg, setMsg] = React.useState("");
   const [przedrostek, setPrzedrostek] = React.useState("");
   const [wyslanoWiadomosc, setwyslanoWiadomosc] = React.useState(false);
+
+
+  
+  
 
   // const href = window.location.pathname;
   // const output = href.replace("/Zaproszenie/", "");
@@ -104,6 +118,8 @@ const Post = () => {
     );
   };
   useEffect(() => {
+if (a.slice(-1)==")")
+return
     const Fetchdata = async () => {
       await db
         .collection("goscie")
