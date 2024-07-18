@@ -69,7 +69,7 @@ const Write = () => {
   const [sent, setSent] = useState();
   const [guests, setGuests] = useState();
 
-  const [currentOBECNOSC, setCurrentOBECNOSC] = useState('Niepotrzebne');
+  const [currentOBECNOSC, setCurrentOBECNOSC] = useState('Tak');
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState();
   const [obecnosc, setObecnosc] = useState();

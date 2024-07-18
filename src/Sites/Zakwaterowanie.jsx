@@ -159,10 +159,10 @@ const Write = () => {
   
 
   const items = info
-  .filter((data) => {
-    if (data.OBECNOSC == 'Tak') return data;
+  // .filter((data) => {
+  //   if (data.OBECNOSC == 'Tak') return data;
    
-  })
+  // })
   .filter((data) => {
     if (search == null) return data;
     else if (
@@ -207,10 +207,10 @@ const Write = () => {
     });
 
     const itemstoshow = info
-    .filter((data) => {
-      if (data.OBECNOSC == 'Tak') return data;
+    // .filter((data) => {
+    //   if (data.OBECNOSC == 'Tak') return data;
      
-    })
+    // })
     .filter((data) => {
       if (data.ZAKWATEROWANIE == currentZAKWATEROWANIE) return data;
     })
