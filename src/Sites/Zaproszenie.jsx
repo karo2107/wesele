@@ -491,7 +491,7 @@ return
               <TextField
                 fullWidth
                 required
-                placeholder="Twoje preferencje dietetyczne"
+                placeholder="Twoje alergie pokarmowe"
                 onChange={(e) => setFood(e.target.value)}
               />
               <br />
