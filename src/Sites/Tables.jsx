@@ -10,7 +10,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import "firebase/compat/firestore";
 import "firebase/storage";
 import "firebase/database";
@@ -43,12 +43,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Alert from "@mui/material/Alert";
-import NavAdmin from "./NavAdmin"
-import Snackbar from '@mui/material/Snackbar';
+import NavAdmin from "./NavAdmin";
+import Snackbar from "@mui/material/Snackbar";
 const Write = () => {
   const [info, setInfo] = useState([]);
   const [name, setName] = React.useState("");
@@ -96,14 +98,14 @@ const Write = () => {
     },
     shadows: ["none"],
     typography: {
-      fontFamily: ['Italianno'].join(","),
+      fontFamily: ["Italianno"].join(","),
       textTransform: "none",
       button: {
         textTransform: "none",
       },
     },
   });
- 
+
   const login = () => {
     localStorage.setItem("pass", pass);
     window.location.reload(false);
@@ -112,7 +114,7 @@ const Write = () => {
   const Fetchdata = async () => {
     await db
       .collection("goscie")
-      .orderBy('TABLE')
+      .orderBy("TABLE")
       .get()
       .then((querySnapshot) => {
         // Loop through the data and store
@@ -125,17 +127,16 @@ const Write = () => {
   };
   const searchSpace = (event) => {
     let keyword = event.target.value;
-    setSearch(keyword)
-    ;
+    setSearch(keyword);
   };
   useEffect(() => {
     setTimeout(() => {
       Fetchdata();
     }, 1); //miliseconds
   }, []);
-  
+
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -143,218 +144,526 @@ const Write = () => {
   };
 
   const updateDATA = async (a, b) => {
-    
     const ref = doc(db, "goscie", a);
     await updateDoc(ref, {
       TABLE: b,
     });
     console.log(ref, a, b);
     setOpen(true);
-   
-    
   };
- 
-
-  
 
   const items = info
-  .filter((data) => {
-    if (search == null) return data;
-    else if (
-      data.NAME.toLowerCase().includes(search.toLowerCase()) ||
-      data.GUEST
-        .toLowerCase()
-        .includes(search.toLowerCase()) 
-   
-    ) {
-      return data;
-    }
-  })
+    .filter((data) => {
+      if (search == null) return data;
+      else if (
+        data.NAME.toLowerCase().includes(search.toLowerCase()) ||
+        data.GUEST.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return data;
+      }
+    })
     .map((data) => {
       return (
         <Card sx={{ m: 0.5 }} variant="outlined">
           <Typography color="" align="left">
-            {data.NAME + ", osoba towarzysząca: " + data.GUEST}<br/>Obecność: {data.OBECNOSC}
+            {data.NAME + ", osoba towarzysząca: " + data.GUEST}
+            <br />
+            Obecność: {data.OBECNOSC}
             <br />
             Numer stolika: {data.TABLE}
           </Typography>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "1")} >
-          1
+          <InputLabel id="">Zmień stolik</InputLabel>
+
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Table"
+          >
+           <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, "1")}
+          >
+            1
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "2")} >
-          2
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, "2")}
+          >
+            2
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "3")} >
-          3
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, "3")}
+          >
+            3
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 4)} >
-          4
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 4)}
+          >
+            4
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 5)} >
-          5
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 5)}
+          >
+            5
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 6)} >
-          6
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 6)}
+          >
+            6
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 7)} >
-          7
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 7)}
+          >
+            7
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 8)} >
-          8
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 8)}
+          >
+            8
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 9)} >
-          9
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 9)}
+          >
+            9
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 10)} >
-          10
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 10)}
+          >
+            10
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 11)} >
-          11
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 11)}
+          >
+            11
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 12)} >
-          12
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 12)}
+          >
+            12
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 13)} >
-          13
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 13)}
+          >
+            13
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 14)} >
-          14
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 14)}
+          >
+            14
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 15)} >
-          15
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 15)}
+          >
+            15
           </Button>
-         
+       
+
+          </Select>
         </Card>
       );
     });
 
-    const itemstoshow = info
+  const itemstoshow = info
     .filter((data) => {
       if (data.TABLE == currentTable) return data;
     })
     .map((data) => {
       return (
         <Card sx={{ m: 3 }} variant="">
-          <Typography component="h5"
-              variant="h5" color="" align="center">
-           Gość: {data.NAME + ", osoba towarzysząca: " + data.GUEST} / 
-            Obecność: {data.OBECNOSC} / Zmień przydzielony stolik:
+          <Typography component="h5" variant="h5" color="" align="center">
+            Gość: {data.NAME + ", osoba towarzysząca: " + data.GUEST} /
+            Obecność: {data.OBECNOSC} 
             <br />
-          
           </Typography>
-          
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "1")} >
-          1
+          <InputLabel id="">Zmień stolik</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Table"
+          >
+           <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, "1")}
+          >
+            1
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "2")} >
-          2
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, "2")}
+          >
+            2
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "3")} >
-          3
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, "3")}
+          >
+            3
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 4)} >
-          4
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 4)}
+          >
+            4
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 5)} >
-          5
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 5)}
+          >
+            5
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 6)} >
-          6
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 6)}
+          >
+            6
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 7)} >
-          7
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 7)}
+          >
+            7
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 8)} >
-          8
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 8)}
+          >
+            8
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 9)} >
-          9
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 9)}
+          >
+            9
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 10)} >
-          10
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 10)}
+          >
+            10
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 11)} >
-          11
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 11)}
+          >
+            11
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 12)} >
-          12
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 12)}
+          >
+            12
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 13)} >
-          13
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 13)}
+          >
+            13
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 14)} >
-          14
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            
+            onClick={(e) => updateDATA( data.ID, 14)}
+          >
+            14
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, 15)} >
-          15
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+             
+            onClick={(e) => updateDATA( data.ID, 15)}
+          >
+            15
           </Button>
-        
+       
+
+          </Select>
         </Card>
       );
     });
   if (loggedin == "Sylwester2024") {
     return (
       <div>
-        <NavAdmin/>
+        <NavAdmin />
         <div>
-        <Snackbar
-  open={open}
-  autoHideDuration={1000}
-  message="Wprowadzono zmiany"
-  onClose={handleClose}
-  
->
-<Alert
-          onClose={handleClose}
-          severity="success"
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-         Wprowadzono zmiany!
-        </Alert>
-        </Snackbar>
+          <Snackbar
+            open={open}
+            autoHideDuration={1000}
+            message="Wprowadzono zmiany"
+            onClose={handleClose}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              variant="filled"
+              sx={{ width: "100%" }}
+            >
+              Wprowadzono zmiany!
+            </Alert>
+          </Snackbar>
           <hr />
-          Wybierz stolik do podglądu
-          <br/>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(1)} >
-          1
+          <InputLabel id="demo-simple-select-label">Wybierz stolik do pokazania</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Wybierz stolik do pokazania"
+          >
+           <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            
+            onClick={(e) => setCurrentTable(1)}
+          >
+            1
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(2)} >
-          2
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            
+            onClick={(e) => setCurrentTable(2)}
+          >
+            2
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(3)} >
-          3
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 3)}
+          >
+            3
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(4)} >
-          4
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 4)}
+          >
+            4
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentTable(5)} >
-          5
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 5)}
+          >
+            5
           </Button>
-          <hr />
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 6)}
+          >
+            6
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 7)}
+          >
+            7
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 8)}
+          >
+            8
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 9)}
+          >
+            9
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 10)}
+          >
+            10
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 11)}
+          >
+            11
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 12)}
+          >
+            12
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 13)}
+          >
+            13
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable( 14)}
+          >
+            14
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentTable(  15)}
+          >
+            15
+          </Button>
        
+
+          </Select>
+      
+        
+         
+          <hr />
         </div>
-        <Box bgcolor="primary.main"   sx={{ maxWidth: "lg"  }} display="block" m="auto">
+        <Box
+          bgcolor="primary.main"
+          sx={{ maxWidth: "lg" }}
+          display="block"
+          m="auto"
+        >
           <Card>
-          <Typography
+            <Typography
               align="justify"
               sx={{ fontStyle: "italic", color: "" }}
               component="h6"
               variant="h6"
             >
               Aktulanie wybrany stolik: {currentTable}
-             </Typography></Card>
+            </Typography>
+          </Card>
           {itemstoshow}
         </Box>
         <hr />
         Lista wszystkich gości
-          <br/>
-          <input
-                className="input"
-                type="text"
-                placeholder="Wyszukaj"
-                onChange={(e) => searchSpace(e)}
-              />
+        <br />
+        <input
+          className="input"
+          type="text"
+          placeholder="Wyszukaj"
+          onChange={(e) => searchSpace(e)}
+        />
         <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
           {items}
         </Box>
@@ -363,7 +672,6 @@ const Write = () => {
   } else
     return (
       <Container>
-
         <Card>
           <input
             type="password"

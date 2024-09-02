@@ -69,7 +69,7 @@ const Write = () => {
   const [sent, setSent] = useState();
   const [guests, setGuests] = useState();
 
-  const [currentZAKWATEROWANIE, setCurrentZAKWATEROWANIE] = useState('Niepotrzebne');
+  const [currentZAKWATEROWANIE, setCurrentZAKWATEROWANIE] = useState('');
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState();
   const [zakwaterowanie, setZakwaterowanie] = useState();
@@ -183,6 +183,10 @@ const Write = () => {
             <br />
             Zakwaterowanie: {data.ZAKWATEROWANIE}
           </Typography>
+          
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie wiemy")} >
+          Nie wiemy
+          </Button>
           <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Niepotrzebne")} >
           Niepotrzebne
           </Button>
@@ -226,7 +230,9 @@ const Write = () => {
             <br />
           
           </Typography>
-          
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie wiemy")} >
+          Nie wiemy
+          </Button>
           <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Niepotrzebne")} >
           Niepotrzebne
           </Button>
@@ -281,10 +287,13 @@ const Write = () => {
           Dom w Dziewinie
           </Button>
           <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentZAKWATEROWANIE("Lokal zapasowy 1")} >
-          Lokal zapasowy 1
+         (Lokal zapasowy 1) Hotel pracowniczy
           </Button>
           <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentZAKWATEROWANIE("Lokal zapasowy 2")} >
-          Lokal zapasowy 2
+          (Lokal zapasowy 2) Hotel w centrum
+          </Button>
+          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentZAKWATEROWANIE("Nie wiemy")} >
+          Nie wiemy
           </Button>
           <hr />
        
