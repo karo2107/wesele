@@ -164,7 +164,8 @@ const Write = () => {
     })
     .map((data) => {
       return (
-        <Card sx={{ m: 0.5 }} variant="outlined">
+        <Card   sx={{ m: 0.5 }} variant="outlined">
+           
           <Typography color="" align="left">
             {data.NAME + ", osoba towarzysząca: " + data.GUEST}
             <br />
@@ -325,9 +326,10 @@ const Write = () => {
     .filter((data) => {
       if (data.TABLE == currentTable) return data;
     })
-    .map((data) => {
+    .map((data, key) => {
       return (
-        <Card sx={{ m: 3 }} variant="">
+        <Card key={key} sx={{ m: 3 }} variant="">
+          Nr : {key+1}
           <Typography component="h5" variant="h5" color="" align="center">
             Gość: {data.NAME + ", osoba towarzysząca: " + data.GUEST} /
             Obecność: {data.OBECNOSC} 

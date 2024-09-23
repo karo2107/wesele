@@ -24,6 +24,7 @@ import Admin from "./Sites/Admin";
 import Tables from "./Sites/Tables.jsx";
 import Wyslane from "./Sites/Wyslane.jsx";
 import Zadania from "./Sites/Todo.jsx";
+import Budget from "./Sites/Budget.jsx";
 import Zakwaterowanie from "./Sites/Zakwaterowanie.jsx";
 
 
@@ -149,6 +150,7 @@ export default function App() {
                 <Route path={`/Harmonogram`} element={<Harmonogram />} />
                 <Route path={`/Obecnosc`} element={<Obecnosc />} />
                 <Route path={`/Stoliki`} element={<Tables />} />
+                <Route path={`/Budzet`} element={<Budget />} />
                 <Route path={`/Informacje`} element={<Informacje />} />
                 <Route path={`/Menu`} element={<Karta />} />
                 <Route path="/:Zaproszenie" element={<Zaproszenie/>} />

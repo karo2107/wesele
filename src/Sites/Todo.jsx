@@ -160,11 +160,10 @@ const Write = () => {
           />
           <br /> 
            </Typography>
-           </CardContent>
+          
           
         
-        </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+        
         <Button variant="outlined" value={data.TASK} onClick={(e) => deleteDATA(e.target.value)}>
           Usuń zadanie
         </Button>
@@ -173,7 +172,9 @@ const Write = () => {
         <Button variant="outlined" value={data.TASK} onClick={(e) => updateDATA(e.target.value)}>
           Zapisz zmiany
         </Button>
+        </CardContent>
         </Box>
+        
       </Card>
     );
   });

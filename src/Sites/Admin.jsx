@@ -152,6 +152,7 @@ const Write = () => {
       PRZEDROSTEK: przedrostek,
       INVITE: invite,
       TABLE: "",
+      ZAKWATEROWANIE: "",
     });
     window.location.reload(false);
   };
