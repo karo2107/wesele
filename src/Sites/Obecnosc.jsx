@@ -10,7 +10,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import "firebase/compat/firestore";
 import "firebase/storage";
 import "firebase/database";
@@ -47,13 +47,16 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Alert from "@mui/material/Alert";
-import NavAdmin from "./NavAdmin"
-import Snackbar from '@mui/material/Snackbar';
+import NavAdmin from "./NavAdmin";
+import Snackbar from "@mui/material/Snackbar";
+
+
+
+
 const Write = () => {
   const [info, setInfo] = useState([]);
   const [name, setName] = React.useState("");
- 
-  
+const [downloadData, setdownloadData] = useState([]);
   const [guest, setGuest] = React.useState("");
   const [food, setFood] = React.useState("");
   const [foodguest, setFoodguest] = React.useState("");
@@ -69,11 +72,11 @@ const Write = () => {
   const [sent, setSent] = useState();
   const [guests, setGuests] = useState();
 
-  const [currentOBECNOSC, setCurrentOBECNOSC] = useState('Tak');
+  const [currentOBECNOSC, setCurrentOBECNOSC] = useState("");
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState();
   const [obecnosc, setObecnosc] = useState();
-
+  const [guestobecnosc, setGuestobecnosc] = useState();
   const theme = createTheme({
     palette: {
       primary: {
@@ -97,14 +100,16 @@ const Write = () => {
     },
     shadows: ["none"],
     typography: {
-      fontFamily: ['Italianno'].join(","),
+      fontFamily: ["Italianno"].join(","),
       textTransform: "none",
       button: {
         textTransform: "none",
       },
     },
   });
- 
+
+  
+
   const login = () => {
     localStorage.setItem("pass", pass);
     window.location.reload(false);
@@ -113,7 +118,7 @@ const Write = () => {
   const Fetchdata = async () => {
     await db
       .collection("goscie")
-      .orderBy('OBECNOSC')
+      .orderBy("OBECNOSC")
       .get()
       .then((querySnapshot) => {
         // Loop through the data and store
@@ -126,17 +131,16 @@ const Write = () => {
   };
   const searchSpace = (event) => {
     let keyword = event.target.value;
-    setSearch(keyword)
-    ;
+    setSearch(keyword);
   };
   useEffect(() => {
     setTimeout(() => {
       Fetchdata();
     }, 1); //miliseconds
   }, []);
-  
+
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -144,161 +148,287 @@ const Write = () => {
   };
 
   const updateDATA = async (a, b) => {
-    
     const ref = doc(db, "goscie", a);
     await updateDoc(ref, {
       OBECNOSC: b,
     });
     console.log(ref, a, b);
     setOpen(true);
-   
-    
   };
- 
-
-  
+  const updateDATAGuest = async (a, b) => {
+    const ref = doc(db, "goscie", a);
+    await updateDoc(ref, {
+      GUESTOBECNOSC: b,
+    });
+    console.log(ref, a, b);
+    setOpen(true);
+  };
+  const download = info
+  .map((data) => {
+    return (
+<div>
+   
+gość;{data.NAME};{data.OBECNOSC}
+<br/>
+osoba towarzysząca;{data.GUESTNAME};{data.GUESTOBECNOSC}
+<br/>
+      
+</div>
+  )});
 
   const items = info
-  
-  .filter((data) => {
-    if (search == null) return data;
-    else if (
-      data.NAME.toLowerCase().includes(search.toLowerCase()) ||
-      data.GUEST
-        .toLowerCase()
-        .includes(search.toLowerCase()) 
-   
-    ) {
-      return data;
-    }
-  })
+
+    .filter((data) => {
+      if (search == null) return data;
+      else if (
+        data.NAME.toLowerCase().includes(search.toLowerCase()) ||
+        data.GUEST.toLowerCase().includes(search.toLowerCase())
+      ) {
+        return data;
+      }
+    })
     .map((data) => {
       return (
         <Card sx={{ m: 0.5 }} variant="outlined">
           <Typography color="" align="left">
-            {data.NAME + ", osoba towarzysząca: " + data.GUEST}<br/>
+            {data.NAME}
+            <br />
             <br />
             Obecnosc: {data.OBECNOSC}
           </Typography>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Tak")} >
-          Tak
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATA(e.target.value, "Tak")}
+          >
+            Tak
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie")} >
-          Nie
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATA(e.target.value, "Nie")}
+          >
+            Nie
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie wiem")} >
-          Nie wiem
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATA(e.target.value, "Nie wiem")}
+          >
+            Nie wiem
           </Button>
-       
-        
-        
-         
+          <br />
+          <Typography color="" align="left">
+            {data.GUEST}
+            <br />
+            <br />
+            Obecnosc: {data.GUESTOBECNOSC}
+          </Typography>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATAGuest(e.target.value, "Tak")}
+          >
+            Tak
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATAGuest(e.target.value, "Nie")}
+          >
+            Nie
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATAGuest(e.target.value, "Nie wiem")}
+          >
+            Nie wiem
+          </Button>
         </Card>
       );
     });
 
-    const itemstoshow = info
-    
-    
+  const itemstoshow = info
+
     .filter((data) => {
       if (data.OBECNOSC == currentOBECNOSC) return data;
     })
     .map((data, key) => {
       return (
         <Card key={key} sx={{ m: 3 }} variant="">
-          
-          Nr : {key+1}
-          <Typography component="h6"
-              variant="h6" color="" align="center">
-           Gość: {data.NAME + ", osoba towarzysząca: " + data.GUEST} / 
-             Zmień obecnosc:
+          Nr : {key + 1}
+          <Typography color="" align="left">
+            {data.NAME}
             <br />
-          
+            <br />
+            Obecnosc: {data.OBECNOSC}
           </Typography>
-          
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Tak")} >
-          Tak
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATA(e.target.value, "Tak")}
+          >
+            Tak
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie")} >
-          Nie
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATA(e.target.value, "Nie")}
+          >
+            Nie
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie wiem")} >
-          Nie wiem
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATA(e.target.value, "Nie wiem")}
+          >
+            Nie wiem
           </Button>
-         
-         
-        
+          <br />
+          <Typography color="" align="left">
+            {data.GUEST}
+            <br />
+            <br />
+            Obecnosc: {data.GUESTOBECNOSC}
+          </Typography>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATAGuest(e.target.value, "Tak")}
+          >
+            Tak
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATAGuest(e.target.value, "Nie")}
+          >
+            Nie
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            value={data.ID}
+            onClick={(e) => updateDATAGuest(e.target.value, "Nie wiem")}
+          >
+            Nie wiem
+          </Button>
         </Card>
       );
     });
   if (loggedin == "Sylwester2024") {
     return (
       <div>
-        <NavAdmin/>
+        <NavAdmin />
         <div>
-        <Snackbar
-  open={open}
-  autoHideDuration={1000}
-  message="Wprowadzono zmiany"
-  onClose={handleClose}
-  
->
-<Alert
-          onClose={handleClose}
-          severity="success"
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-         Wprowadzono zmiany!
-        </Alert>
-        </Snackbar>
+          <Snackbar
+            open={open}
+            autoHideDuration={1000}
+            message="Wprowadzono zmiany"
+            onClose={handleClose}
+          >
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              variant="filled"
+              sx={{ width: "100%" }}
+            >
+              Wprowadzono zmiany!
+            </Alert>
+          </Snackbar>
           <hr />
-          Wybierz obecnosc do podglądu: 
-          <br/>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentOBECNOSC("Tak")} >
-          Tak
+          Wybierz obecnosc do podglądu:
+          <br />
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentOBECNOSC("Tak")}
+          >
+            Tak
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentOBECNOSC("Nie")} >
-          Nie
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentOBECNOSC("Nie")}
+          >
+            Nie
           </Button>
-          <Button  variant="outlined" sx={{ m: 0.5 }}size="small"   onClick={(e) =>setCurrentOBECNOSC("Nie wiem")} >
-         Nie wiem
+          <Button
+            variant="outlined"
+            sx={{ m: 0.5 }}
+            size="small"
+            onClick={(e) => setCurrentOBECNOSC("Nie wiem")}
+          >
+            Nie wiem
           </Button>
-          
           <hr />
-       
         </div>
-        <Box bgcolor=""   sx={{ maxWidth: "lg"  }} display="block" m="auto">
+        <Box bgcolor="" sx={{ maxWidth: "lg" }} display="block" m="auto">
           <Card>
-          <Typography
+            <Typography
               align="justify"
               sx={{ fontStyle: "italic", color: "" }}
               component="h6"
               variant="h6"
             >
               Obecnosc: {currentOBECNOSC}
-             </Typography></Card>
+            </Typography>
+          </Card>
           {itemstoshow}
         </Box>
         <hr />
-        <br/><br/><br/><br/><br/><br/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         Lista wszystkich gości
-          <br/>
-          <input
-                className="input"
-                type="text"
-                placeholder="Wyszukaj"
-                onChange={(e) => searchSpace(e)}
-              />
+        <br />
+        <input
+          className="input"
+          type="text"
+          placeholder="Wyszukaj"
+          onChange={(e) => searchSpace(e)}
+        />
         <Box sx={{ maxWidth: "sm" }} display="block" m="auto">
           {items}
         </Box>
+        <div>
+      {download}
+    
+        </div>
       </div>
     );
   } else
     return (
       <Container>
-
         <Card>
           <input
             type="password"
