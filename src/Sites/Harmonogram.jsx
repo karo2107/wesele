@@ -34,7 +34,7 @@ import Dance from "../GraphicAssets/Dance.png";
 import Fireworks from "../GraphicAssets/Fireworks.png";
 import Breakfast from "../GraphicAssets/Breakfast.png";
 import { BreakfastDining } from "@mui/icons-material";
-
+import Cake from "../GraphicAssets/cake.jpeg"
 
 const pathname = window.location.pathname;
 const splitString = pathname.split("/");
@@ -79,52 +79,80 @@ const info = [
   // },
  
   {
-    TITLE: "① Przyjazd do Gospody nad Rabą",
-    DATE: "⏲ 15:00 🗓 31/12/2024",
-    DETAILS:"Powitalne drinki i poczęstunek",
+    TITLE: " Przyjazd do Gospody nad Rabą",
+    DATE: "⏲ 13:00 - 15:00 🗓 31/12/2024",
+    DETAILS:"",
     IMG: Gospoda,
-    LOCATION: "⚐ Gospoda nad Rabą",
+    LOCATION: "Gospoda nad Rabą",
   },
   {
-    TITLE: " ② Ceremonia ślubu",
-    DATE: "⏲ 16:00 🗓 31/12/2024",
-    DETAILS:"Więcej szczegółów wrótce",
+    TITLE: "  Ceremonia ślubu",
+    DATE: "⏲ 15:15 - 15:30 🗓 31/12/2024",
+    DETAILS:"Ceremonia odbędzie się w lokalu, zapraszamy gości do sali tanecznej",
     IMG: Wedding,
-    LOCATION: "",
+    LOCATION: "Gospoda nad Rabą - sala taneczna",
   },
   {
-    TITLE: "③ Toast",
-    DATE: "⏲ 17:00 🗓 31/12/2024",
-    DETAILS:"Więcej szczegółów wrótce",
+    TITLE: " Pierwszy posiłek",
+    DATE: "⏲ 15:30 - 16:30 🗓 31/12/2024",
+    DETAILS:"",
+    IMG: Food,
+    LOCATION: "Gospoda nad Rabą",
+  },
+  {
+    TITLE: " Życzenia i deser",
+    DATE: "⏲ 16:30 - 17:30 🗓 31/12/2024",
+    DETAILS:"",
     IMG: Drinks,
     LOCATION: "Gospoda nad Rabą",
   },
   {
-    TITLE: "④ Pierwszy ciepły posiłek",
-    DATE: "⏲ 17:00 🗓 31/12/2024",
-    DETAILS:"Więcej szczegółów wrótce",
-    IMG: Food,
+    TITLE: " Pierwszy taniec i zaczynamy zabawę",
+    DATE: "⏲ 17:30 🗓 31/12/2024",
+    DETAILS:"",
+    IMG: Dance,
     LOCATION: "Gospoda nad Rabą",
   },
 
   {
-    TITLE: "⑤ Wesele",
-    DATE: "⏲ 17:00 🗓 31/12/2024",
-    DETAILS:"Więcej szczegółów wrótce",
-    IMG: Dance,
+    TITLE: " Drugi ciepły posiłek",
+    DATE: "⏲ 19:30 🗓 31/12/2024",
+    DETAILS:"",
+    IMG: Food,
     LOCATION: "Gospoda nad Rabą",
   },
   {
-    TITLE: "⑥ Fajerwerki",
-    DATE: "⏲ 24:00 🗓 31/12/2024",
-    DETAILS:"Więcej szczegółów wrótce",
+    TITLE: " Tort",
+    DATE: "⏲ 21:30 🗓 31/12/2024",
+    DETAILS:"",
+    IMG: Cake,
+    LOCATION: "Gospoda nad Rabą",
+  },
+  {
+    TITLE: " Fajerwerki i przywitanie nowego roku",
+    DATE: "⏲ 23:30 - 00:30 🗓 31/12/2024",
+    DETAILS:"Zapraszamy na pokaz fajerwerków",
     IMG: Fireworks,
+    LOCATION: "Przed lokalem",
+  },
+  {
+    TITLE: " Ciepły posiłek podawany do stołów",
+    DATE: "⏲ 00:30 - 01:30 🗓 01/01/2025",
+    DETAILS:"",
+    IMG: Food,
     LOCATION: "Gospoda nad Rabą",
   },
   {
-    TITLE: "⑦ Śniadanie noworoczne",
+    TITLE: " Ciepły posiłek podawany do stołów",
+    DATE: "⏲ 03:00 - 03:30 🗓 01/01/2025",
+    DETAILS:"",
+    IMG: Food,
+    LOCATION: "Gospoda nad Rabą",
+  },
+  {
+    TITLE: " Śniadanie noworoczne",
     DATE: "⏲ 10:00 🗓 01/01/2025",
-    DETAILS:"Więcej szczegółów wrótce",
+    DETAILS:"Zapraszamy na śniadanie noworoczne w Gospodzie od godziny dziesiątej.",
     IMG: Breakfast,
     LOCATION: "Gospoda nad Rabą",
   },

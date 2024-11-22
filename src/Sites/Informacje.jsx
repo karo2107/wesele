@@ -81,7 +81,7 @@ const info = [
   },
   {
     TITLE: "Preferencje dietetyczne",
-    GMAP: "http://hotelnadraba.pl/wp-content/uploads/2022/12/Menu-weselne-v2.pdf",
+    GMAP: "http://hotelnadraba.pl/",
     DETAILS:
       "Gospoda słynie z pysznych dań mięsnych i jarskich. W związku z tym uprzejmie prosimy o informacje dotyczącą ewentualnych alergii pokarmowych.",
     DETAILS2: "",
