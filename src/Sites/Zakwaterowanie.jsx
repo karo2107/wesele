@@ -53,7 +53,7 @@ const Write = () => {
   const [info, setInfo] = useState([]);
   const [name, setName] = React.useState("");
  
-  
+  const [room, setRoom] = React.useState("");
   const [guest, setGuest] = React.useState("");
   const [food, setFood] = React.useState("");
   const [foodguest, setFoodguest] = React.useState("");
@@ -155,7 +155,17 @@ const Write = () => {
     
   };
  
-
+  const updateROOM = async (a, b) => {
+    
+    const ref = doc(db, "goscie", a);
+    await updateDoc(ref, {
+      ROOM: b,
+    });
+    console.log(ref, a, b);
+    setOpen(true);
+   
+    
+  };
   
 
   const items = info
@@ -181,9 +191,18 @@ const Write = () => {
           <Typography color="" align="left">
             {data.NAME + ", osoba towarzysząca: " + data.GUEST}<br/>
             <br />
-            Zakwaterowanie: {data.ZAKWATEROWANIE}
+            Zakwaterowanie: {data.ZAKWATEROWANIE}, 
+            <br/>Pokój: 
+            <TextField
+                   variant="standard"
+                    placeholder={data.ROOM}
+                    onChange={(e) => setRoom(e.target.value)}
+                  />
+                    <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateROOM(e.target.value, room)} >
+          Zapisz
+          </Button>
           </Typography>
-          
+          <br/>
           <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie wiemy")} >
           Nie wiemy
           </Button>
@@ -225,11 +244,20 @@ const Write = () => {
           Nr : {key+1}
           <Typography component="h6"
               variant="h6" color="" align="center">
-           Gość: {data.NAME + ", osoba towarzysząca: " + data.GUEST} / 
-             Zmień zakwaterowanie:
-            <br />
+           Gość: {data.NAME + ", osoba towarzysząca: " + data.GUEST} 
+            
+             <br/>Pokój: 
+            <TextField
+                   variant="standard"
+                    placeholder={data.ROOM}
+                    onChange={(e) => setRoom(e.target.value)}
+                  />
+                    <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateROOM(e.target.value, room)} >
+          Zapisz
+          </Button>
           
           </Typography>
+          
           <Button  variant="outlined" sx={{ m: 0.5 }}size="small"  value={data.ID} onClick={(e) =>updateDATA(e.target.value, "Nie wiemy")} >
           Nie wiemy
           </Button>
