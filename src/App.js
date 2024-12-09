@@ -26,8 +26,8 @@ import Wyslane from "./Sites/Wyslane.jsx";
 import Zadania from "./Sites/Todo.jsx";
 import Budget from "./Sites/Budget.jsx";
 import Zakwaterowanie from "./Sites/Zakwaterowanie.jsx";
-
-
+import Winietki from "./Sites/Winietki.jsx";
+import Alergeny from './Sites/Alergeny.jsx'
 function Copyright() {
   return (
     <Typography variant="body2" color="white" align="center">
@@ -158,7 +158,10 @@ export default function App() {
                 <Route path={`/Admin`} element={<Admin />} />
                 <Route path={`/Zakwaterowanie`} element={<Zakwaterowanie />} />
                 <Route path={`/Wyslane`} element={<Wyslane />} />
+                <Route path={`/Winietki`} element={<Winietki />} />
                 <Route path={`/Zadania`} element={<Zadania />} />
+                <Route path={`/Alergeny`} element={< Alergeny />} />
+               
                 {/* <Route path={`${a}/:any `} element={<LandingPage />} /> */}
                 <Route path={`${a}`} element={<Home />} />
                 <Route path={`/:any `} element={<Home />} />
