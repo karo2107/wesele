@@ -261,6 +261,19 @@ osoba towarzysząca;{data.GUESTNAME};{data.GUESTOBECNOSC}
       );
     });
 
+
+  let count = 0
+  let totals = info.map ((data) => {
+    if (data.OBECNOSC == currentOBECNOSC) {
+      console.log(data.ID)
+      count++
+    }
+    if (data.GUESTOBECNOSC == currentOBECNOSC) {
+      console.log(data.ID)
+      count++
+    }
+  })
+
   const itemstoshow = info
 
     .filter((data) => {
@@ -268,7 +281,7 @@ osoba towarzysząca;{data.GUESTNAME};{data.GUESTOBECNOSC}
     })
     .map((data, key) => {
       return (
-        <Card key={key} sx={{ m: 3 }} variant="">
+        (data.OBECNOSC == currentOBECNOSC) && <Card key={key} sx={{ m: 3 }} variant="">
           Nr : {key + 1}
           <Typography color="" align="left">
             {data.NAME}
@@ -304,6 +317,8 @@ osoba towarzysząca;{data.GUESTNAME};{data.GUESTOBECNOSC}
             Nie wiem
           </Button>
           <br />
+          {data.GUESTOBECNOSC == 'Tak' && 
+          <div>
           <Typography color="" align="left">
             {data.GUEST}
             <br />
@@ -337,6 +352,8 @@ osoba towarzysząca;{data.GUESTNAME};{data.GUESTOBECNOSC}
           >
             Nie wiem
           </Button>
+          </div>
+          }
         </Card>
       );
     });
@@ -397,7 +414,7 @@ osoba towarzysząca;{data.GUESTNAME};{data.GUESTOBECNOSC}
               component="h6"
               variant="h6"
             >
-              Obecnosc: {currentOBECNOSC}
+              Obecnosc: {currentOBECNOSC}: {count}
             </Typography>
           </Card>
           {itemstoshow}
